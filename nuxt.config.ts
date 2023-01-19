@@ -1,22 +1,4 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import sanityClient from '@sanity/client'
-
-export const getRoutes = async () => {
-	const client = sanityClient({
-		projectId: process.env.SANITY_ID,
-		dataset: process.env.SANITY_DATASET,
-		apiVersion: '2022-11-21',
-		useCdn: true,
-	})
-
-	const data = await client.fetch(`[
-		...*[_type == "article"]{"route": "/blog/" + uid.current + "/"},
-		...*[_type == "page"]{"route": "/" + uid.current + "/"}
-	]`)
-
-
-	return data.map((item: any) => { return item["route"] })
-}
 
 export default defineNuxtConfig({
 
@@ -38,7 +20,6 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		'@nuxt/image-edge',
 		'@nuxtjs/i18n',
-		'~/modules/style-inlining'
 	],
 
 	icon: {
@@ -71,32 +52,32 @@ export default defineNuxtConfig({
 
 
 	sanity: {
-		projectId: process.env.SANITY_ID,
-		dataset: process.env.SANITY_DATASET,
+		projectId: 'ede4uk6z',
+		dataset: 'production',
 		minimal: true,
 		apiVersion: '2022-11-21'
 	},
 
 	image: {
 		sanity: {
-			projectId: process.env.SANITY_ID,
+			projectId: 'ede4uk6z',
 		}
 	},
 
 	nitro: {
 		prerender: {
 			crawlLinks: false,
-			routes: ['/sitemap.xml']
+			// routes: ['/sitemap.xml']
 		},
 	},
 
-	hooks: {
-		async 'nitro:config'(nitroConfig: any) {
-			if (nitroConfig.dev) { return }
-			const routes = await getRoutes()
-			nitroConfig.prerender.routes.push(...routes)
-		}
-	},
+	// hooks: {
+	// 	async 'nitro:config'(nitroConfig: any) {
+	// 		if (nitroConfig.dev) { return }
+	// 		const routes = await getRoutes()
+	// 		nitroConfig.prerender.routes.push(...routes)
+	// 	}
+	// },
 
 	vite: {
 		css: {

@@ -1,13 +1,13 @@
 {
-	"private": true,
-	"scripts": {
-		"build": "nuxt build",
-		"dev": "nuxt dev",
-		"generate": "nuxt generate",
-		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
-	},
-	"devDependencies": {
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  	"devDependencies": {
 		"@antfu/eslint-config": "^0.31.1",
 		"@emailjs/browser": "^3.7.0",
 		"@nuxt/image-edge": "^1.0.0-27809804.194d2d6",
