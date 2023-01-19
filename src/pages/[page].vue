@@ -1,15 +1,14 @@
 <template>
 	<div id="page">
 		<template v-if="data && !pending">
-			<h1>{{ data?.title }}</h1>
 			<Content :blocks="data.content" />
 		</template>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { Page_Q } from "~~/src/assets/queries"
-import type { Page } from "~~/src/assets/types"
+import { Page_Q } from "~/assets/queries"
+import type { Page } from "~/assets/types"
 
 // fetch data
 const { params } = useRoute()
@@ -19,12 +18,22 @@ const { data, pending } = await useAsyncData(
 	(): Promise<Page> => fetch(Page_Q, { uid: params.page })
 )
 
-// // handle error
+
+// handle error
 if (!data.value) throw createError({
 	statusCode: 404,
 	statusMessage: `${params.page} Not Found`,
 	fatal: true
 })
+
+
+// i18n
+// defineI18nRoute({
+// 	paths: {
+// 		ua: data.value.uid,
+// 		en: data.value.altLang.uid,
+// 	}
+// })
 
 // write metatags
 useMetaTags(data.value.metaTags)
@@ -33,7 +42,6 @@ useMetaTags(data.value.metaTags)
 <style lang="scss" scoped>
 #page {
 	width: 100%;
-	max-width: 25rem;
 	flex-grow: 1;
 
 	display: flex;
@@ -41,17 +49,7 @@ useMetaTags(data.value.metaTags)
 	justify-content: center;
 	position: relative;
 
-	.title {
-		position: absolute;
-		top: -1.5rem;
-		left: 0;
 
-		color: $white;
-		text-transform: uppercase;
-		font-size: 1.5rem;
-		line-height: 1.5rem;
-		font-weight: 300;
-	}
 }
 </style>
 

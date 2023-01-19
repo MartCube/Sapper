@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { Articles_Q, ArticleTags_Q, ArticleCount_Q } from "~~/src/assets/queries"
-import type { ArticleCard } from "~~/src/assets/types"
+import { Articles_Q, ArticleTags_Q, ArticleCount_Q } from "~/assets/queries"
+import type { ArticleCard } from "~/assets/types"
 
 export default defineStore('BlogStore', () => {
 	// state

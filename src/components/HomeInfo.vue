@@ -1,3 +1,3 @@
 <template>
-	<h2>Gmap</h2>
+	<h2>homeInfo</h2>
 </template>

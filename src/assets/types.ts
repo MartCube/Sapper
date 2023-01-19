@@ -1,3 +1,5 @@
+import { string } from "zod";
+
 export interface metaTags {
 	title: string,
 	description: string,
@@ -41,15 +43,38 @@ export interface Article extends ArticleCard {
 		image: string
 	}
 }
-export interface HomePage {
-	title: string,
-	content: any[],
-	metaTags: {
-		title: string,
-		description: string,
-		image: string
-	}
+
+export interface Lang {
+	id: string,
+	uid: string,
+	title?: string,
 }
+
+export interface Locale {
+	code: string,
+	name: string,
+}
+
+export interface Link {
+	name: string,
+	url: string,
+}
+
+export interface App {
+	logo: string,
+	info: {
+		email: string,
+		adress: string,
+		phone: string,
+	},
+	smedias: {
+		facebook: string,
+		instagram: string,
+	}
+	links: Link[],
+}
+
+
 export interface Page {
 	uid: string,
 	title: string,
@@ -59,6 +84,8 @@ export interface Page {
 		description: string,
 		image: string
 	}
+	lang: string,
+	altLang: Lang
 }
 
 

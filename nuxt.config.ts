@@ -33,6 +33,7 @@ export default defineNuxtConfig({
 	],
 
 	modules: [
+		'nuxt-icon',
 		'@nuxtjs/sanity',
 		'@pinia/nuxt',
 		'@nuxt/image-edge',
@@ -40,9 +41,32 @@ export default defineNuxtConfig({
 		'~/modules/style-inlining'
 	],
 
+	icon: {
+		// https://icones.js.org/collection/ri
+		size: '24px',
+		class: 'icon',
+	},
+
 	i18n: {
-		locales: ['en', 'ua'],
-		defaultLocale: 'en',
+		locales: [
+			{
+				code: 'ua',
+				name: 'Ukrainian',
+			},
+			{
+				code: 'en',
+				name: 'English',
+			}
+		],
+		defaultLocale: 'ua',
+		customRoutes: 'config',
+		pages: {
+			'[page]/': {
+				en: '/[page]/',
+				ru: '/[page]/',
+			}
+		}
+
 	},
 
 
@@ -63,7 +87,7 @@ export default defineNuxtConfig({
 		prerender: {
 			crawlLinks: false,
 			routes: ['/sitemap.xml']
-		}
+		},
 	},
 
 	hooks: {

@@ -1,12 +1,30 @@
 <template>
 	<header>
-		<div class="menu" :class="{ hide: menuValue }" @click="menuToggle()">
-			<span class="bar" />
-			<span class="bar" />
-		</div>
-		<div class="links" :class="{ show: menuValue }" @click="menuToggle()">
-			<div v-for="(link, n) in links" :key="link.name" :style="`--i:${n}`" ref="link" class="link">
+		<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
+		<div class="links">
+			<div v-for="link in links" :key="link.name" class="link">
 				<NuxtLink :to="link.url">{{ link.name }}</NuxtLink>
+			</div>
+		</div>
+		<div class="menu">
+			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
+				<span>{{ altLocale }}</span>
+			</NuxtLink>
+			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" />
+			<Icon v-else name="ri:close-fill" @click="menuToggle()" />
+		</div>
+		<div class="sidebar" v-show="menuValue">
+			<div class="info phone">
+				<Icon name="ri:phone-fill" />
+				<span>{{ info?.phone }}</span>
+			</div>
+			<div class="info email">
+				<Icon name="ri:mail-open-fill" />
+				<span>{{ info?.email }}</span>
+			</div>
+			<div class="info adress">
+				<Icon name="ri:map-pin-2-fill" />
+				<span>{{ info?.adress }}</span>
 			</div>
 		</div>
 	</header>
@@ -14,31 +32,18 @@
 
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
+
+const switchLocalePath = useSwitchLocalePath()
+const { locale, setLocale } = useI18n()
+const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
+
+const { AppFetch } = useAppStore()
+const { logo, links, info } = storeToRefs(useAppStore())
 
 const [menuValue, menuToggle] = useToggle()
 
-const links = [
-	{
-		name: 'mart cube',
-		url: '/'
-	},
-	{
-		name: 'about',
-		url: '/about/'
-	},
-	{
-		name: 'projects',
-		url: '/projects/'
-	},
-	{
-		name: 'blog',
-		url: '/blog/'
-	},
-	{
-		name: 'contact',
-		url: '/contact/'
-	},
-]
+
 
 
 </script>
@@ -46,131 +51,109 @@ const links = [
 <style lang="scss" scoped>
 header {
 	width: 100%;
-	height: 2rem;
-	max-width: 25rem;
+	height: 4rem;
+	padding: 0 10%;
+	border: 1px solid $dark;
 
 	display: flex;
-	flex-direction: row-reverse;
 	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
 
-	.menu {
+	.logo {
 		width: 2rem;
-		height: 2rem;
-		z-index: 10;
-		cursor: pointer;
-		overflow: hidden;
+	}
 
+
+
+	.menu {
 		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
 
-		.bar {
-			width: 0%; // width: 100%
-			height: 2px;
-			background: $primary;
-			border-radius: 5px;
+		.lang_switcher {
+			width: 2rem;
+			height: 2rem;
+			margin-right: 1rem;
+			cursor: pointer;
 
-			&:last-of-type {
-				align-self: flex-end;
-			}
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-			animation-name: menuAnim;
-			animation-duration: 350ms;
-			animation-timing-function: ease;
-			animation-direction: normal;
-			animation-fill-mode: forwards;
-			will-change: width;
-
-			@keyframes menuAnim {
-				from {
-					width: 0%;
-				}
-
-				to {
-					width: 100%;
-				}
-			}
 		}
 
-		&.hide {
-			.bar {
-				animation-name: menuAnimHide;
-
-				@keyframes menuAnimHide {
-					from {
-						width: 100%;
-					}
-
-					to {
-						width: 0%;
-					}
-				}
-			}
-
+		svg {
+			width: 2rem;
+			height: 2rem;
+			color: $dark3;
 		}
 	}
 
 	.links {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: $bg-primary;
-		padding: 0 10%;
-
+		width: 50%;
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 
-		z-index: -1;
-		opacity: 0;
-
-
 		.link {
-			width: 100%;
-			max-width: 25rem;
 			overflow: hidden;
-			margin-bottom: 3rem;
 
 			&:last-child {
 				margin: 0;
 			}
 
 			a {
-				display: inline-block;
-				text-transform: uppercase;
-				font-size: 2rem;
-				color: white;
-				font-weight: 300;
-				letter-spacing: 0.5rem;
+				text-transform: capitalize;
+				font-size: 1rem;
+				color: dark;
+				font-weight: 500;
 
-				&.router-link-exact-active {
-					color: $primary;
-				}
+				// &.router-link-exact-active {
+				// 	color: $primary;
+				// }
 
-				&:hover {
-					color: $primary;
-				}
+				// &:hover {
+				// 	color: $primary;
+				// }
 
-				opacity: 0;
-				transform: translateY(-120%);
-				transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
 			}
+
+
+
 		}
+	}
+
+	.sidebar {
+		z-index: 11;
+		position: absolute;
+		top: 4rem;
+		left: 0;
+		width: 25rem;
+		height: 100vh;
+
+		background: $white;
+		color: $dark;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.info {
+			width: 100%;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 
 
-		&.show {
-			z-index: 9;
-			opacity: 1;
-
-			.link a {
-				opacity: 1;
-				transform: translateX(0);
-				transition-delay: calc(0.055s * var(--i));
+			.icon {
+				width: 6rem;
+				height: 6rem;
+				padding: 1.5rem;
+				background: $dark3;
+				color: $white;
 			}
 		}
 	}

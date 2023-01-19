@@ -9,20 +9,20 @@
 
 	a {
 		text-decoration: none;
-		color: $white;
+		color: $dark;
 	}
 
 	&::selection {
-		color: $bg-primary;
-		background: $primary;
+		color: $white;
+		background: $dark;
 	}
 }
 
 html,
 body {
 	font-family: 'Roboto';
-	background-color: $bg-primary;
-	color: $white;
+	background-color: $white;
+	color: $dark;
 }
 
 img {

@@ -13,12 +13,18 @@ defineProps<{
 
 const serializers = {
 	types: {
+		// page content ### Lazy load ?
+		slider: resolveComponent('Slider'),
+		articleSlider: resolveComponent('ArticleSlider'),
+		achivments: resolveComponent('Achivments'),
+		pageIntro: resolveComponent('PageIntro'),
+		homeInfo: resolveComponent('HomeInfo'),
+		contactForm: resolveComponent('ContactForm'),
+		gmap: resolveComponent('Gmap'),
+
 		// article content
-		// gallery: resolveComponent('LazyGallery'),
-		// youtube: resolveComponent('LazyYoutube'),
-		// page content
-		projectList: resolveComponent('LazyGmap'),
-		contactForm: resolveComponent('LazyContactForm'),
+		// gallery: resolveComponent('Gallery'),
+		// youtube: resolveComponent('Youtube'),
 	},
 	// marks: {
 	// 	link: Link,
@@ -29,7 +35,6 @@ const serializers = {
 <style lang="scss">
 .content {
 	width: 100%;
-	max-width: 25rem;
 
 
 	// .v-enter-active,

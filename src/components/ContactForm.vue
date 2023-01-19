@@ -1,5 +1,8 @@
 <template>
-	<form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
+	<div>
+		<h2>contact form</h2>
+	</div>
+	<!-- <form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
 		<VeeInput :name="props.email" />
 		<VeeInput :name="props.subject" />
 		<VeeInput :name="props.message" />
@@ -15,7 +18,7 @@
 			<p>I will replay by email as soon as possible.</p>
 			<p>Write<span @click="formStateAnim = 'showForm'"> new message</span>.</p>
 		</div>
-	</form>
+	</form> -->
 </template>
 
 <script setup lang="ts">
@@ -27,8 +30,9 @@ import emailjs from '@emailjs/browser';
 import { promiseTimeout } from '@vueuse/core'
 
 const props = defineProps<{
+	name: string;
 	email: string;
-	subject: string;
+	phone: string;
 	message: string;
 }>()
 
@@ -36,8 +40,9 @@ const formStateAnim = ref<string>('showForm')
 const form = ref<string | HTMLFormElement>('')
 const validationSchema = toFormValidator(
 	z.object({
+		name: z.string().min(1, 'Required'),
 		email: z.string().min(1, 'Required').email(),
-		subject: z.string().min(1, 'Required'),
+		phone: z.string().min(1, 'Required'),
 		message: z.string().min(1, 'Required').max(120),
 	})
 )
@@ -81,7 +86,7 @@ form {
 			display: flex;
 			justify-content: space-between;
 
-			color: white;
+			color: $white;
 			letter-spacing: 0.25rem;
 			text-transform: uppercase;
 			font-weight: 300;
@@ -133,65 +138,12 @@ form {
 
 		&:hover {
 			.submit {
-				color: $primary;
+				color: $dark;
 			}
 		}
 	}
 
-	.msg {
-		z-index: -1; // z-index:1	
-		opacity: 0; // opacity:1
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: calc(100% - 2rem);
-		background: $bg-primary;
 
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-
-		h2 {
-			margin-bottom: 1rem;
-			text-transform: uppercase;
-			font-weight: 100;
-		}
-
-		p {
-			font-weight: 300;
-			line-height: 1.5rem;
-
-			span {
-				color: $primary;
-				cursor: pointer;
-				position: relative;
-				line-height: 1.5rem;
-				font-weight: 300;
-
-				&::after {
-					content: '';
-					position: absolute;
-					left: 0;
-					bottom: -2px;
-					width: 0%;
-					height: 1px;
-					background: $primary;
-					transition: width 0.25s ease;
-				}
-
-				&:hover {
-					&::after {
-						width: 100%;
-					}
-				}
-			}
-
-			&:last-of-type {
-				margin-top: 1rem;
-			}
-		}
-	}
 
 	&.loading {
 		.field {

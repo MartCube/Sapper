@@ -9,10 +9,11 @@ export default (data: metaTags) => {
 		dataset: "production",
 	})
 
+	const domain = "https://martcube.netlify.app"
 	const ogImage = builder.image(data.image).auto('format').width(1200).height(630).url()
-	const url = `https://martcube.netlify.app${fullPath}`
+	const url = domain + fullPath
 	const ogType = useRoute().params.article ? "article" : "website"
-	const robots = useRoute().params.article ? "index, nofollow" : "index, follow"
+	// const robots = useRoute().params.article ? "index, nofollow" : "index, follow"
 
 	useHead({
 		title: data.title,
@@ -24,7 +25,7 @@ export default (data: metaTags) => {
 			{ name: "author", content: "Mart Cube" },
 			{ name: 'title', content: data.title },
 			{ name: 'description', content: data.description },
-			{ name: 'robots', content: robots },
+			// { name: 'robots', content: robots },
 			// og
 			{ property: 'og:locale', content: 'en_US', },
 			// { property: "og:locale:alternate", content: "fr_FR" },
