@@ -57,7 +57,7 @@ defineProps<{ list: object[], }>()
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-image: url('./public/quality-bg.png');
+	background-image: url('/quality-bg.png');
 	background-position: center;
 	background-size: cover;
 	.container {
