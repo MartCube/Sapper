@@ -56,8 +56,8 @@ export interface Locale {
 }
 
 export interface Link {
-	name: string,
-	url: string,
+	title: string,
+	uid: string,
 }
 
 export interface App {
@@ -71,7 +71,10 @@ export interface App {
 		facebook: string,
 		instagram: string,
 	}
-	links: Link[],
+	links: {
+		en: Link[],
+		ua: Link[],
+	},
 }
 
 

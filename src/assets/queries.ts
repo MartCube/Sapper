@@ -13,7 +13,10 @@ export const App_Q = groq`*[ _type == "app" ][0]{
 	"logo": logo.asset._ref,
     info,
     smedias,
-    links
+    links {
+      en[]->{ title, "uid": uid.current},
+			ua[]->{ title, "uid": uid.current},
+    }
 }`
 
 

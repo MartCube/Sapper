@@ -2,8 +2,8 @@
 	<header>
 		<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
 		<div class="links">
-			<div v-for="link in links" :key="link.name" class="link">
-				<NuxtLink :to="link.url">{{ link.name }}</NuxtLink>
+			<div v-for="link in links?.ua" :key="link.title" class="link">
+				<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
 			</div>
 		</div>
 		<div class="menu">
