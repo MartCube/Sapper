@@ -5,7 +5,7 @@
 				<h3 class="title">Mine action</h3>
 				<div class="image">
 					<span class="border_layer"></span>
-					<img src="../public/team.png" alt="">
+					<img src="/team.png" alt="">
 				</div>
 				<p class="description">Humanitarian demining is the clearing of areas and objects from explosive objects carried out in order to ensure the safety of life of the population</p>
 			</div>
@@ -13,7 +13,7 @@
 				<h3 class="title">What we do</h3>
 				<div class="image">
 					<span class="border_layer"></span>
-					<img src="../public/like.png" alt="">
+					<img src="/like.png" alt="">
 				</div>
 				<p class="description">Our mission is to provide safe and reliable humanitarian demining services</p>
 			</div>
@@ -21,7 +21,7 @@
 				<h3 class="title">Our units</h3>
 				<div class="image">
 					<span class="border_layer"></span>
-					<img src="../public/handshake.png" alt="">
+					<img src="/handshake.png" alt="">
 				</div>
 				<p class="description">
 					– Non-technical survey and public information unit 
@@ -34,7 +34,7 @@
 				<h3 class="title">Training</h3>
 				<div class="image">
 					<span class="border_layer"></span>
-					<img src="../public/satisfaction.png" alt="">
+					<img src="/satisfaction.png" alt="">
 				</div>
 				<p class="description">We organize training for new employees and improve the skills of our experts.</p>
 			</div>

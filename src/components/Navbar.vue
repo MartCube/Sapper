@@ -51,7 +51,7 @@ const [menuValue, menuToggle] = useToggle()
 <style lang="scss" scoped>
 header {
 	width: 100%;
-	height: 4rem;
+	height: 115px;
 	padding: 0 10%;
 	border: 1px solid $dark;
 
@@ -59,6 +59,10 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
+
+	@media (max-width: 600px) {
+		height: 60px;
+	}
 
 	.logo {
 		width: 2rem;
