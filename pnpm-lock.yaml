@@ -13,7 +13,7 @@ specifiers:
   '@vueuse/core': 9.6.0
   eslint: ^8.31.0
   nuxt: ^3.0.0
-  nuxt-icon: ^0.2.5
+  nuxt-icon: ^0.2.6
   purgecss: ^5.0.0
   purgecss-from-html: ^5.0.0
   sass: ^1.53.0

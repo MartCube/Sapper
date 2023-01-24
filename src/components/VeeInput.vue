@@ -54,24 +54,26 @@ const { errorMessage, value } = useField(nameRef)
 
 	input {
 		border: none;
-		border-bottom: 1px solid $bg-secondary;
+		border-bottom: 3px solid $dark;
 		background: transparent;
-		padding: 0.5rem 0;
+		padding: 1rem;
 
-		color: $white;
+		color: $dark;
 		font-size: 1rem;
 		font-weight: 100;
-		line-height: 1rem;
+		line-height: 4rem;
 		letter-spacing: 1px;
-
+		height: 4.5rem;
+		box-shadow: 0 1rem 2rem rgb(0 0 0 / 10%);
+		border-radius: 5px;
 		&::placeholder {
-			color: $light-grey;
+			color: $dark4;
 			text-transform: capitalize;
 		}
 
 		&:focus {
 			&::placeholder {
-				color: $white;
+				color: $dark;
 				opacity: 1;
 			}
 
@@ -102,7 +104,7 @@ const { errorMessage, value } = useField(nameRef)
 		left: 0;
 		width: 0%;
 		height: 1px;
-		background: $primary;
+		background: $dark;
 		transition: all 0.25s ease;
 	}
 }

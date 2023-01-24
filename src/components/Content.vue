@@ -21,7 +21,7 @@ const serializers = {
 		homeInfo: resolveComponent('HomeInfo'),
 		contactForm: resolveComponent('ContactForm'),
 		gmap: resolveComponent('Gmap'),
-
+		contactInfo: resolveComponent('ContactInfo'),
 		// article content
 		// gallery: resolveComponent('Gallery'),
 		// youtube: resolveComponent('Youtube'),

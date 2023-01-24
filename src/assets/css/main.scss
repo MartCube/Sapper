@@ -66,10 +66,13 @@ p, a {
 @media (min-width: 1000px) {
 	.container {
 		max-width:  1400px;
+		width: 100%;
+		padding: 0 2rem;
 	}
 }
 @media (max-width: 1000px) {
 	.container {
+		width: 100%;
 		max-width:  90%;
 	}
 }
