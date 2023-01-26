@@ -24,6 +24,7 @@ defineProps<{
 		font-size: 1.4rem;
 	}
 
+
 	// .v-enter-active,
 	// .v-leave-active {
 	// 	transition: all .35s ease;

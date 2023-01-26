@@ -30,6 +30,17 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 	'uid': uid.current,
 	content[]{
 		...,
+		_type == 'articleSlider' => {... , 
+			lastnews[] -> {
+				_id,
+				description,
+				title,
+				publishedAt,
+				"image": poster.asset._ref,
+				"lang": __i18n_lang,
+				"uid": uid.current,
+			},
+		},
 		_type == 'slider' => { ..., list[]{title, "image":image.asset._ref} },
 		_type == 'achivments' => { ..., list[]{ title, icon, number}  },
 	},

@@ -15,7 +15,7 @@ const serializers = {
 	types: {
 		// page content ### Lazy load ?
 		slider: resolveComponent('Slider'),
-		articleSlider: resolveComponent('ArticleSlider'),
+		articleSlider: resolveComponent('LatestNews'),
 		achivments: resolveComponent('Achivments'),
 		pageIntro: resolveComponent('PageIntro'),
 		homeInfo: resolveComponent('HomeInfo'),

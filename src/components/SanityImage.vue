@@ -10,6 +10,16 @@ defineProps<{
 }>()
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+	div {
+		width: inherit;
+		height: 100%;
+		img {
+			width: inherit;
+			height: inherit;
+			display: block;
+			object-fit: cover;
+			object-position: center;
+		}
+	}
 </style>

@@ -122,12 +122,21 @@ const data = [
 					font-weight: 900;
 					line-height: 1;
 					margin-bottom: 1rem;
+					margin-top: 0;
 				}
 				.subtitle {
 					font-size: 3rem;
+					margin: 0;
 				}
 				.description {
 					font-size: 1.3rem;
+				}
+			}
+		}
+		@media (max-width: 1000px) {
+			.wrapper {
+				.content {
+					max-width: 70%;
 				}
 			}
 		}
