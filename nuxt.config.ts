@@ -45,7 +45,7 @@ export default defineNuxtConfig({
 		pages: {
 			'[page]/': {
 				en: '/[page]/',
-				ru: '/[page]/',
+				ua: '/[page]/',
 			}
 		}
 

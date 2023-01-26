@@ -14,8 +14,12 @@ export const App_Q = groq`*[ _type == "app" ][0]{
     info,
     smedias,
     links {
-      en[]->{ title, "uid": uid.current},
-			ua[]->{ title, "uid": uid.current},
+			en[]->{ 
+              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current}
+            },
+			ua[]->{ 
+              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current}
+            },
     }
 }`
 

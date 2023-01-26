@@ -1,11 +1,18 @@
 <template>
 	<header>
 		<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
-		<div class="links">
-			<div v-for="link in links?.ua" :key="link.title" class="link">
-				<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
-			</div>
-		</div>
+		<nav>
+			<ul class="links">
+				<li v-for="link in links?.ua" :key="link.title" class="link">
+					<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
+					<ul v-if="link.dropdown" class="submenu">
+						<li v-for="sublink in link.dropdown">
+							<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 		<div class="menu">
 			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
 				<span>{{ altLocale }}</span>
@@ -33,6 +40,7 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
+import { useMediaQuery } from '@vueuse/core'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
@@ -43,8 +51,7 @@ const { logo, links, info } = storeToRefs(useAppStore())
 
 const [menuValue, menuToggle] = useToggle()
 
-
-
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 
 </script>
 
@@ -58,7 +65,6 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	overflow: hidden;
 
 	@media (max-width: 600px) {
 		height: 60px;
@@ -91,39 +97,86 @@ header {
 			color: $dark3;
 		}
 	}
-
+	nav {
+		width: 100%;
+	}
+	ul {
+		list-style-type: none;
+	}
 	.links {
-		width: 50%;
+		width: 100%;
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
 		align-items: center;
-
+		
 		.link {
 			overflow: hidden;
-
+			position: relative;
 			&:last-child {
 				margin: 0;
 			}
 
 			a {
 				text-transform: capitalize;
-				font-size: 1rem;
-				color: dark;
+				font-size: 1.2rem;
+				letter-spacing: 1px;
+				line-height: 2rem;
+				width: fit-content;
+				display: flex;
+				color: $dark;
 				font-weight: 500;
+				margin: 0 2rem;
+				position: relative;
+				&::after {
+					content: '';
+					position: absolute;
+					width: 0;
+					height: 3px;
+					background-color: $dark;
+					bottom: 0;
+					left: 0;
+					transition: width 0.3s linear;
+				}
+				&.router-link-exact-active {
+					&::after {
+						width: 100%;
+					}
+				}
 
-				// &.router-link-exact-active {
-				// 	color: $primary;
-				// }
-
-				// &:hover {
-				// 	color: $primary;
-				// }
+				&:hover {
+					&::after {
+						width: 100%;
+					}
+				}
 
 
 			}
 
+	
+			ul.submenu {
+				position: absolute;
+				background-color: $white;
+				padding: 1rem;
+				z-index: 3;
+				opacity: 0;
+				min-width: 150px;
+				white-space: nowrap;
+				border-radius: 5px;
+				box-shadow: 0 0 10px -3px lightgrey;
+				transition: opacity 0.3s linear;
+				li {
+					a {
+						margin: 0;
+					}
+				}
+			}
 
-
+			&:hover {
+				overflow: visible;
+				ul.submenu {
+					opacity: 1;
+				}
+			}
 		}
 	}
 

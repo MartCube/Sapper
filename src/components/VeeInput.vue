@@ -60,7 +60,6 @@ const { errorMessage, value } = useField(nameRef)
 
 		color: $dark;
 		font-size: 1rem;
-		font-weight: 100;
 		line-height: 4rem;
 		letter-spacing: 1px;
 		height: 4.5rem;
