@@ -7,22 +7,22 @@
 </template>
 
 <script setup lang="ts">
-import { Page_Q } from "~/assets/queries"
-import type { Page } from "~/assets/types"
+import { Article_Q } from "~/assets/queries"
+import type { Article } from "~/assets/types"
 
 // fetch data
 const { params } = useRoute()
 const { fetch } = useSanity()
 const { data, pending } = await useAsyncData(
-	`${params.page} - page`,
-	(): Promise<Page> => fetch(Page_Q, { uid: params.page })
+	`${params.article} - article`,
+	(): Promise<Article> => fetch(Article_Q, { uid: params.article })
 )
 
 
 // handle error
 if (!data.value) throw createError({
 	statusCode: 404,
-	statusMessage: `${params.page} Not Found`,
+	statusMessage: `${params.article} Not Found`,
 	fatal: true
 })
 

@@ -91,6 +91,18 @@ export interface Page {
 	lang: string,
 	altLang: Lang
 }
+export interface Article {
+	uid: string,
+	title: string,
+	content: any[],
+	metaTags: {
+		title: string,
+		description: string,
+		image: string
+	}
+	lang: string,
+	altLang: Lang
+}
 
 
 

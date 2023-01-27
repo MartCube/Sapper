@@ -41,11 +41,16 @@ export default defineNuxtConfig({
 			}
 		],
 		defaultLocale: 'ua',
+		strategy: 'prefix_except_default',
 		customRoutes: 'config',
 		pages: {
 			'[page]/': {
 				en: '/[page]/',
 				ua: '/[page]/',
+			},
+			'blog/[article]': {
+				en: '/blog/[article]/',
+				ua: '/novunu/[article]/',
 			}
 		}
 

@@ -71,8 +71,13 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	'poster': poster.asset._ref, 
 	'uid': uid.current,
 	'tag': tag->title,
+	__i18n_refs[] -> {
+		"lang": __i18n_lang,
+		"uid": uid.current
+	}
 	publishedAt,
 	content[] {
+		...,
 		_type == 'block' => { ... },
 		_type == 'image' => { _key, _type, "src": asset._ref, },
 		_type == 'gallery' => { _key, _type, "images": images[].asset._ref },
