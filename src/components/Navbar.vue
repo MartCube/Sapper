@@ -3,20 +3,21 @@
 		<NuxtLink :to="localePath('/')">
 			<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
 		</NuxtLink>
-
-		<nav v-if="!isLargeScreen">
-			<ul class="links">
-				<li v-for="link in links?.ua" :key="link.title" class="link">
-					<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
-					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
-					<ul v-if="link.dropdown" class="submenu">
-						<li v-for="sublink in link.dropdown">
-							<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
+		<template v-if="!isLargeScreen">
+			<nav>
+				<ul class="links">
+					<li v-for="link in links?.ua" :key="link.title" class="link">
+						<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
+						<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
+						<ul v-if="link.dropdown" class="submenu">
+							<li v-for="sublink in link.dropdown">
+								<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</template>
 		<div class="menu">
 			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
 				<span>{{ altLocale }}</span>
@@ -44,11 +45,16 @@
 				</div>
 			</template>
 			<template v-if="isLargeScreen">
-				<nav v-if="isLargeScreen">
+				<div class="close">
+					<Icon name="ri:close-fill" @click="menuToggle()" />
+				</div>
+				<nav>
 					<ul class="links">
-						<li v-for="link in links?.ua" :key="link.title" class="link">
+						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
 							<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
-							<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
+							<div class="arrow">
+								<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down" :key="link.uid"/>
+							</div>
 							<ul v-if="link.dropdown" class="submenu">
 								<li v-for="sublink in link.dropdown">
 									<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
@@ -66,9 +72,11 @@
 import { useToggle } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useMediaQuery } from '@vueuse/core'
+import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
+console.log(locale.value);
 
 const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
@@ -76,7 +84,19 @@ const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
 const { AppFetch } = useAppStore()
 const { logo, links, info } = storeToRefs(useAppStore())
 
+const currentLinks = (localeProperty: string) => localeProperty === 'ua' ? links.value?.ua : links.value?.en
+watch(locale, async (newLocale, oldLocale) => {
+    currentLinks(newLocale);
+})
 const [menuValue, menuToggle] = useToggle()
+
+const submenu = (link: Link) => {
+	if(link.classes !== '') {
+		link.classes = ''
+	} else {
+		link.classes = 'open'
+	}
+}
 
 const isLargeScreen = useMediaQuery('(max-width: 1200px)')
 
@@ -160,8 +180,9 @@ header {
 			position: relative;
 			display: flex;
 			align-items: center;
+			margin: 0 2rem;
 			&:last-child {
-				margin: 0;
+				margin-right: 0;
 			}
 
 			a {
@@ -173,8 +194,8 @@ header {
 				display: flex;
 				color: $dark;
 				font-weight: 500;
-				margin: 0 2rem;
 				position: relative;
+				margin-right: 1rem;
 				&::after {
 					content: '';
 					position: absolute;
@@ -265,8 +286,68 @@ header {
 
 		.links {
 			flex-direction: column;
+			.link {
+				width: 100%;
+				padding-right: 2rem;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				overflow: hidden;
+				height: 4rem;
+				margin: 0;
+				padding: 0 0 0 2rem;
+				transition: all 0.3s ease-in;
+				a {
+					padding: 1rem 0;
+				}
+				
+				.arrow {
+					padding: 1rem;
+				}
+				&.open{
+					overflow: visible;
+					height: 100%;
+					.submenu {
+						opacity: 1;
+					}
+				}
+				.submenu {
+					position: initial;
+					transition: all 0.3s ease-in;
+					width: 100%;
+					box-shadow: initial;
+					padding-left: 3rem;
+					padding-top: 0;
+					padding-bottom: 0;
+					opacity: 0;
+					li {
+						a {
+							&::before {
+								content: "-";
+								margin-right: 1rem;
+							}
+						}
+					}
+				}
+			}
 		}
+		.close {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			svg {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
 
+	@media (max-width: 600px) {
+		.sidebar {
+			width: 100vw;
+		}
+		.menu .phone {
+			display: none;
+		}
 	}
 }
 </style>

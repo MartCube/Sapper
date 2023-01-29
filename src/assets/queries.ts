@@ -15,10 +15,10 @@ export const App_Q = groq`*[ _type == "app" ][0]{
     smedias,
     links {
 			en[]->{ 
-              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current}
+              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current, "id": _id}
             },
 			ua[]->{ 
-              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current}
+              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current, "id": _id}
             },
     }
 }`

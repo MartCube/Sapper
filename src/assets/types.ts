@@ -58,7 +58,9 @@ export interface Locale {
 export interface Link {
 	title: string,
 	uid: string,
+	id: string,
 	dropdown: Link[]
+	classes: string,
 }
 
 export interface App {

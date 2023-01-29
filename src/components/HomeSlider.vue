@@ -98,7 +98,8 @@ defineComponent({ Carousel,Slide,Pagination,Navigation})
 					margin-top: 0;
 				}
 				.subtitle {
-					font-size: 3rem;
+					font-size: 2.3rem;
+					line-height: 1.1;
 					margin: 0;
 				}
 				.description {
