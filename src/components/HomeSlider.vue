@@ -1,9 +1,9 @@
 <template>
 	<div class="slider">
 		<carousel :items-to-show="1">
-			<slide v-for="slide in data" :key="slide.image">
+			<slide v-for="slide in list" :key="slide.image">
 				<div class="wrapper">
-					<img :src="slide.image" alt="">
+					<SanityImage :src="slide.image"/>
 					<div class="content">
 						<h4 class="subtitle">{{ slide.subtitle }}</h4>
 						<h1 class="title"> {{ slide.title }}</h1>
@@ -24,7 +24,7 @@
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
-defineProps<{ list: object[], }>()
+defineProps<{ list: any[], }>()
 
 defineComponent({ Carousel,Slide,Pagination,Navigation})
 

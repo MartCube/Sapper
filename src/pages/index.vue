@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { Page_Q } from "~~/src/assets/queries"
+import { Home_Q } from "~~/src/assets/queries"
 import type { Page } from "~~/src/assets/types"
 
 
@@ -15,18 +15,20 @@ import type { Page } from "~~/src/assets/types"
 const { fetch } = useSanity()
 const { data, pending } = await useAsyncData(
 	`Home Page`,
-	(): Promise<Page> => fetch(Page_Q, { uid: "golovna" })
+	(): Promise<Page> => fetch(Home_Q, { lang: "ua" })
 )
+// console.log(data.value);
+
 
 // // handle error
-if (!data.value) throw createError({
-	statusCode: 404,
-	statusMessage: 'Page Not Found',
-	fatal: true
-})
+// if (!data.value) throw createError({
+// 	statusCode: 404,
+// 	statusMessage: `f${data.value} Not Found`,
+// 	fatal: true
+// })
 
 // write metatags
-useMetaTags(data.value.metaTags)
+// useMetaTags(data.value.metaTags)
 </script>
 
 <style lang="scss" scoped>

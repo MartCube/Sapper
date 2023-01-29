@@ -1,49 +1,25 @@
 <template>
 	<div class="achivments">
 		<div class="container">
-			<div class="item">
-				<h3 class="title">Mine action</h3>
+			<div v-for="item in list" :key="item.title" class="item">
+				<h3 class="title">{{ item.title }}</h3>
 				<div class="image">
 					<span class="border_layer"></span>
-					<img src="/team.png" alt="">
+					<Icon :name="item.icon" />
 				</div>
-				<p class="description">Humanitarian demining is the clearing of areas and objects from explosive objects carried out in order to ensure the safety of life of the population</p>
-			</div>
-			<div class="item">
-				<h3 class="title">What we do</h3>
-				<div class="image">
-					<span class="border_layer"></span>
-					<img src="/like.png" alt="">
-				</div>
-				<p class="description">Our mission is to provide safe and reliable humanitarian demining services</p>
-			</div>
-			<div class="item">
-				<h3 class="title">Our units</h3>
-				<div class="image">
-					<span class="border_layer"></span>
-					<img src="/handshake.png" alt="">
-				</div>
-				<p class="description">
-					– Non-technical survey and public information unit 
-					<br>	– Technical survey unit 
-					<br>	– Demining unit 
-					<br>	– Mines and explosive objects destruction unit
-				</p>
-			</div>
-			<div class="item">
-				<h3 class="title">Training</h3>
-				<div class="image">
-					<span class="border_layer"></span>
-					<img src="/satisfaction.png" alt="">
-				</div>
-				<p class="description">We organize training for new employees and improve the skills of our experts.</p>
+				<p class="description">{{ item.description }}</p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-defineProps<{ list: object[], }>()
+defineProps<{ list: {
+	icon: string,
+	description: string,
+	title: string,
+	key: string,
+}[], }>()
 </script>
 
 <style lang="scss" scoped>
@@ -73,8 +49,11 @@ defineProps<{ list: object[], }>()
 			color: $dark;
 			width: 22%;
 			border-radius: 5px;
-			h3 {
+			.title {
 				font-size: 1.5rem;
+				text-align: center;
+				min-height: 3rem;
+				line-height: 1;
 			}
 			.description {
 				text-align: center;
@@ -90,7 +69,7 @@ defineProps<{ list: object[], }>()
 				box-shadow: 0 0 20px -6px #9e9e9e;
 				margin: 2rem 0;
 				position: relative;
-				img {
+				svg {
 					width: 70px;
 					height: auto;
 					object-position: center;
@@ -125,6 +104,11 @@ defineProps<{ list: object[], }>()
 			&:hover {
 				background-color: $dark4;
 				color: $white;
+				.image {
+					svg {
+						color: $dark4;
+					}
+				}
 				.border_layer {
 					animation-play-state: running;
 					clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0 0);

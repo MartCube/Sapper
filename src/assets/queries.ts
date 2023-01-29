@@ -41,7 +41,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 				"uid": uid.current,
 			},
 		},
-		_type == 'slider' => { ..., list[]{title, "image":image.asset._ref} },
+		_type == 'slider' => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
 		_type == 'achivments' => { ..., list[]{ title, icon, number}  },
 	},
 	metaTags {
@@ -56,6 +56,32 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
     ),
 }`
 
+// home 
+export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
+	title,
+	content[]{
+		...,
+		_type == 'latestArticles' => {... , 
+			lastnews[] -> {
+				_id,
+				description,
+				title,
+				publishedAt,
+				"image": poster.asset._ref,
+				"lang": __i18n_lang,
+				"uid": uid.current,
+			},
+		},
+		_type == 'homeSlider' => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
+		_type == 'achivments' => { ..., list[]{ title, icon, description, _key}  },
+	},
+	metaTags {
+		title,
+		description,
+		"image": image.asset._ref,
+	},
+    "lang": __i18n_lang,
+}`
 
 // Article
 export const Articles_Q = groq`*[_type == "article" && $activeTag in [tag->title, "all"]][$from...$to]{

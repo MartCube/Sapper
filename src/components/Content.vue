@@ -14,8 +14,8 @@ defineProps<{
 const serializers = {
 	types: {
 		// page content ### Lazy load ?
-		slider: resolveComponent('Slider'),
-		articleSlider: resolveComponent('LatestNews'),
+		homeSlider: resolveComponent('HomeSlider'),
+		latestArticles: resolveComponent('LatestNews'),
 		achivments: resolveComponent('Achivments'),
 		pageIntro: resolveComponent('PageIntro'),
 		homeInfo: resolveComponent('HomeInfo'),
@@ -23,6 +23,7 @@ const serializers = {
 		gmap: resolveComponent('Gmap'),
 		contactInfo: resolveComponent('ContactInfo'),
 		richtext: resolveComponent('RichText'),
+		richtextImage: resolveComponent('RichTextImage'),
 		// article content
 		// gallery: resolveComponent('Gallery'),
 		// youtube: resolveComponent('Youtube'),

@@ -80,7 +80,7 @@ export interface App {
 
 
 export interface Page {
-	uid: string,
+	uid?: string,
 	title: string,
 	content: any[],
 	metaTags: {

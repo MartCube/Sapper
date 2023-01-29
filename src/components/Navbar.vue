@@ -1,6 +1,9 @@
 <template>
 	<header>
-		<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
+		<NuxtLink :to="localePath('/')">
+			<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
+		</NuxtLink>
+
 		<nav>
 			<ul class="links">
 				<li v-for="link in links?.ua" :key="link.title" class="link">
@@ -44,6 +47,8 @@ import { useMediaQuery } from '@vueuse/core'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
+
+const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
 
 const { AppFetch } = useAppStore()
