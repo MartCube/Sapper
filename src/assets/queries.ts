@@ -72,6 +72,17 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 				"uid": uid.current,
 			},
 		},
+		_type == 'services' => { ..., 
+			list[]{ 
+				title, 
+				icon, 
+				description, 
+				_key, 
+				link -> {title, "uid": uid.current, "lang": __i18n_lang, }, 
+				"image": image.asset._ref 
+			} 
+		},
+		_type == 'richtextImage' => { ..., "image": image.asset._ref  },
 		_type == 'homeSlider' => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
 		_type == 'achivments' => { ..., list[]{ title, icon, description, _key}  },
 	},

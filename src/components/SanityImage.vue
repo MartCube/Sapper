@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="image-wrapper">
 		<nuxt-img provider="sanity" :src="src" width="640" height="360" loading="lazy" />
 	</div>
 </template>
@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
-	div {
+	div.image-wrapper {
 		width: inherit;
 		height: 100%;
 		img {

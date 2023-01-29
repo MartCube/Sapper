@@ -4,10 +4,11 @@
 			<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
 		</NuxtLink>
 
-		<nav>
+		<nav v-if="!isLargeScreen">
 			<ul class="links">
 				<li v-for="link in links?.ua" :key="link.title" class="link">
 					<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
+					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
 					<ul v-if="link.dropdown" class="submenu">
 						<li v-for="sublink in link.dropdown">
 							<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
@@ -22,20 +23,41 @@
 			</NuxtLink>
 			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" />
 			<Icon v-else name="ri:close-fill" @click="menuToggle()" />
+			<a class="phone" href="tel:+380647339023">
+				<Icon name="mdi:phone-in-talk-outline"/>
+				+38 (064) 733-90-23
+			</a>
 		</div>
 		<div class="sidebar" v-show="menuValue">
-			<div class="info phone">
-				<Icon name="ri:phone-fill" />
-				<span>{{ info?.phone }}</span>
-			</div>
-			<div class="info email">
-				<Icon name="ri:mail-open-fill" />
-				<span>{{ info?.email }}</span>
-			</div>
-			<div class="info adress">
-				<Icon name="ri:map-pin-2-fill" />
-				<span>{{ info?.adress }}</span>
-			</div>
+			<template v-if="!isLargeScreen">
+				<div class="info phone">
+					<Icon name="ri:phone-fill" />
+					<span>{{ info?.phone }}</span>
+				</div>
+				<div class="info email">
+					<Icon name="ri:mail-open-fill" />
+					<span>{{ info?.email }}</span>
+				</div>
+				<div class="info adress">
+					<Icon name="ri:map-pin-2-fill" />
+					<span>{{ info?.adress }}</span>
+				</div>
+			</template>
+			<template v-if="isLargeScreen">
+				<nav v-if="isLargeScreen">
+					<ul class="links">
+						<li v-for="link in links?.ua" :key="link.title" class="link">
+							<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
+							<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
+							<ul v-if="link.dropdown" class="submenu">
+								<li v-for="sublink in link.dropdown">
+									<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</template>
 		</div>
 	</header>
 </template>
@@ -56,7 +78,7 @@ const { logo, links, info } = storeToRefs(useAppStore())
 
 const [menuValue, menuToggle] = useToggle()
 
-const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+const isLargeScreen = useMediaQuery('(max-width: 1200px)')
 
 </script>
 
@@ -83,7 +105,7 @@ header {
 
 	.menu {
 		display: flex;
-
+		align-items: center;
 		.lang_switcher {
 			width: 2rem;
 			height: 2rem;
@@ -101,6 +123,25 @@ header {
 			height: 2rem;
 			color: $dark3;
 		}
+		.phone {
+			display: flex;
+			white-space: nowrap;
+			margin-left: 2rem;
+			padding: 1rem;
+			background-color: $dark3;
+			color: $white;
+			border-radius: 5px;
+			align-items: center;
+			font-weight: 600;
+			transition: all 0.2s ease-in;
+			svg {
+				color: inherit;
+				margin-right: 1rem;
+			}
+			&:hover {
+				background-color: $dark2;
+			}
+		}
 	}
 	nav {
 		width: 100%;
@@ -117,6 +158,8 @@ header {
 		.link {
 			overflow: hidden;
 			position: relative;
+			display: flex;
+			align-items: center;
 			&:last-child {
 				margin: 0;
 			}
@@ -161,6 +204,7 @@ header {
 			ul.submenu {
 				position: absolute;
 				background-color: $white;
+				top: 2rem;
 				padding: 1rem;
 				z-index: 3;
 				opacity: 0;
@@ -187,8 +231,8 @@ header {
 
 	.sidebar {
 		z-index: 11;
-		position: absolute;
-		top: 4rem;
+		position: fixed;
+		top: 0;
 		left: 0;
 		width: 25rem;
 		height: 100vh;
@@ -218,6 +262,11 @@ header {
 				color: $white;
 			}
 		}
+
+		.links {
+			flex-direction: column;
+		}
+
 	}
 }
 </style>

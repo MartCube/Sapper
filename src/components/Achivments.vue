@@ -37,7 +37,6 @@ defineProps<{ list: {
 	background-position: center;
 	background-size: cover;
 	.container {
-		max-width: 1300px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
@@ -50,13 +49,14 @@ defineProps<{ list: {
 			width: 22%;
 			border-radius: 5px;
 			.title {
-				font-size: 1.5rem;
+				font-size: 1.7rem;
 				text-align: center;
 				min-height: 3rem;
 				line-height: 1;
 			}
 			.description {
 				text-align: center;
+				font-size: 1.2rem;
 			}
 			.image {
 				display: flex;

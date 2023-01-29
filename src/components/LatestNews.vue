@@ -31,7 +31,7 @@ const { locale, setLocale } = useI18n()
 
 	display: flex;
 	justify-content: center;
-	background-image: url('./section-bg.png');
+	background-image: url('/section-bg.png');
 	background-size: contain;
 	background-position: left center;
 	background-repeat: no-repeat;

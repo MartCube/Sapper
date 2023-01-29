@@ -27,33 +27,6 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 defineProps<{ list: any[], }>()
 
 defineComponent({ Carousel,Slide,Pagination,Navigation})
-
-const data = [
-	{
-		image: '/slide1.jpg',
-		subtitle: 'Lorem, ipsum dolor.',
-		title: 'Lorem, ipsum dolor.',
-		description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, temporibus!',
-	},
-	{
-		image: '/slide2.jpg',
-		subtitle: 'Lorem, ipsum dolor.',
-		title: 'Lorem, ipsum dolor.',
-		description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, temporibus!',
-	},
-	{
-		image: '/slide3.jpg',
-		subtitle: 'Lorem, ipsum dolor.',
-		title: 'Lorem, ipsum dolor.',
-		description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, temporibus!',
-	},
-	{
-		image: '/slide4.jpg',
-		subtitle: 'Lorem, ipsum dolor.',
-		title: 'Lorem, ipsum dolor.',
-		description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, temporibus!',
-	},
-]
 </script>
 
 <style lang="scss">
