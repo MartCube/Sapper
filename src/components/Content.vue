@@ -26,6 +26,7 @@ const serializers = {
 		richtextImage: resolveComponent('RichTextImage'),
 		services: resolveComponent('Services'),
 		counter: resolveComponent('Counter'),
+		testimonials: resolveComponent('Testimonials'),
 		// article content
 		// gallery: resolveComponent('Gallery'),
 		// youtube: resolveComponent('Youtube'),
