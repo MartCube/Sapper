@@ -50,7 +50,7 @@
 				</div>
 				<nav>
 					<ul class="links">
-						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
+						<li v-for="link in links?.ua" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
 							<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
 							<div class="arrow">
 								<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down" :key="link.uid"/>
@@ -98,7 +98,7 @@ const submenu = (link: Link) => {
 	}
 }
 
-const isLargeScreen = useMediaQuery('(max-width: 1200px)')
+const isLargeScreen = useMediaQuery('(max-width: 1400px)')
 
 </script>
 
@@ -106,7 +106,7 @@ const isLargeScreen = useMediaQuery('(max-width: 1200px)')
 header {
 	width: 100%;
 	height: 115px;
-	padding: 0 10%;
+	padding: 0 5%;
 	border: 1px solid $dark;
 
 	display: flex;
