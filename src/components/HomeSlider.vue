@@ -3,7 +3,7 @@
 		<carousel :items-to-show="1">
 			<slide v-for="slide in list" :key="slide.image">
 				<div class="wrapper">
-					<SanityImage :src="slide.image"/>
+					<AppImage :src="slide.image"/>
 					<div class="content">
 						<h4 class="subtitle">{{ slide.subtitle }}</h4>
 						<h1 class="title"> {{ slide.title }}</h1>

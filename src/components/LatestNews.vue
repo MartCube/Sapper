@@ -5,7 +5,7 @@
 			<div class="article-wrapper">
 				<div v-for="article in lastnews" :key="article._id" class="item">
 					<div class="image">
-						<SanityImage :src="article.image"/>
+						<AppImage :src="article.image"/>
 					</div>
 					<div class="text">
 						<h3 class="title">{{ article.title }}</h3>

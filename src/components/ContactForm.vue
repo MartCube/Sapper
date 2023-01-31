@@ -73,8 +73,11 @@ form {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	position: relative;
 	margin: 2rem 0;
+	.container {
+		position: relative;
+		
+	}
 	.group {
 		display: flex;
 		.field{
@@ -220,7 +223,7 @@ form {
 		position: absolute;
     top: 0;
     background-color: $white;
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     height: 100%;
 		text-align: center;
     display: flex;

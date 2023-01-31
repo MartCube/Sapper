@@ -12,7 +12,7 @@
 						<p class="description">{{ item.description.slice(0, item.description.length / 2) }}</p>
 					</div>
 					<div class="back-card">
-						<SanityImage :src="item.image" />
+						<AppImage :src="item.image" />
 						<p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p>
 						<NuxtLink :to="localePath({ name: 'page', params: { page: item.link.uid } })">Відкрити</NuxtLink>
 					</div>
@@ -23,7 +23,7 @@
 						</div>
 						<h3 class="title">{{ item.title }}</h3>
 						<p class="description">{{ item.description }}</p>
-						<SanityImage :src="item.image" />
+						<AppImage :src="item.image" />
 						<NuxtLink :to="localePath({ name: 'page', params: { page: item.link.uid } })">Відкрити</NuxtLink>
 				</template>
 			</div>

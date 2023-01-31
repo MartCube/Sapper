@@ -2,7 +2,7 @@
 	<section class="richtext-image">
 		<div class="container">
 			<div class="image">
-				<SanityImage :src="image" ref="imageParalax"/>
+				<AppImage :src="image" ref="imageParalax"/>
 			</div>
 			<div class="text">
 				<SanityContent :blocks="list" />
