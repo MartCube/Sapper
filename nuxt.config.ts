@@ -1,7 +1,11 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-
+	router: {
+		options: {
+			strict: false,
+		}
+	},
 	srcDir: 'src',
 	typescript: { strict: true, typeCheck: true, shim: false },
 	app: {
