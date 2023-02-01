@@ -1,5 +1,5 @@
 <template>
-	<div class="achivments">
+	<section class="achivments">
 		<div class="container">
 			<div v-for="item in list" :key="item.title" class="item">
 				<h3 class="title">{{ item.title }}</h3>
@@ -10,7 +10,7 @@
 				<p class="description">{{ item.description }}</p>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">

@@ -7,7 +7,7 @@
 				</div>
 			</div>
 			<div v-if="isOpen" class="lightbox">
-				<div class="image" ref="img">
+				<div class="wrapper" ref="img">
 					<AppImage :src="state" :width="1280" :height="720" />
 					<Icon class="prev" @click="prev()" name="ic:baseline-arrow-back-ios-new" />
 					<Icon class="next" @click="next()" name="ic:baseline-arrow-forward-ios" />
@@ -55,11 +55,12 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 </script>
 
 <style lang="scss" scoped>
-.gallery .container{
+.gallery {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	padding: 3rem 0;
 	.lightbox {
 		position: fixed;
 		z-index: 2;
@@ -67,12 +68,12 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: $dark4;
+		background-color: rgb($dark4, 80%);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		.image {
-			height: 90%;
+			height: 100%;
 			user-select: none;
 			img {
 				width: 100%;
@@ -84,37 +85,51 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			position: absolute;
 			width: 3rem;
 			height: 3rem;
-			stroke: rgb(255,255,255, 50%);
-			fill: none;
+			// stroke: $white;
+			color: $white;
 			transition: all 0.2s ease;
+			
 			&:hover {
 				cursor: pointer;
-				stroke: $dark;
+				color: rgb($white, 70%);
+				animation-play-state: running;
 			}
 		}
 		.prev {
-			top: 50%;
+			top: 48%;
 			left: 1rem;
-			transform: rotate(180deg);
+			animation: shift 0.4s ease infinite alternate-reverse;
+			animation-play-state: paused;
 		}
 		.next {
-			top: 50%;
+			top: 48%;
 			right: 1rem;
+			animation: shift 0.4s ease infinite alternate-reverse;
+			animation-play-state: paused;
 		}
 		.close {
 			top: 1rem;
 			right: 1rem;
+			&:hover {
+				background-color: $dark;
+				padding: 3px;
+				transform: scale(0.7);
+			}
 		}
 	}
 	.grid {
 		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-evenly;
 		flex-wrap: wrap;
 		.placeholder {
-			width: 370px;
-			height: 263px;
-			margin-bottom: 4rem;
+			width: 30%;
+			height: 20vw;
+			margin: 15px;
+			.image {
+				width: 100%;
+				height: 100%;
+			}
 			img {
 				width: 100%;
 				height: 100%;
@@ -122,6 +137,49 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			&:hover {
 				cursor: pointer;
 			}
+
+		}
+	}
+	@media (max-width: 1000px) {
+		.lightbox {
+			.wrapper {
+				width: 100%;
+				.image {
+					width: 100%;
+				}
+			}
+		}
+		.grid {
+			justify-content: space-between;
+			.placeholder {
+				width: 44%;
+				height: 30vw;
+			}
+		}
+	}
+	@media (max-width: 1000px) {
+		.lightbox {
+			.wrapper {
+				width: 85%;
+				.image {
+					width: 100%;
+				}
+			}
+		}
+		.grid {
+			justify-content: space-between;
+			.placeholder {
+				width: 95%;
+				height: 60vw;
+			}
+		}
+	}
+	@keyframes shift {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-5px);
 		}
 	}
 }

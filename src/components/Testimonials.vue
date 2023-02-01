@@ -1,5 +1,5 @@
 <template>
-	<div class="testimonials">
+	<section class="testimonials">
 		<div class="container">
 			<h2 class="title">{{ title }}</h2>
 			<div v-for="item in list" :key="item._key" class="item">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">

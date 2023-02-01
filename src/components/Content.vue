@@ -18,7 +18,7 @@ const serializers = {
 		latestArticles: resolveComponent('LatestNews'),
 		achivments: resolveComponent('Achivments'),
 		pageIntro: resolveComponent('PageIntro'),
-		homeInfo: resolveComponent('HomeInfo'),
+		// homeInfo: resolveComponent('HomeInfo'),
 		contactForm: resolveComponent('ContactForm'),
 		gmap: resolveComponent('Gmap'),
 		contactInfo: resolveComponent('ContactInfo'),

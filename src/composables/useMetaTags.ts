@@ -5,7 +5,7 @@ export default (data: metaTags) => {
 
 	const { fullPath } = useRoute()
 	const builder = imageUrlBuilder({
-		projectId: useSanity().config.projectId,
+		projectId: 'ede4uk6z',
 		dataset: "production",
 	})
 

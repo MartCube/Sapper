@@ -1,5 +1,5 @@
 <template>
-	<div class="contact-info">
+	<section class="contact-info">
 		<div class="container">
 			<div class="item">
 				<div class="icon-wrapper">
@@ -23,7 +23,7 @@
 				<span>{{ address.value }}</span>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">

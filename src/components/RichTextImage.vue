@@ -1,7 +1,7 @@
 <template>
 	<section class="richtext-image">
 		<div class="container">
-			<div class="image">
+			<div class="image-wrapper">
 				<AppImage :src="image" ref="imageParalax"/>
 			</div>
 			<div class="text">
@@ -37,17 +37,19 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	.container {
 		display: flex;
 		flex-wrap: wrap;
-		.image {
+		.image-wrapper {
 			width: 700px;
 			height: 700px;
 			overflow: hidden;
+			display: flex;
 			border-radius: 50%;
 			padding: 0 7rem 14rem;
-			.image-wrapper {
+			.image {
 				overflow: hidden;
 				border-radius: 50%;
 				border: 20px solid $dark;
 				width: 100%;
+				height: auto;
 			}
 		}
 		.text {
@@ -70,6 +72,13 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	}
 	@media (max-width: 1000px) {
 		.container {
+			.image-wrapper {
+				width: 70vw;
+				height: 70vw;
+				padding: 0;
+				margin-left: auto;
+				margin-right: auto;
+			}
 			.image {
 				width: 70vw;
 				height: 70vw;
@@ -79,6 +88,7 @@ const { tilt, roll, source } = useParallax(imageParalax)
 			.text {
 				margin-top: 3rem;
 				width: 100%;
+				padding-left: 0;
 			}
 		}
 	}

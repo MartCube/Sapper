@@ -1,5 +1,5 @@
 <template>
-	<div class="counter">
+	<section class="counter">
 		<div class="container">
 			<div v-for="item in list" :key="item._key" class="item">
 				<div class="image">
@@ -10,7 +10,7 @@
 				<h3 class="title">{{ item.title }}</h3>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">

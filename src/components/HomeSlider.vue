@@ -1,5 +1,5 @@
 <template>
-	<div class="slider">
+	<section class="slider">
 		<carousel :items-to-show="1">
 			<slide v-for="slide in list" :key="slide.image">
 				<div class="wrapper">
@@ -17,7 +17,7 @@
 				<pagination />
 			</template>
 		</carousel>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">

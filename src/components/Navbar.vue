@@ -7,11 +7,11 @@
 			<nav>
 				<ul class="links">
 					<li v-for="link in links?.ua" :key="link.title" class="link">
-						<NuxtLink :to="link.uid">{{ link.title }}</NuxtLink>
+						<NuxtLink :to="`/${link.uid}`">{{ link.title }}</NuxtLink>
 						<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
 						<ul v-if="link.dropdown" class="submenu">
 							<li v-for="sublink in link.dropdown">
-								<NuxtLink :to="sublink.uid">{{ sublink.title }}</NuxtLink>
+								<NuxtLink :to="`/${sublink.uid}`">{{ sublink.title }}</NuxtLink>
 							</li>
 						</ul>
 					</li>

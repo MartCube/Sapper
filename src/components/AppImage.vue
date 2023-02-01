@@ -1,7 +1,7 @@
 <template>
 	<div class="image">
 		<!-- format="auto" -->
-		<SanityImage :asset-id="src" :w="width" :h="height" format="auto">
+		<SanityImage :asset-id="src" :w="width" :h="height" >
 			<template #default="{ src }">
 				<img v-lazy="src" />
 			</template>
@@ -15,17 +15,20 @@ defineProps<{
 	width?: number,
 	height?: number,
 }>()
+
 </script>
 
 <style lang="scss" scoped>
 .image {
-	width: v-bind(width);
-	height: v-bind(height);
+	width: inherit;
+	height: inherit;
+	// width: v-bind(width);
+	// height: v-bind(height);
 	display: flex;
 	img {
 		width: 100%;
 		height: 100%;
-		object-fit: contain;
+		object-fit: cover;
 		display: block;
 		outline: none;
 		border: none;

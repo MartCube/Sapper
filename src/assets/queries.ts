@@ -27,10 +27,10 @@ export const App_Q = groq`*[ _type == "app" ][0]{
 // Page
 export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 	title,
-	'uid': uid.current,
+	"uid": uid.current,
 	content[]{
 		...,
-		_type == 'articleSlider' => {... , 
+		_type == "articleSlider" => {... , 
 			lastnews[] -> {
 				_id,
 				description,
@@ -41,11 +41,11 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 				"uid": uid.current,
 			},
 		},
-		_type == 'richtextImage' => { ..., "image": image.asset._ref  },
-		_type == 'gallery' => { ..., "images": images[].asset._ref  },
-		_type == 'youtubeGallery' => { ..., "list": list[].id  },
-		_type == 'slider' => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
-		_type == 'achivments' => { ..., list[]{ title, icon, number}  },
+		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "gallery" => { ..., "images": images[].asset._ref  },
+		_type == "youtubeGallery" => { ..., "list": list[].id  },
+		_type == "slider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
+		_type == "achivments" => { ..., list[]{ title, icon, number}  },
 	},
 	metaTags {
 		title,
@@ -64,7 +64,7 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 	title,
 	content[]{
 		...,
-		_type == 'latestArticles' => {... , 
+		_type == "latestArticles" => {... , 
 			lastnews[] -> {
 				_id,
 				description,
@@ -75,7 +75,7 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 				"uid": uid.current,
 			},
 		},
-		_type == 'services' => { ..., 
+		_type == "services" => { ..., 
 			list[]{ 
 				title, 
 				icon, 
@@ -85,9 +85,9 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 				"image": image.asset._ref 
 			} 
 		},
-		_type == 'richtextImage' => { ..., "image": image.asset._ref  },
-		_type == 'homeSlider' => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
-		_type == 'achivments' => { ..., list[]{ title, icon, description, _key}  },
+		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "homeSlider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
+		_type == "achivments" => { ..., list[]{ title, icon, description, _key}  },
 	},
 	metaTags {
 		title,
@@ -100,33 +100,33 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 // Article
 export const Articles_Q = groq`*[_type == "article" && $activeTag in [tag->title, "all"]][$from...$to]{
 	title,
-	'uid': uid.current,
-	'tag': tag->title,
+	"uid": uid.current,
+	"tag": tag->title,
 	publishedAt
 }`
 export const ArticleTags_Q = groq`*[_type == "articleTag"].title`
 export const ArticleCount_Q = groq`count(*[ _type == "article" && $activeTag in [tag->title, $all]])`
 export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	title, 
-	'poster': poster.asset._ref, 
-	'uid': uid.current,
-	'tag': tag->title,
+	"poster": poster.asset._ref, 
+	"uid": uid.current,
+	"tag": tag->title,
 	__i18n_refs[] -> {
 		"lang": __i18n_lang,
 		"uid": uid.current
-	}
+	},
 	publishedAt,
 	content[] {
 		...,
-		_type == 'block' => { ... },
-		_type == 'image' => { _key, _type, "src": asset._ref, },
-		_type == 'gallery' => { _key, _type, "images": images[].asset._ref },
-		_type == 'youtube' => { ... },
+		_type == "block" => { ... },
+		_type == "image" => { _key, _type, "src": asset._ref, },
+		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
+		_type == "youtube" => { ... },
 	},
 	metaTags {
 		title,
 		description,
-		'image': image.asset._ref,
+		"image": image.asset._ref,
 	}
 }`
 

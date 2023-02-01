@@ -4,7 +4,7 @@
 			<h2>{{ title }}</h2>
 			<div class="article-wrapper">
 				<div v-for="article in lastnews" :key="article._id" class="item">
-					<div class="image">
+					<div class="image-wrapper">
 						<AppImage :src="article.image"/>
 					</div>
 					<div class="text">
@@ -87,10 +87,10 @@ const { locale, setLocale } = useI18n()
 					background-color: #1a1a1a;
 				}
 			}
-			.image {
+			.image-wrapper {
 				width: 100%;
 				height: 50%;
-				img {
+				.image {
 					width: 100%;
 					height: 100%;
 					display: block;

@@ -3,7 +3,7 @@
 		<div class="container">
 			<h2 class="title">{{ title }}</h2>
 			<div v-for="item in list" :key="item.title" class="item">
-				<template v-if="!isLargeScreen">
+				<template v-if="!isMobileScreen">
 					<div class="front-card">
 						<div class="image">
 							<Icon :name="item.icon" />
@@ -17,8 +17,8 @@
 						<NuxtLink :to="localePath({ name: 'page', params: { page: item.link.uid } })">Відкрити</NuxtLink>
 					</div>
 				</template>
-				<template v-if="isLargeScreen">
-						<div class="image">
+				<template v-if="isMobileScreen">
+						<div class="icon">
 							<Icon :name="item.icon" />
 						</div>
 						<h3 class="title">{{ item.title }}</h3>
@@ -35,7 +35,7 @@
 import { useMediaQuery } from '@vueuse/core'
 
 const localePath = useLocalePath()	 
-const isLargeScreen = useMediaQuery('(max-width: 1000px)')
+const isMobileScreen = useMediaQuery('(max-width: 1000px)')
 
 defineProps<{ 
 	title: string, 
@@ -112,6 +112,14 @@ defineProps<{
 				transform: rotateY(180deg);
 				transition: all 0.7s ease;
 				opacity: 0;
+				.image {
+					width: 100%;
+					filter: brightness(0.2);
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
 			}
 			.description {
 				position: relative;
@@ -155,14 +163,7 @@ defineProps<{
 					}
 				}
 			}
-			.image-wrapper {
-				width: 100%;
-				filter: brightness(0.2);
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
+	
 			&:hover {
 				.front-card {
 					transform: rotateY(-180deg);
@@ -232,8 +233,13 @@ defineProps<{
 					z-index: 3;
 				}
 				.image {
-					position: relative;
-					z-index: 4;
+					position: absolute;
+					z-index: 0;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					filter: brightness(0.3);
 				}
 			}
 		}

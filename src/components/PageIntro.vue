@@ -1,11 +1,13 @@
 <template>
-	<div class="intro">
-		<h1>{{ title }}</h1>
-		<div class="breadcrumbs">
-			<NuxtLink to="/">home</NuxtLink>
-			<NuxtLink to="/">{{ title }}</NuxtLink>
+	<section class="intro">
+		<div class="container">
+			<h1>{{ title }}</h1>
+			<div class="breadcrumbs">
+				<NuxtLink to="/">home</NuxtLink>
+				<NuxtLink to="/">{{ title }}</NuxtLink>
+			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">
@@ -28,8 +30,10 @@ defineProps<{ title: string, }>()
 	background-position: center;
 
 	h1 {
-		font-size: 5rem;
+		font-size: 4.5rem;
 		font-weight: 600;
+		text-align: center;
+		line-height: 1;
 		&::first-letter {
 			text-transform: uppercase;
 		}
@@ -37,6 +41,7 @@ defineProps<{ title: string, }>()
 	.breadcrumbs {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		a {
 			// display: flex;
 			color: $white;
