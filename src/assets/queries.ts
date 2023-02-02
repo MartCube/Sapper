@@ -98,11 +98,13 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 }`
 
 // Article
-export const Articles_Q = groq`*[_type == "article" && $activeTag in [tag->title, "all"]][$from...$to]{
+// export const Articles_Q = groq`*[_type == "article" && $activeTag in [tag->title, "all"]][$from...$to]{
+export const Articles_Q = groq`*[_type == "article" && $lang == __i18n_lang ][$from...$to]{
 	title,
 	"uid": uid.current,
-	"tag": tag->title,
-	publishedAt
+  	"image": poster.asset._ref,
+	description,
+	publishedAt,
 }`
 export const ArticleTags_Q = groq`*[_type == "articleTag"].title`
 export const ArticleCount_Q = groq`count(*[ _type == "article" && $activeTag in [tag->title, $all]])`

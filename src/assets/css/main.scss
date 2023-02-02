@@ -84,3 +84,24 @@ h5, h6          { font-weight: bolder }
 	}
 }
 
+#article {
+	.image {
+		width: 100%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@media (min-width: 1000px) {
+		div.image {
+			max-width:  1450px;
+			width: 100%;
+			padding: 0 2rem;
+		}
+	}
+	@media (max-width: 1000px) {
+		div.image {
+			width: 100%;
+			max-width:  90%;
+		}
+	}
+}

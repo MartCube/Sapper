@@ -1,5 +1,5 @@
 <template>
-	<div id="page">
+	<div id="article">
 		<template v-if="data && !pending">
 			<Content :blocks="data.content" />
 		</template>
@@ -40,7 +40,7 @@ useMetaTags(data.value.metaTags)
 </script>
 
 <style lang="scss" scoped>
-#page {
+#article {
 	width: 100%;
 	flex-grow: 1;
 
@@ -48,8 +48,6 @@ useMetaTags(data.value.metaTags)
 	flex-direction: column;
 	justify-content: center;
 	position: relative;
-
-
 }
 </style>
 

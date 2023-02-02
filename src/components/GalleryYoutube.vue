@@ -3,6 +3,7 @@
 		<div class="container">
 			<div class="grid">
 				<div v-for="(image, index) in list" :key="index" @click="Open(index)" class="placeholder">
+					<Icon name="ic:baseline-play-circle-filled-white" />
 					<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
 				</div>
 			</div>
@@ -55,14 +56,15 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 </script>
 
 <style lang="scss" scoped>
-.gallery-youtube .container{
+.gallery-youtube {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	padding: 4rem 0;
 	.lightbox {
 		position: fixed;
-		z-index: 2;
+		z-index: 10;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -80,26 +82,39 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			position: absolute;
 			width: 3rem;
 			height: 3rem;
-			stroke: rgb(255,255,255, 50%);
-			fill: none;
+			// stroke: $white;
+			color: $white;
 			transition: all 0.2s ease;
+			
 			&:hover {
 				cursor: pointer;
-				stroke: $dark;
+				color: rgb($white, 70%);
+				animation-play-state: running;
 			}
 		}
 		.prev {
-			top: 50%;
+			top: 48%;
 			left: 1rem;
-			transform: rotate(180deg);
+			animation: shift 0.4s ease infinite alternate-reverse;
+			animation-play-state: paused;
 		}
 		.next {
-			top: 50%;
+			top: 48%;
 			right: 1rem;
+			animation: shift 0.4s ease infinite alternate-reverse;
+			animation-play-state: paused;
 		}
 		.close {
 			top: 1rem;
 			right: 1rem;
+			background-color: $dark4;
+			padding: 5px;
+			border-radius: 5px;
+			&:hover {
+				background-color: $dark3;
+				padding: 3px;
+				transform: scale(0.7);
+			}
 		}
 	}
 	.grid {
@@ -108,16 +123,49 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		justify-content: space-between;
 		flex-wrap: wrap;
 		.placeholder {
-			width: 370px;
-			height: 263px;
+			width: 30%;
+			height: 20vw;
 			margin-bottom: 4rem;
+			position: relative;
+			border-radius: 4px;
+			overflow: hidden;
+			box-shadow: 0 0 26px -5px hsl(0deg 0% 45%);
 			img {
 				width: 100%;
+				object-fit: cover;
 				height: 100%;
+				filter: brightness(0.4);
+				transition: transform 0.3s ease-in;
+			}
+			svg {
+				color: $white;
+				font-size: 5rem;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 4;
 			}
 			&:hover {
 				cursor: pointer;
+				img {
+					transform: scale(1.1);
+				}
 			}
+		}
+		@media (max-width: 1000px) {
+			.placeholder {
+				width: 45%;
+				height: 35vw;
+			}
+			
+		}
+		@media (max-width: 600px) {
+			.placeholder {
+				width: 100%;
+				height: 55vw;
+			}
+			
 		}
 	}
 }

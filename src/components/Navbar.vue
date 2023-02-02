@@ -76,7 +76,7 @@ import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
-console.log(locale.value);
+// console.log(locale.value);
 
 const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
@@ -344,6 +344,15 @@ header {
 	@media (max-width: 600px) {
 		.sidebar {
 			width: 100vw;
+			.links .link {
+				padding: 0 2rem;
+				a, .arrow svg {
+					font-size: 1.5rem;
+				}
+				a.router-link-exact-active::after {
+					bottom: 10px;
+				}
+			}
 		}
 		.menu .phone {
 			display: none;

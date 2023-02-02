@@ -24,7 +24,8 @@ export interface Sitemap {
 // components
 export interface ArticleCard {
 	title: string,
-	poster?: string,
+	description: string,
+	image: string,
 	uid: string,
 	publishedAt: string
 }
