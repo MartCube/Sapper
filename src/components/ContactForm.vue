@@ -1,13 +1,14 @@
 <template>
 	<form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
 		<div class="container">
-			<h2 v-if="title !== ''" class="title">{{ title }}</h2>
+			<h2 v-if="title" class="title">{{ title }}</h2>
 			<div class="group">
 				<VeeInput :name="props.name" />
 				<VeeInput :name="props.email" />
 				<VeeInput :name="props.phone" />
 			</div>
-			<VeeInput :name="props.message" :type="'textarea'"/>
+			<!-- <VeeInput :name="props.message" type="textarea" /> -->
+			<!-- <VeeTextarea :name="props.message"/> -->
 	
 			<button type="submit" :disabled="isSubmitting">
 				<span class="submit">submit</span>
@@ -36,7 +37,7 @@ const props = defineProps<{
 	name: string;
 	email: string;
 	phone: string;
-	message: string;
+	// message: string;
 	title?: string;
 }>()
 
@@ -47,13 +48,13 @@ const validationSchema = toFormValidator(
 		name: z.string().min(1, 'Required'),
 		email: z.string().min(1, 'Required').email(),
 		phone: z.string().min(1, 'Required'),
-		message: z.string().min(1, 'Required').max(120),
+		// message: z.string().min(1, 'Required').max(120),
 	})
 )
 
 const showMsg = ref(false)
 
-const { handleSubmit, isSubmitting, } = useForm<ContactForm>({ validationSchema })
+const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
 
 const onSubmit = handleSubmit(async (values, actions) => {
 	console.log(values, actions);

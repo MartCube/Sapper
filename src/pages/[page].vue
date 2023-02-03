@@ -32,7 +32,7 @@ if (!data.value) throw createError({
 //     ua: data.value.lang
 //   }
 // })
-console.log(data.value.altLang);
+// console.log(data.value.altLang);
 
 if(params && data.value) {
   meta.nuxtI18n = {

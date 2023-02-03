@@ -76,6 +76,8 @@ import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
+const isLargeScreen = ref(useMediaQuery('(max-width: 1400px)'))
+
 // console.log(locale.value);
 
 const localePath = useLocalePath()	 
@@ -98,7 +100,6 @@ const submenu = (link: Link) => {
 	}
 }
 
-const isLargeScreen = useMediaQuery('(max-width: 1400px)')
 
 </script>
 
