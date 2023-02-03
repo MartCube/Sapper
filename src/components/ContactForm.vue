@@ -1,13 +1,13 @@
 <template>
 	<form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
 		<div class="container">
-
+			<h2 v-if="title !== ''" class="title">{{ title }}</h2>
 			<div class="group">
 				<VeeInput :name="props.name" />
 				<VeeInput :name="props.email" />
 				<VeeInput :name="props.phone" />
 			</div>
-			<VeeInput :name="props.message" />
+			<VeeInput :name="props.message" :type="'textarea'"/>
 	
 			<button type="submit" :disabled="isSubmitting">
 				<span class="submit">submit</span>
@@ -37,6 +37,7 @@ const props = defineProps<{
 	email: string;
 	phone: string;
 	message: string;
+	title?: string;
 }>()
 
 const formStateAnim = ref<string>('showForm')
@@ -50,14 +51,14 @@ const validationSchema = toFormValidator(
 	})
 )
 
-const showMsg = ref(true)
+const showMsg = ref(false)
 
 const { handleSubmit, isSubmitting, } = useForm<ContactForm>({ validationSchema })
 
 const onSubmit = handleSubmit(async (values, actions) => {
 	console.log(values, actions);
 	
-	showMsg.value = true
+	showMsg.value = false
 	// formStateAnim.value = 'loading'
 	//send data
 	// emailjs.sendForm('service_l807s5g', 'template_l807s5g', form.value, 'O9kaL-kw7T0WfpVbt').then((result) => { console.log('SUCCESS!', result.text) }, (error) => { console.log('FAILED...', error.text) },)

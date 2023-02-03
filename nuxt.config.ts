@@ -34,17 +34,33 @@ export default defineNuxtConfig({
 	},
 
 	i18n: {
+		vueI18n: {
+			legacy: false,
+			locale: 'ua',
+			fallbackLocale: 'ua',
+			messages: {
+				en: {
+					index: 'Home'
+				},
+				ua: {
+					index: 'Домашня'
+				}
+			}
+		},
 		locales: [
 			{
 				code: 'ua',
+				iso: 'uk-UA',
 				name: 'Ukrainian',
 			},
 			{
 				code: 'en',
+				iso: 'en-US',
 				name: 'English',
 			}
 		],
 		defaultLocale: 'ua',
+		dynamicRouteParams: true,
 		strategy: 'prefix_except_default',
 		customRoutes: 'config',
 		pages: {
@@ -53,7 +69,7 @@ export default defineNuxtConfig({
 				ua: '/[page]/',
 			},
 			'blog/[article]': {
-				en: '/blog/[article]/',
+				en: false,
 				ua: '/novunu/[article]/',
 			}
 		}

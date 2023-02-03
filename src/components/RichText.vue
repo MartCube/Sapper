@@ -35,7 +35,7 @@ defineProps<{
 			&::before {
 				content: '';
 				display: block;
-				width: 7px;
+				min-width: 7px;
 				height: 3px;
 				background-color: $dark;
 				margin-right: 1rem;
@@ -51,5 +51,11 @@ defineProps<{
 	// .v-leave-to {
 	// 	opacity: 0
 	// }
+	@media (max-width: 1000px) {
+		ul {
+			// font-size: 1.2rem;
+			padding-left: 1rem;
+		}
+	}
 }
 </style>

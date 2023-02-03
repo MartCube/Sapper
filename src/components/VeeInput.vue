@@ -1,18 +1,27 @@
 <template>
 	<div class="field">
-		<div class="error">
-			<span v-show="errorMessage"> {{ errorMessage }} </span>
-		</div>
-		<input v-model="value" type="text" :id="name" :name="name" :placeholder="name" />
-		<div class="line" />
+		<template v-if="type !== 'textarea'">
+			<div class="error">
+				<span v-show="errorMessage"> {{ errorMessage }} </span>
+			</div>
+			<input v-model="value" type="text" :id="name" :name="name" :placeholder="name" />
+			<div class="line" />
+		</template>
+		<template v-if="type === 'textarea'">
+			<div class="error">
+				<span v-show="errorMessage"> {{ errorMessage }} </span>
+			</div>
+			<textarea :id="name" :name="name" :placeholder="name"></textarea>
+			<div class="line" />
+		</template>
 	</div>
 </template>
   
 <script setup lang="ts">
 import { useField } from 'vee-validate'
-import { toRef } from 'vue'
+import { toRef , Ref} from 'vue'
 
-const props = defineProps<{ name: string }>()
+const props = defineProps<{ name: string, type?: string }>()
 
 const nameRef = toRef(props, 'name')
 const { errorMessage, value } = useField(nameRef)
@@ -52,11 +61,16 @@ const { errorMessage, value } = useField(nameRef)
 		}
 	}
 
-	input {
+	textarea {
+		min-height: 150px;
+	}
+
+	input, textarea {
 		border: none;
 		border-bottom: 3px solid $dark;
 		background: transparent;
 		padding: 1rem;
+		font-family: 'Poppins';
 
 		color: $dark;
 		font-size: 1rem;

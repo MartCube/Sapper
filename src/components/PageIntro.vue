@@ -3,7 +3,7 @@
 		<div class="container">
 			<h1>{{ title }}</h1>
 			<div class="breadcrumbs">
-				<NuxtLink to="/">home</NuxtLink>
+				<NuxtLink to="/">{{ t('index')}}</NuxtLink>
 				<NuxtLink to="/">{{ title }}</NuxtLink>
 			</div>
 		</div>
@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n({})
+
 defineProps<{ title: string, }>()
 </script>
 
