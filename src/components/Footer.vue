@@ -6,15 +6,15 @@
 					<img src="/logo-footer.png" alt="">
 				</div>
 				<div class="contact-info">
-					<a href="tel:+3806974001236">
+					<a :href="`tel:${info?.phone}`">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M38.8 23.65q-.25-6.05-4.45-10.25T24.1 8.95v-3q3.6.1 6.775 1.525Q34.05 8.9 36.45 11.3q2.4 2.4 3.825 5.575Q41.7 20.05 41.8 23.65Zm-8.45 0q-.25-2.5-2-4.225Q26.6 17.7 24.1 17.45v-3q3.75.25 6.375 2.85t2.875 6.35ZM39.75 42q-6.1 0-12.125-3T16.8 31.2Q12 26.4 9 20.375 6 14.35 6 8.25q0-.95.65-1.6Q7.3 6 8.25 6h7q.7 0 1.225.475.525.475.675 1.275l1.35 6.3q.1.7-.025 1.275t-.525.975l-5 5.05q2.8 4.65 6.275 8.1Q22.7 32.9 27.1 35.3l4.75-4.9q.5-.55 1.15-.775.65-.225 1.3-.075l5.95 1.3q.75.15 1.25.75T42 33v6.75q0 .95-.65 1.6-.65.65-1.6.65Zm-28.3-23.4 4.05-4.1L14.35 9H9q0 1.95.6 4.275t1.85 5.325ZM29.9 36.75q2.05.95 4.45 1.55 2.4.6 4.65.7v-5.35l-5.15-1.05ZM11.45 18.6ZM29.9 36.75Z"/></svg>
-						+380 69 740 01 23</a>
-					<a href="mailto:mymail@gmail.com">
+						{{ info?.phone }}</a>
+					<a :href="`mailto:${info?.email}`">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M7 40q-1.2 0-2.1-.9Q4 38.2 4 37V11q0-1.2.9-2.1Q5.8 8 7 8h34q1.2 0 2.1.9.9.9.9 2.1v26q0 1.2-.9 2.1-.9.9-2.1.9Zm17-15.1L7 13.75V37h34V13.75Zm0-3L40.8 11H7.25ZM7 13.75V11v26Z"/></svg>
-						mymail@gmail.com</a>
+						{{ info?.email }}</a>
 					<a href="javascript:;">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M24 23.5q1.45 0 2.475-1.025Q27.5 21.45 27.5 20q0-1.45-1.025-2.475Q25.45 16.5 24 16.5q-1.45 0-2.475 1.025Q20.5 18.55 20.5 20q0 1.45 1.025 2.475Q22.55 23.5 24 23.5Zm0 16.55q6.65-6.05 9.825-10.975Q37 24.15 37 20.4q0-5.9-3.775-9.65T24 7q-5.45 0-9.225 3.75Q11 14.5 11 20.4q0 3.75 3.25 8.675Q17.5 34 24 40.05ZM24 44q-8.05-6.85-12.025-12.725Q8 25.4 8 20.4q0-7.5 4.825-11.95Q17.65 4 24 4q6.35 0 11.175 4.45Q40 12.9 40 20.4q0 5-3.975 10.875T24 44Zm0-23.6Z"/></svg>
-						Ukraine, Kyiv</a>
+						{{ info?.adress }}</a>
 				</div>
 				<div class="social-media">
 					<NuxtLink :to="smedias?.instagram" external>
@@ -23,7 +23,7 @@
 					<NuxtLink :to="smedias?.facebook" external>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
 					</NuxtLink>
-					<NuxtLink :to="smedias?.facebook" external>
+					<NuxtLink :to="smedias?.youtube" external>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
 					</NuxtLink>
 				</div>
@@ -36,34 +36,16 @@
 			<div class="group">
 				<h3 class="title">About us</h3>
 				<ul class="links">
-					<li>
-						<a href="#">Our team</a>
-					</li>
-					<li>
-						<a href="#">About us</a>
-					</li>
-					<li>
-						<a href="#">Job offers</a>
-					</li>
-					<li>
-						<a href="#">Education</a>
+					<li v-for="sublink in submenuLinks">
+						<NuxtLink :to="`${localePath({ name: 'page', params: { page: sublink.uid } })}`">{{ sublink.title }}</NuxtLink>
 					</li>
 				</ul>
 			</div>
 			<div class="group">
 				<h3 class="title">Sitemap</h3>
 				<ul class="links">
-					<li>
-						<a href="#">About us</a>
-					</li>
-					<li>
-						<a href="#">Mine action</a>
-					</li>
-					<li>
-						<a href="#">Contacts</a>
-					</li>
-					<li>
-						<a href="#">Lorem, ipsum.</a>
+					<li v-for="link in footerLinks">
+						<NuxtLink :to="`${localePath({ name: 'page', params: { page: link.uid } })}`">{{ link.title }}</NuxtLink>
 					</li>
 				</ul>
 			</div>
@@ -76,8 +58,23 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { Link } from '../assets/types'
+const { locale, setLocale } = useI18n()
+const { smedias, info, links } = storeToRefs(useAppStore())
+const localePath = useLocalePath()
 
-const { smedias } = storeToRefs(useAppStore())
+
+console.log(locale.value);
+
+const footerLinks = computed( () => locale.value === 'ua' ? links.value?.ua : links.value?.en ) 
+const submenuLinks = computed( () => footerLinks.value?.at(0)?.dropdown)
+
+watch(locale, (oldLocale, newLocale) => {
+	if(newLocale) {
+		footerLinks
+		submenuLinks
+	}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -199,7 +196,9 @@ footer {
 				width: 20%;
 				.image {
 					img {
+						background-color: $white;
 						width: 200px;
+						border-radius: 15px;
 					}
 				}
 			}

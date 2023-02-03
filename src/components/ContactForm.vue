@@ -3,11 +3,11 @@
 		<div class="container">
 			<h2 v-if="title" class="title">{{ title }}</h2>
 			<div class="group">
-				<VeeInput :name="props.name" />
-				<VeeInput :name="props.email" />
-				<VeeInput :name="props.phone" />
+				<VeeInput :name="name" />
+				<VeeInput :name="email" />
+				<VeeInput :name="phone" />
 			</div>
-			<!-- <VeeInput :name="props.message" type="textarea" /> -->
+			<!-- <VeeInput :name="message" type="textarea" /> -->
 			<!-- <VeeTextarea :name="props.message"/> -->
 	
 			<button type="submit" :disabled="isSubmitting">
@@ -78,7 +78,6 @@ form {
 	margin: 2rem 0;
 	.container {
 		position: relative;
-		
 	}
 	.group {
 		display: flex;

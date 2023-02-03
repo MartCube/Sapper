@@ -1,8 +1,8 @@
 // Sitemap
 export const Sitemap_Q = groq`*[ _type in ["article", "page"] ]{
-    "url": "/"+uid.current+"/",
-    "changefreq": "monthly",
-   	"priority": sitemap.priority,
+	"url": "/"+uid.current+"/",
+	"changefreq": "monthly",
+	"priority": sitemap.priority,
 	"lastmod" :_updatedAt,
     _type == "article" => {
         "url": "/blog/"+uid.current+"/",

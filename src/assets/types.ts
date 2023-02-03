@@ -60,8 +60,8 @@ export interface Link {
 	title: string,
 	uid: string,
 	id: string,
-	dropdown: Link[]
-	classes: string,
+	dropdown?: Link[]
+	classes?: string,
 }
 
 export interface App {
@@ -74,6 +74,7 @@ export interface App {
 	smedias: {
 		facebook: string,
 		instagram: string,
+		youtube: string,
 	}
 	links: {
 		en: Link[],

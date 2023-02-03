@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 
 	i18n: {
 		vueI18n: {
-			legacy: false,
+			// legacy: false,
 			locale: 'ua',
 			fallbackLocale: 'ua',
 			messages: {
@@ -65,12 +65,12 @@ export default defineNuxtConfig({
 		customRoutes: 'config',
 		pages: {
 			'[page]/': {
-				en: '/[page]/',
-				ua: '/[page]/',
+				en: '/[page]',
+				ua: '/[page]',
 			},
 			'blog/[article]': {
 				en: false,
-				ua: '/novunu/[article]/',
+				ua: '/novunu/[article]',
 			}
 		}
 

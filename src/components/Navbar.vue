@@ -1,25 +1,23 @@
 <template>
 	<header>
 		<NuxtLink :to="localePath('/')">
-			<nuxt-img provider="sanity" :src="logo!" width="112" height="63" loading="lazy" />
+			<img src="/logo.jpg" width="112" height="63" loading="lazy" class="logo" />
 		</NuxtLink>
-		<template v-if="!isLargeScreen">
-			<nav>
-				<ul class="links">
-					<li v-for="link in links?.ua" :key="link.title" class="link">
-						<NuxtLink :to="`/${link.uid}/`">{{ link.title }}</NuxtLink>
-						<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
-						<ul v-if="link.dropdown" class="submenu">
-							<li v-for="sublink in link.dropdown">
-								<NuxtLink :to="`/${sublink.uid}/`">{{ sublink.title }}</NuxtLink>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</template>
+		<nav>
+			<ul class="links">
+				<li v-for="link in links?.ua" :key="link.title" class="link">
+					<NuxtLink :to="`/${link.uid}`">{{ link.title }}</NuxtLink>
+					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
+					<ul v-if="link.dropdown" class="submenu">
+						<li v-for="sublink in link.dropdown">
+							<NuxtLink :to="`/${sublink.uid}`">{{ sublink.title }}</NuxtLink>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 		<div class="menu">
-			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
+			<NuxtLink class="lang_switcher" :to="`${switchLocalePath(altLocale)}/`">
 				<span>{{ altLocale }}</span>
 			</NuxtLink>
 			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" />
@@ -29,56 +27,52 @@
 				+38 (064) 733-90-23
 			</a>
 		</div>
-		<div class="sidebar" v-show="menuValue">
-			<template v-if="!isLargeScreen">
-				<div class="info phone">
+		<div class="sidebar" v-show="menuValue" ref="sidebar">
+			<div class="close">
+				<Icon name="ri:close-fill" @click="menuToggle()" />
+			</div>
+			<div class="desktop">
+				<a :href="`tel:${info?.phone}`" class="info phone">
 					<Icon name="ri:phone-fill" />
 					<span>{{ info?.phone }}</span>
-				</div>
-				<div class="info email">
+				</a>
+				<a :href="`mailto:${info?.email}`" class="info email">
 					<Icon name="ri:mail-open-fill" />
 					<span>{{ info?.email }}</span>
-				</div>
-				<div class="info adress">
+				</a>
+				<a href="javaskript:;" class="info adress">
 					<Icon name="ri:map-pin-2-fill" />
 					<span>{{ info?.adress }}</span>
-				</div>
-			</template>
-			<template v-if="isLargeScreen">
-				<div class="close">
-					<Icon name="ri:close-fill" @click="menuToggle()" />
-				</div>
+				</a>
+			</div>
+			<div class="mobile">
 				<nav>
 					<ul class="links">
-						<li v-for="link in links?.ua" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
-							<NuxtLink :to="`/${link.uid}/`">{{ link.title }}</NuxtLink>
+						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
+							<NuxtLink :to="`/${link.uid}`" @click="menuToggle()">{{ link.title }}</NuxtLink>
 							<div class="arrow">
 								<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down" :key="link.uid"/>
 							</div>
 							<ul v-if="link.dropdown" class="submenu">
 								<li v-for="sublink in link.dropdown">
-									<NuxtLink :to="`/${sublink.uid}/`">{{ sublink.title }}</NuxtLink>
+									<NuxtLink :to="`/${sublink.uid}`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</nav>
-			</template>
+			</div>
 		</div>
 	</header>
 </template>
 
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
+import { useToggle, onClickOutside, useMediaQuery } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
-import { useMediaQuery } from '@vueuse/core'
 import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
 const { locale, setLocale } = useI18n()
-const isLargeScreen = ref(useMediaQuery('(max-width: 1400px)'))
-
-// console.log(locale.value);
 
 const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
@@ -86,9 +80,10 @@ const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
 const { AppFetch } = useAppStore()
 const { logo, links, info } = storeToRefs(useAppStore())
 
-const currentLinks = (localeProperty: string) => localeProperty === 'ua' ? links.value?.ua : links.value?.en
-watch(locale, async (newLocale, oldLocale) => {
-    currentLinks(newLocale);
+
+const currentLinks = computed(() => locale.value === 'ua' ? links.value?.ua : links.value?.en)
+watch(locale, async (oldLocale, newLocale) => {
+	if (newLocale) currentLinks
 })
 const [menuValue, menuToggle] = useToggle()
 
@@ -100,6 +95,8 @@ const submenu = (link: Link) => {
 	}
 }
 
+const sidebar = ref()
+onClickOutside(sidebar, (event) => menuValue.value = false)
 
 </script>
 
@@ -119,10 +116,10 @@ header {
 	}
 
 	.logo {
-		width: 2rem;
+		width: 100px;
+		height: auto;
+		object-fit: contain;
 	}
-
-
 
 	.menu {
 		display: flex;
@@ -164,12 +161,15 @@ header {
 			}
 		}
 	}
+
 	nav {
 		width: 100%;
 	}
+
 	ul {
 		list-style-type: none;
 	}
+
 	.links {
 		width: 100%;
 		display: flex;
@@ -274,12 +274,15 @@ header {
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-
+			margin-bottom: 2rem;
+			font-weight: 600;
 
 			.icon {
 				width: 6rem;
 				height: 6rem;
 				padding: 1.5rem;
+				border-radius: 5px;
+				margin-bottom: 1rem;
 				background: $dark3;
 				color: $white;
 			}
@@ -338,6 +341,23 @@ header {
 			svg {
 				width: 30px;
 				height: 30px;
+			}
+		}
+		.mobile {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1400px) {
+		> nav {
+			display: none;
+		}
+		.sidebar {
+			.desktop {
+				display: none;
+			}
+			.mobile {
+				display: block;
 			}
 		}
 	}
