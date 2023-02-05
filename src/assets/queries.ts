@@ -1,12 +1,36 @@
 // Sitemap
 export const Sitemap_Q = groq`*[ _type in ["article", "page"] ]{
-	"url": "/"+uid.current+"/",
-	"changefreq": "monthly",
-	"priority": sitemap.priority,
-	"lastmod" :_updatedAt,
-    _type == "article" => {
-        "url": "/blog/"+uid.current+"/",
-    },
+	_type == "page" && __i18n_lang == 'ua' => {
+			"url": "/"+uid.current+"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "page" && __i18n_lang == 'en' => {
+			"url": "/en/"+uid.current+
+			"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "article" && __i18n_lang == 'ua' => {
+			"url": "/novunu/"+uid.current+"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+}`
+
+export const Route_Q = groq`*[ _type in ["article", "page"] ]{
+	_type == "page" && __i18n_lang == 'ua' => {
+			"url": "/"+uid.current+"/",
+	},
+	_type == "page" && __i18n_lang == 'en' => {
+			"url": "/en/"+uid.current+"/",
+	},
+	_type == "article" && __i18n_lang == 'ua' => {
+			"url": "/novunu/"+uid.current+"/",
+	},
 }`
 
 export const App_Q = groq`*[ _type == "app" ][0]{

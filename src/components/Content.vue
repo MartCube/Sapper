@@ -1,11 +1,12 @@
 <template>
-	<div class="content">
+	<div ref="root" class="content">
 		<SanityContent :blocks="blocks" :serializers="serializers" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { resolveComponent } from 'vue'
+import { resolveComponent, ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 
 defineProps<{
 	blocks: any[],
@@ -38,7 +39,22 @@ const serializers = {
 	// marks: {
 	// 	link: Link,
 	// },
+
+	
 }
+
+
+// const root = ref(null)
+// const target = document.getElementById("counter")
+// const isVisible = ref(false)
+// useIntersectionObserver(
+//   target,
+//   ([{ isIntersecting }]) => {
+//     isVisible.value = isIntersecting
+//   },
+//   { root },
+// )
+
 </script>
 
 <style lang="scss">

@@ -1,4 +1,31 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import sanityClient from '@sanity/client'
+
+export const getRoutes = async () => {
+	const client = sanityClient({
+		projectId: 'ede4uk6z',
+		dataset: 'production',
+		apiVersion: '2022-11-21',
+		useCdn: true,
+	})
+
+	const data = await client.fetch(
+		`*[ _type in ["article", "page"] ]{
+			_type == "page" && __i18n_lang == 'ua' => {
+					"url": "/"+uid.current+"/",
+			},
+			_type == "page" && __i18n_lang == 'en' => {
+					"url": "/en/"+uid.current+"/",
+			},
+			_type == "article" && __i18n_lang == 'ua' => {
+					"url": "/novunu/"+uid.current+"/",
+			},
+		}`
+	)
+
+	return data.map((item: any) => { return item["url"] })
+}
+
 
 export default defineNuxtConfig({
 	router: {
@@ -123,17 +150,17 @@ export default defineNuxtConfig({
 	nitro: {
 		prerender: {
 			crawlLinks: false,
-			// routes: ['/sitemap.xml']
-		},
+			routes: ['/sitemap.xml']
+		}
 	},
 
-	// hooks: {
-	// 	async 'nitro:config'(nitroConfig: any) {
-	// 		if (nitroConfig.dev) { return }
-	// 		const routes = await getRoutes()
-	// 		nitroConfig.prerender.routes.push(...routes)
-	// 	}
-	// },
+	hooks: {
+		async 'nitro:config'(nitroConfig: any) {
+			if (nitroConfig.dev) { return }
+			const routes = await getRoutes()
+			nitroConfig.prerender.routes.push(...routes)
+		}
+	},
 
 	vite: {
 		css: {

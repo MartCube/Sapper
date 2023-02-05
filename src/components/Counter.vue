@@ -1,5 +1,5 @@
 <template>
-	<section class="counter">
+	<section ref="counter" id="counter" class="counter">
 		<div class="container">
 			<div v-for="item in list" :key="item._key" class="item">
 				<div class="image">
@@ -14,12 +14,34 @@
 </template>
 
 <script setup lang="ts">
+// import { useIntersectionObserver } from '@vueuse/core'
+
 defineProps<{ list: {
 	icon: string,
 	number: number,
 	title: string,
 	_key: string,
 }[], }>()
+
+const counter = ref()
+// const targetIsVisible = ref(false)
+
+// const observe = useIntersectionObserver(
+// 	target,
+// 	([{ isIntersecting }], observerElement) => {
+// 		targetIsVisible.value = isIntersecting
+// 	},
+// )
+// observe
+// const section:HTMLElement = document.querySelector('#counter')!
+
+// const options = {
+// 	threshold: 0.5
+// }
+// const observer = new IntersectionObserver(function(entry: any, observer) {
+// 	console.log(entry)
+// }, options)
+// observer.observe(counter)
 </script>
 
 <style lang="scss" scoped>
