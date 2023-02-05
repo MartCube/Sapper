@@ -11,15 +11,15 @@
 			<!-- <VeeTextarea :name="props.message"/> -->
 	
 			<button type="submit" :disabled="isSubmitting">
-				<span class="submit">submit</span>
+				<span class="submit">{{ t('form.submit') }}</span>
 				<span class="loading">loading</span>
 			</button>
 	
 			<div class="msg" v-if="showMsg">
-				<h2>message sent</h2>
-				<p>Thanks for being awesome!</p>
-				<p>I will replay by email as soon as possible.</p>
-				<span>Write<span @click="showMsg = false"> new message</span>.</span>
+				<h2>{{ t('form.message_title') }}</h2>
+				<p>{{ t('form.message_greet') }}</p>
+				<p>{{ t('form.message_reply') }}</p>
+				<span>Write<span @click="showMsg = false">{{ t('form.new_message') }}</span>.</span>
 			</div>
 		</div>
 	</form>
@@ -32,7 +32,7 @@ import { toFormValidator } from '@vee-validate/zod';
 import { z } from 'zod';
 // import emailjs from '@emailjs/browser';
 // import { promiseTimeout } from '@vueuse/core'
-
+const { t } = useI18n()
 const props = defineProps<{
 	name: string;
 	email: string;

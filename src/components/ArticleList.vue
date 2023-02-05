@@ -11,7 +11,7 @@
 						<div class="text">
 							<h3 class="title">{{ article.title }}</h3>
 							<p class="description">{{ article.description }}</p>
-							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}`" class="link">Читати</NuxtLink>
+							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}`" class="link">{{ t('read_more') }}</NuxtLink>
 						</div>
 					</div>
 				</div>
@@ -25,7 +25,7 @@ import { Articles_Q } from "~/assets/queries"
 import type { ArticleCard } from "~/assets/types"
 
 defineProps<{ title: string }>()
-const { locale, setLocale } = useI18n()
+const { locale, setLocale, t } = useI18n()
 // console.log(locale);
 
 // fetch data

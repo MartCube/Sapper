@@ -5,7 +5,7 @@
 			<div class="text">
 				<SanityContent :blocks="list" />
 			</div>
-			<button @click="isOpen = true" class="call-modal">Send the form</button>
+			<button @click="isOpen = true" class="call-modal">{{ t('form.send_form') }}</button>
 		</div>
 		<div v-if="isOpen" class="modal">
 			<Icon class="close" @click="isOpen = false" name="ic:baseline-close" />
@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 const isOpen = ref(false) // toggle modal
+const { t } = useI18n()
 
 defineProps<{
 	list: any[],
@@ -33,6 +34,9 @@ defineProps<{
 	
 	p, a {
 		font-size: 1.2rem;
+	}
+	p {
+		margin-bottom: 15px;
 	}
 	
 	.container {

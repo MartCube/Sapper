@@ -23,6 +23,9 @@ defineProps<{
 	p, a {
 		font-size: 1.4rem;
 	}
+	p {
+		margin-bottom: 15px;
+	}
 
 	ul {
 		font-size: 1.4rem;

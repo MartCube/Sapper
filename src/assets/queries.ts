@@ -41,6 +41,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 				"uid": uid.current,
 			},
 		},
+		_type == "image" => { "src": asset._ref  },
 		_type == "richtextImage" => { ..., "image": image.asset._ref  },
 		_type == "gallery" => { ..., "images": images[].asset._ref  },
 		_type == "youtubeGallery" => { ..., "list": list[].id  },
@@ -94,7 +95,7 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 		description,
 		"image": image.asset._ref,
 	},
-    "lang": __i18n_lang,
+	"lang": __i18n_lang,
 }`
 
 // Article

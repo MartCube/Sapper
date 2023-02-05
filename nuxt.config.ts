@@ -40,10 +40,36 @@ export default defineNuxtConfig({
 			fallbackLocale: 'ua',
 			messages: {
 				en: {
-					index: 'Home'
+					index: 'Home',
+					sitemap: 'Карта сайту',
+					about_us: 'Про нас',
+					read_more: 'Читати',
+					form: {
+						message_title: 'Повідомлення відправлено!',
+						submit: 'Відправити',
+						send_form: 'Відправити запит',
+						message_greet: 'Дякую що написали нам!',
+						message_reply: 'Ми відповімо якнайскоріше 💙💛',
+						new_message: 'Створити новий лист',
+					},
+					rights: 'Всі права захищено',
+					footer_text: "Наша компанія – це команда фахівців, які мають необхідний досвід та спеціалізацію в галузі гуманітарного розмінування. Кожен із наших співробітників отримав необхідну освіту та досвід для здійснення протимінної діяльності. ",
 				},
 				ua: {
-					index: 'Домашня'
+					index: 'Домашня',
+					about_us: 'About us',
+					sitemap: 'Sitemap',
+					read_more: 'Read more',
+					form: {
+						submit: 'Submit',
+						send_form: 'Send the form',
+						message_title: 'Message sent !',
+						message_greet: 'Thanks for being awesome!',
+						new_message: 'New message',
+						message_reply: 'I will replay by email as soon as possible 💙💛',
+					},
+					rights: 'All Rights Reserved',
+					footer_text: 'Our company is a team of experts with the necessary experience and specialization in the field of humanitarian demining. Each of our employees has received the necessary education and experience to carry out mine action.'
 				}
 			}
 		},
@@ -71,7 +97,11 @@ export default defineNuxtConfig({
 			'blog/[article]': {
 				en: false,
 				ua: '/novunu/[article]',
-			}
+			},
+			// 'index': {
+			// 	en: '/en',
+			// 	ua: '/'
+			// }
 		}
 
 	},

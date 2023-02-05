@@ -10,7 +10,7 @@
 					<div class="text">
 						<h3 class="title">{{ article.title }}</h3>
 						<p class="description">{{ article.description }}</p>
-						<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}`" class="link">Читати</NuxtLink>
+						<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}`" class="link">{{ t('read_more') }}</NuxtLink>
 					</div>
 				</div>
 			</div>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 defineProps<{ title: string, lastnews: any[]}>()
-const { locale, setLocale } = useI18n()
+const { locale, setLocale, t } = useI18n()
 </script>
 
 <style lang="scss" scoped>

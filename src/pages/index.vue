@@ -9,26 +9,28 @@
 <script setup lang="ts">
 import { Home_Q } from "~~/src/assets/queries"
 import type { Page } from "~~/src/assets/types"
-
+const { locale, setLocale } = useI18n()
 
 // fetch data
 const { fetch } = useSanity()
-const { data, pending } = await useAsyncData(
+const { data, pending, refresh } = await useAsyncData(
 	`Home Page`,
-	(): Promise<Page> => fetch(Home_Q, { lang: "ua" })
+	(): Promise<Page> => fetch(Home_Q, { lang: locale.value })
 )
 // console.log(data.value);
-
+watch(locale, async (oldLocale, newLocale) => {
+	if (newLocale) refresh
+})
 
 // // handle error
-// if (!data.value) throw createError({
-// 	statusCode: 404,
-// 	statusMessage: `f${data.value} Not Found`,
-// 	fatal: true
-// })
+if (!data.value) throw createError({
+	statusCode: 404,
+	statusMessage: `f${data.value} Not Found`,
+	fatal: true
+})
 
 // write metatags
-// useMetaTags(data.value.metaTags)
+useMetaTags(data.value.metaTags)
 </script>
 
 <style lang="scss" scoped>

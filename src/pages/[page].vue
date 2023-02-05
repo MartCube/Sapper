@@ -13,7 +13,8 @@ import type { Page } from "~/assets/types"
 // fetch data
 const { params, meta  } = useRoute()
 const { fetch } = useSanity()
-const { data, pending } = await useAsyncData(
+const { locale, setLocale } = useI18n()
+const { data, pending, refresh } = await useAsyncData(
 	`${params.page} - page`,
 	(): Promise<Page> => fetch(Page_Q, { uid: params.page })
 )
@@ -24,6 +25,10 @@ if (!data.value) throw createError({
 	statusCode: 404,
 	statusMessage: `${params.page} Not Found`,
 	fatal: true
+})
+
+watch(locale, async (oldLocale, newLocale) => {
+	if (newLocale) refresh
 })
 
 // defineI18nRoute({

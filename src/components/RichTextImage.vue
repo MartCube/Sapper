@@ -33,6 +33,9 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	p, a {
 		font-size: 1.2rem;
 	}
+	p {
+		margin-bottom: 15px;
+	}
 
 	.container {
 		display: flex;
