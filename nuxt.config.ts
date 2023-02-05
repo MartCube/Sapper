@@ -12,13 +12,13 @@ export const getRoutes = async () => {
 	const data = await client.fetch(
 		`*[ _type in ["article", "page"] ]{
 			_type == "page" && __i18n_lang == 'ua' => {
-					"url": "/"+uid.current+"/",
+					"url": "/"+uid.current,
 			},
 			_type == "page" && __i18n_lang == 'en' => {
-					"url": "/en/"+uid.current+"/",
+					"url": "/en/"+uid.current,
 			},
 			_type == "article" && __i18n_lang == 'ua' => {
-					"url": "/novunu/"+uid.current+"/",
+					"url": "/novunu/"+uid.current,
 			},
 		}`
 	)

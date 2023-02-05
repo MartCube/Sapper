@@ -7,7 +7,7 @@
 				<VeeInput :name="email" />
 				<VeeInput :name="phone" />
 			</div>
-			<!-- <VeeInput :name="message" type="textarea" /> -->
+			<VeeInput :name="message" type="textarea" />
 			<!-- <VeeTextarea :name="props.message"/> -->
 	
 			<button type="submit" :disabled="isSubmitting">
@@ -37,7 +37,7 @@ const props = defineProps<{
 	name: string;
 	email: string;
 	phone: string;
-	// message: string;
+	message: string;
 	title?: string;
 }>()
 
