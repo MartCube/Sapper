@@ -11,7 +11,7 @@
 						<div class="text">
 							<h3 class="title">{{ article.title }}</h3>
 							<p class="description">{{ article.description }}</p>
-							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}`" class="link">{{ t('read_more') }}</NuxtLink>
+							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}/`" class="link">{{ t('read_more') }}</NuxtLink>
 						</div>
 					</div>
 				</div>

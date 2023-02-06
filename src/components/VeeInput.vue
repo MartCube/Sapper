@@ -1,34 +1,21 @@
 <template>
 	<div class="field">
-	
-		<template v-if="type === 'textarea'">
 			<div class="error">
 				<span v-show="errorMessage"> {{ errorMessage }} </span>
 			</div>
-			
-			<Field type="textarea" name="name" v-model="value">
-				<!-- Conflict between v-model and `v-bind=field` -->
-				<textarea :id="name" :name="name" :placeholder="name"></textarea>
-			</Field>
+			<input v-model="value" type="text" :id="data.name" :name="data.name" :placeholder="data.label" />
 			<div class="line" />
-		</template>
-		<template v-else>
-			<div class="error">
-				<span v-show="errorMessage"> {{ errorMessage }} </span>
-			</div>
-			<input v-model="value" type="text" :id="name" :name="name" :placeholder="name" />
-			<div class="line" />
-		</template>
 	</div>
 </template>
   
 <script setup lang="ts">
 import { useField, Field } from 'vee-validate'
-import { toRef , Ref} from 'vue'
+import type { InputField } from "~~/src/assets/types";
+import { toRef } from 'vue'
 
-const props = defineProps<{ name: string, type?: string }>()
+const props = defineProps<{ data: InputField }>()
 
-const nameRef = toRef(props, 'name')
+const nameRef = toRef(props.data, 'name')
 const { errorMessage, value } = useField(nameRef)
 </script>
 

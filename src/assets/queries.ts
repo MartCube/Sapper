@@ -77,7 +77,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 		description,
 		"image": image.asset._ref,
 	},
-		"lang": __i18n_lang,
+	"lang": __i18n_lang,
 	"altLang": coalesce(
 		__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
 		__i18n_base -> { "id": __i18n_lang, "uid": uid.current},

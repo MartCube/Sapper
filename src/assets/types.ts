@@ -108,6 +108,13 @@ export interface Article {
 	altLang: Lang
 }
 
+export interface InputField {
+	name: string,
+	label: string,
+	type: string,
+
+}
+
 
 
 

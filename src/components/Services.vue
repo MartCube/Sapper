@@ -24,7 +24,7 @@
 						<h3 class="title">{{ item.title }}</h3>
 						<p class="description">{{ item.description }}</p>
 						<AppImage :src="item.image" />
-						<NuxtLink :to="localePath({ name: 'page', params: { page: item.link.uid } })">Відкрити</NuxtLink>
+						<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}/`">Відкрити</NuxtLink>
 				</template>
 			</div>
 		</div>

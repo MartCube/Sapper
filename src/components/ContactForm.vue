@@ -1,5 +1,5 @@
 <template>
-	<form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
+	<form id="form" @submit="onSubmit" autocomplete="off">
 		<div class="container">
 			<h2 v-if="title" class="title">{{ title }}</h2>
 			<div class="group">
@@ -7,7 +7,8 @@
 				<VeeInput :name="email" />
 				<VeeInput :name="phone" />
 			</div>
-			<VeeInput :name="message" type="textarea" />
+			<VeeInput :name="message" />
+			<!-- <VeeInput :name="message" type="textarea" /> -->
 			<!-- <VeeTextarea :name="props.message"/> -->
 	
 			<button type="submit" :disabled="isSubmitting">
@@ -15,12 +16,12 @@
 				<span class="loading">loading</span>
 			</button>
 	
-			<div class="msg" v-if="showMsg">
+			<!-- <div class="msg" v-if="showMsg">
 				<h2>{{ t('form.message_title') }}</h2>
 				<p>{{ t('form.message_greet') }}</p>
 				<p>{{ t('form.message_reply') }}</p>
 				<span>Write<span @click="showMsg = false">{{ t('form.new_message') }}</span>.</span>
-			</div>
+			</div> -->
 		</div>
 	</form>
 </template>
@@ -41,11 +42,9 @@ const props = defineProps<{
 	title?: string;
 }>()
 
-const formStateAnim = ref<string>('showForm')
-const form = ref<string | HTMLFormElement>('')
 const validationSchema = toFormValidator(
 	z.object({
-		name: z.string().min(1, 'Required'),
+		'full name': z.string().min(1, 'Required'),
 		email: z.string().min(1, 'Required').email(),
 		phone: z.string().min(1, 'Required'),
 		// message: z.string().min(1, 'Required').max(120),
@@ -56,17 +55,11 @@ const showMsg = ref(false)
 
 const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
 
-const onSubmit = handleSubmit(async (values, actions) => {
-	console.log(values, actions);
-	
+const onSubmit = handleSubmit(async (values, { resetForm}) => {
+	console.log(values)
+
 	showMsg.value = false
-	// formStateAnim.value = 'loading'
-	//send data
-	// emailjs.sendForm('service_l807s5g', 'template_l807s5g', form.value, 'O9kaL-kw7T0WfpVbt').then((result) => { console.log('SUCCESS!', result.text) }, (error) => { console.log('FAILED...', error.text) },)
-	// loading animation
-	// await promiseTimeout(750)
-	// reset form
-	// actions.resetForm()
+	resetForm()
 })
 </script>
 

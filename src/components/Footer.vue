@@ -31,7 +31,7 @@
 			<div class="group">
 				<h3 class="title">{{ t('about_us') }}</h3>
 				<p class="desription">{{ t('footer_text') }}</p>
-				<NuxtLink :to="localePath({ name: 'page', params: { page: footerLinks?.at(-1)?.uid ?? ''  } })" class="cta">{{ footerLinks?.at(-1)?.title }}</NuxtLink>
+				<NuxtLink :to="`${localePath({ name: 'page', params: { page: footerLinks?.at(-1)?.uid ?? ''  } })}/`" class="cta">{{ footerLinks?.at(-1)?.title }}</NuxtLink>
 			</div>
 			<div class="group">
 				<h3 class="title">{{ t('about_us') }}</h3>
