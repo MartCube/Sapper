@@ -29,11 +29,27 @@ export interface ArticleCard {
 	uid: string,
 	publishedAt: string
 }
-export interface ContactForm {
-	email: string;
-	subject: string;
-	message: string;
+
+export interface InputField {
+	name: string,
+	label: string,
+	type: string,
 }
+export interface ContactForm {
+	email: InputField;
+	name: InputField;
+	phone: InputField;
+	message: InputField;
+}
+export interface JobOfferForm {
+	title: string;
+	email: InputField;
+	phone: InputField;
+	name: InputField;
+	message: InputField;
+}
+
+
 
 // sanity schema docs
 export interface Article extends ArticleCard {
@@ -108,12 +124,7 @@ export interface Article {
 	altLang: Lang
 }
 
-export interface InputField {
-	name: string,
-	label: string,
-	type: string,
 
-}
 
 
 

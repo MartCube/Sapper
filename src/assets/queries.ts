@@ -71,6 +71,14 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 		_type == "youtubeGallery" => { ..., "list": list[].id  },
 		_type == "slider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
 		_type == "achivments" => { ..., list[]{ title, icon, number}  },
+		_type == "contactForm" => {
+			"data": {
+				email { label, name, type },
+				phone { label, name, type },
+				message { label, name, type },
+				name { label, name, type },
+			},
+    }, 
 	},
 	metaTags {
 		title,

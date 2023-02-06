@@ -1,6 +1,7 @@
 <template>
 	<form id="form" @submit="onSubmit" autocomplete="off">
 		<div class="container">
+			<h2 v-if="data.title" class="title">{{ data.title }}</h2>
 			<div class="group">
 				<VeeInput :data="data.name" />
 				<VeeInput :data="data.email" />
@@ -15,38 +16,61 @@
 				<span class="loading">loading</span>
 			</button>
 	
-			<div class="msg" v-if="showMsg">
+			<!-- <div class="msg" v-if="showMsg">
 				<h2>{{ t('form.message_title') }}</h2>
 				<p>{{ t('form.message_greet') }}</p>
 				<p>{{ t('form.message_reply') }}</p>
 				<span>Write<span @click="showMsg = false">{{ t('form.new_message') }}</span>.</span>
-			</div>
+			</div> -->
 		</div>
 	</form>
 </template>
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
-import type { ContactForm } from "~~/src/assets/types";
+import type { JobOfferForm } from "~~/src/assets/types";
 import { toFormValidator } from '@vee-validate/zod';
 import { z } from 'zod';
 // import emailjs from '@emailjs/browser';
 // import { promiseTimeout } from '@vueuse/core'
 const { t } = useI18n()
-const props = defineProps<{data: ContactForm}>()
+
+let data: JobOfferForm = {
+	title: 'Some title',
+	email: {
+		name: 'email',
+		label: 'Email',
+		type: 'input',
+	},
+	phone: {
+		name: 'phone',
+		label: 'Phone',
+		type: 'input',
+	},
+	name: {
+		name: 'name',
+		label: 'Name',
+		type: 'input',
+	},
+	message: {
+		name: 'message',
+		label: 'Message',
+		type: 'textarea',
+	},
+}
 
 const validationSchema = toFormValidator(
 	z.object({
-		name: z.string().min(1, 'Required'),
+		'full name': z.string().min(1, 'Required'),
 		email: z.string().min(1, 'Required').email(),
 		phone: z.string().min(1, 'Required'),
-		message: z.string().min(1, 'Required').max(120),
+		// message: z.string().min(1, 'Required').max(120),
 	})
 )
 
 const showMsg = ref(false)
 
-const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
+const { handleSubmit, isSubmitting } = useForm<JobOfferForm>({ validationSchema })
 
 const onSubmit = handleSubmit(async (values, { resetForm}) => {
 	console.log(values)
