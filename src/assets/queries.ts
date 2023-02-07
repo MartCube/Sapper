@@ -39,10 +39,10 @@ export const App_Q = groq`*[ _type == "app" ][0]{
     smedias,
     links {
 			en[]->{ 
-              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current, "id": _id}
+              title, "uid": uid.current, "dropdown": dropdown{title, "sublinks": sublinks[]->{title,"uid":uid.current}}
             },
 			ua[]->{ 
-              title, "uid": uid.current, dropdown[] -> {title, "uid": uid.current, "id": _id}
+              title, "uid": uid.current, "dropdown": dropdown{title, "sublinks": sublinks[]->{title,"uid":uid.current}}
             },
     }
 }`
@@ -70,7 +70,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 		_type == "gallery" => { ..., "images": images[].asset._ref  },
 		_type == "youtubeGallery" => { ..., "list": list[].id  },
 		_type == "slider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
-		_type == "achivments" => { ..., list[]{ title, icon, number}  },
+		_type == "counter" => { ..., list[]{ title, icon, number}  },
 		_type == "contactForm" => {
 			"data": {
 				email { label, name, type },

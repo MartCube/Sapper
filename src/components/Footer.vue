@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="group">
 				<div class="image">
-					<img src="/logo-footer.png" alt="">
+					<img src="/logo.jpg" alt="">
 				</div>
 				<div class="contact-info">
 					<a :href="`tel:${info?.phone}`">
@@ -36,7 +36,7 @@
 			<div class="group">
 				<h3 class="title">{{ t('about_us') }}</h3>
 				<ul class="links">
-					<li v-for="sublink in submenuLinks">
+					<li v-for="sublink in submenuLinks?.sublinks">
 						<NuxtLink :to="`${localePath({ name: 'page', params: { page: sublink.uid } })}`">{{ sublink.title }}</NuxtLink>
 					</li>
 				</ul>
@@ -60,7 +60,7 @@
 
 import { storeToRefs } from 'pinia'
 
-const { locale, setLocale, t} = useI18n()
+const { locale, setLocale, t} = useI18n({})
 const { smedias, info, links } = storeToRefs(useAppStore())
 const localePath = useLocalePath()
 

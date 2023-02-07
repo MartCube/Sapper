@@ -76,7 +76,10 @@ export interface Link {
 	title: string,
 	uid: string,
 	id: string,
-	dropdown?: Link[]
+	dropdown?: {
+		title: string,
+		sublinks: Link[],
+	},
 	classes?: string,
 }
 

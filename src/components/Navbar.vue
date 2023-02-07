@@ -5,11 +5,18 @@
 		</NuxtLink>
 		<nav>
 			<ul class="links">
+				<li class="link">
+					<NuxtLink :to="localePath('index')" class="logo">
+						{{ t('index') }}
+					</NuxtLink>
+				</li>
 				<li v-for="link in currentLinks" :key="link.title" class="link">
-					<NuxtLink :to="`/${link.uid}/`">{{ link.title }}</NuxtLink>
+					
+					<NuxtLink v-if="!link.dropdown" :to="`/${link.uid}/`">{{ link.title }}</NuxtLink>
+					<a href="javacript:;" v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
 					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
 					<ul v-if="link.dropdown" class="submenu">
-						<li v-for="sublink in link.dropdown">
+						<li v-for="sublink in link.dropdown.sublinks">
 							<NuxtLink :to="`/${sublink.uid}/`">{{ sublink.title }}</NuxtLink>
 						</li>
 					</ul>
@@ -62,11 +69,11 @@
 					<ul class="links">
 						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
 							<NuxtLink :to="`/${link.uid}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
-							<div class="arrow">
-								<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down" :key="link.uid"/>
+							<div class="arrow" v-if="link.dropdown" :key="link.uid">
+								<Icon name="ic:twotone-keyboard-arrow-down"/>
 							</div>
 							<ul v-if="link.dropdown" class="submenu">
-								<li v-for="sublink in link.dropdown">
+								<li v-for="sublink in link.dropdown.sublinks">
 									<NuxtLink :to="`/${sublink.uid}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
 								</li>
 							</ul>
@@ -84,7 +91,7 @@ import { storeToRefs } from 'pinia'
 import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
-const { locale, setLocale } = useI18n()
+const { locale, setLocale, t } = useI18n()
 
 const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
@@ -193,7 +200,7 @@ header {
 			position: relative;
 			display: flex;
 			align-items: center;
-			margin: 0 2rem;
+			margin: 0 1.5rem;
 			&:last-child {
 				margin-right: 0;
 			}
@@ -208,7 +215,7 @@ header {
 				color: $dark;
 				font-weight: 500;
 				position: relative;
-				margin-right: 1rem;
+				// margin-right: 1rem;
 				&::after {
 					content: '';
 					position: absolute;
@@ -219,6 +226,7 @@ header {
 					left: 0;
 					transition: width 0.3s linear;
 				}
+				
 				&.router-link-exact-active {
 					&::after {
 						width: 100%;
@@ -234,7 +242,9 @@ header {
 
 			}
 
-	
+			.icon {
+				margin-left: 0.5rem;
+			}
 			ul.submenu {
 				position: absolute;
 				background-color: $white;

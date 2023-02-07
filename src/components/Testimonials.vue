@@ -1,7 +1,7 @@
 <template>
 	<section class="testimonials">
 		<div class="container">
-			<h2 class="title">{{ title }}</h2>
+			<h2 v-if="title" class="title">{{ title }}</h2>
 			<div v-for="item in list" :key="item._key" class="item">
 				<span class="bg-icon">
 					<Icon name="fa-solid:quote-right" />
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 defineProps<{ 
-	title: string,
+	title?: string,
 	list: {
 		icon: string,
 		description: string,
@@ -43,7 +43,7 @@ defineProps<{
 	.container {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		justify-content: space-evenly;
 		.title {
 			width: 100%;
 			text-align: center;
@@ -57,6 +57,7 @@ defineProps<{
 			width: 30%;
 			border-radius: 5px;
 			position: relative;
+			justify-content: space-between;
 			.bg-icon {
 				position: absolute;
 				z-index: 0;
@@ -83,6 +84,7 @@ defineProps<{
 				font-size: 1.2rem;
 				position: relative;
 				z-index: 3;
+				margin-bottom: auto;
 			}
 			.image {
 				display: flex;

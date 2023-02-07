@@ -9,8 +9,8 @@
 							<AppImage :src="article.image"/>
 						</div>
 						<div class="text">
-							<h3 class="title">{{ article.title }}</h3>
-							<p class="description">{{ article.description }}</p>
+							<h3 class="title">{{ article.title.slice(0, 80) }}</h3>
+							<p class="description">{{ article.description.slice(0, 150) }}</p>
 							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}/`" class="link">{{ t('read_more') }}</NuxtLink>
 						</div>
 					</div>
@@ -65,7 +65,7 @@ const { data, pending } = await useAsyncData(
 	}
 	.article-wrapper {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
 		flex-wrap: wrap;
 		.item {
 			display: flex;
@@ -76,11 +76,13 @@ const { data, pending } = await useAsyncData(
 			text-align: center;
 			background-color: $white;
 			border-radius: 5px;
-			margin: 1rem;
+			margin: 1.6%;
 			box-shadow: 3px 3px 13px 0 rgb(0 0 0 / 10%);
 			.title {
-				font-size: 1.5rem;
-				line-height: 1.2;
+				font-size: 1.3rem;
+				line-height: 1.5rem;
+				max-height: 3rem;
+				overflow: hidden;
 			}
 			.text {
 				display: flex;
@@ -112,7 +114,7 @@ const { data, pending } = await useAsyncData(
 			}
 			.image-wrapper {
 				width: 100%;
-				height: 50%;
+				height: 14rem;
 				.image {
 					width: 100%;
 					height: 100%;

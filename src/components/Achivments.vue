@@ -1,25 +1,29 @@
 <template>
 	<section class="achivments">
 		<div class="container">
+			<h2 v-if="title" class="title">{{ title }}</h2>
 			<div v-for="item in list" :key="item.title" class="item">
-				<h3 class="title">{{ item.title }}</h3>
+				<h3 v-if="item.title" class="title">{{ item.title }}</h3>
 				<div class="image">
 					<span class="border_layer"></span>
 					<Icon :name="item.icon" />
 				</div>
-				<p class="description">{{ item.description }}</p>
+				<p v-if="item.description" class="description">{{ item.description }}</p>
 			</div>
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
-defineProps<{ list: {
-	icon: string,
-	description: string,
-	title: string,
-	key: string,
-}[], }>()
+defineProps<{ 
+	title?: string,
+	list: {
+		icon: string,
+		description: string,
+		title: string,
+		key: string,
+	}[], 
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -40,6 +44,11 @@ defineProps<{ list: {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
+
+		h2 {
+			width: 100%;
+			text-align: center;
+		}
 		.item {
 			display: flex;
 			flex-direction: column;

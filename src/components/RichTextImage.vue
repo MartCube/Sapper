@@ -40,13 +40,14 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	.container {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		.image-wrapper {
 			width: 700px;
 			height: 700px;
 			overflow: hidden;
 			display: flex;
 			border-radius: 50%;
-			padding: 0 7rem 14rem;
+			padding: 7rem ;
 			.image {
 				overflow: hidden;
 				border-radius: 50%;
