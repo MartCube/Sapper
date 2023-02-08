@@ -80,10 +80,15 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 			},
     }, 
 	},
-	metaTags {
-		title,
-		description,
-		"image": image.asset._ref,
+	"metaTags": {
+		"uid": uid.current,
+		"title" : metaTags.title,
+		"description": metaTags.description,
+		"image": metaTags.image.asset._ref,
+		"altLang": coalesce(
+			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
+			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
+		),
 	},
 	"lang": __i18n_lang,
 	"altLang": coalesce(
@@ -122,10 +127,15 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 		_type == "homeSlider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
 		_type == "achivments" => { ..., list[]{ title, icon, description, _key}  },
 	},
-	metaTags {
-		title,
-		description,
-		"image": image.asset._ref,
+	"metaTags": {
+		"uid": uid.current,
+		"title" : metaTags.title,
+		"description": metaTags.description,
+		"image": metaTags.image.asset._ref,
+		"altLang": coalesce(
+			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
+			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
+		),
 	},
 	"lang": __i18n_lang,
 }`
@@ -159,11 +169,16 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
 		_type == "youtube" => { ... },
 	},
-	metaTags {
-		title,
-		description,
-		"image": image.asset._ref,
-	}
+	"metaTags": {
+		"uid": uid.current,
+		"title" : metaTags.title,
+		"description": metaTags.description,
+		"image": metaTags.image.asset._ref,
+		"altLang": coalesce(
+			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
+			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
+		),
+	},
 }`
 
 
