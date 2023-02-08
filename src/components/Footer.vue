@@ -201,7 +201,7 @@ footer {
 				.image {
 					img {
 						background-color: $white;
-						width: 200px;
+						width: 150px;
 						border-radius: 15px;
 					}
 				}

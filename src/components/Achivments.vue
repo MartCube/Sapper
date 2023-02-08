@@ -2,7 +2,7 @@
 	<section class="achivments">
 		<div class="container">
 			<h2 v-if="title" class="title">{{ title }}</h2>
-			<div v-for="item in list" :key="item.title" class="item">
+			<div v-for="item in list" :key="item.title" class="item" :class="{four: list.length === 4}">
 				<h3 v-if="item.title" class="title">{{ item.title }}</h3>
 				<div class="image">
 					<span class="border_layer"></span>
@@ -55,12 +55,17 @@ defineProps<{
 			padding: 46px 20px 54px 20px;
 			align-items: center;
 			color: $dark;
-			width: 22%;
+			width: 30%;
 			border-radius: 5px;
+			margin: 1.5%;
+			&.four {
+				width: 22%;
+				
+			}
 			.title {
 				font-size: 1.7rem;
 				text-align: center;
-				min-height: 3rem;
+				min-height: 5rem;
 				line-height: 1;
 			}
 			.description {

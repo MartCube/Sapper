@@ -64,10 +64,10 @@ const { tilt, roll, source } = useParallax(imageParalax)
 
 	@media (max-width: 1260px) {
 		.container {
-			.image {
+			.image-wrapper {
 				width: 45vw;
 				height: 45vw;
-				padding: 0 4rem 8rem;
+				padding: 4rem;
 			}
 			.text {
 				width: calc(100% - 45vw);

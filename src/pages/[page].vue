@@ -41,8 +41,8 @@ watch(locale, async (oldLocale, newLocale) => {
 
 if(params && data.value) {
   meta.nuxtI18n = {
-		en: { page: `${data.value.altLang.uid}` },
-		ua: { page: `${params.page}` },
+		en: { page: `${locale.value === 'en' ? params.page : data.value.altLang.uid}/` },
+		ua: { page: `${locale.value === 'ua' ? params.page : data.value.altLang.uid}/` },
 	};
 }
 // write metatags

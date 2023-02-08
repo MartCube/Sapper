@@ -12,12 +12,12 @@
 				</li>
 				<li v-for="link in currentLinks" :key="link.title" class="link">
 					
-					<NuxtLink v-if="!link.dropdown" :to="`/${link.uid}/`">{{ link.title }}</NuxtLink>
+					<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid}})}/`">{{ link.title }}</NuxtLink>
 					<a href="javacript:;" v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
 					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
 					<ul v-if="link.dropdown" class="submenu">
 						<li v-for="sublink in link.dropdown.sublinks">
-							<NuxtLink :to="`/${sublink.uid}/`">{{ sublink.title }}</NuxtLink>
+							<NuxtLink :to="`${localePath({name: 'page', params: { page: sublink.uid}})}/`">{{ sublink.title }}</NuxtLink>
 						</li>
 					</ul>
 				</li>
@@ -68,13 +68,13 @@
 				<nav>
 					<ul class="links">
 						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
-							<NuxtLink :to="`/${link.uid}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
+							<NuxtLink :to="`${localePath({name: 'page', params: { page: link.uid}})}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
 							<div class="arrow" v-if="link.dropdown" :key="link.uid">
 								<Icon name="ic:twotone-keyboard-arrow-down"/>
 							</div>
 							<ul v-if="link.dropdown" class="submenu">
 								<li v-for="sublink in link.dropdown.sublinks">
-									<NuxtLink :to="`/${sublink.uid}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
+									<NuxtLink :to="`localePath({name: 'page', params: { page: sublink.uid}})}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
 								</li>
 							</ul>
 						</li>

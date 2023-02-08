@@ -1,11 +1,13 @@
 <template>
 	<section class="richtext-form">
 		<div class="container">
-			<h2 class="titlek">{{ title }}</h2>
-			<div class="text">
-				<SanityContent :blocks="list" />
+			<div class="card">
+				<h2 class="titlek">{{ title }}</h2>
+				<div class="text">
+					<SanityContent :blocks="list" />
+				</div>
+				<button @click="isOpen = true" class="call-modal">{{ t('form.send_form') }}</button>
 			</div>
-			<button @click="isOpen = true" class="call-modal">{{ t('form.send_form') }}</button>
 		</div>
 		<div v-if="isOpen" class="modal">
 			<Icon class="close" @click="isOpen = false" name="ic:baseline-close" />
@@ -33,16 +35,28 @@ defineProps<{
 	justify-content: center;
 	
 	p, a {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 	}
 	p {
 		margin-bottom: 15px;
 	}
-	
+	h4 {
+		font-size: 1.4rem;
+		margin: 2rem 0 1.5rem;
+	}
+	h2 {
+		margin: 0;
+	}
 	.container {
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
+	}
+	.card {
+		margin: 1rem;
+		border-radius: 15px;
+		box-shadow: 0 0 40px 1px lightgray;
+		padding: 3rem;
 	}
 	.call-modal {
 		text-decoration: none;
@@ -52,7 +66,7 @@ defineProps<{
 		position: relative;
 		font-size: 1rem;
 		width: fit-content;
-		margin: 3rem 2rem;
+		margin: 3rem 2rem 0 2rem;
 		font-weight: 600;
 		border-radius: 100px;
 		cursor: pointer;
@@ -87,9 +101,9 @@ defineProps<{
 		// padding-left: 3rem;
 	}
 	ul {
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		padding-left: 3rem;
-		margin-top: 2rem;
+		// margin-top: 2rem;
 		list-style-type: none;
 		li {
 			display: flex;
