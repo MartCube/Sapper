@@ -2,30 +2,32 @@
 	<section class="services">
 		<div class="container">
 			<h2 class="title">{{ title }}</h2>
-			<div v-for="item in list" :key="item.title" class="item">
-				<template v-if="!isMobileScreen">
-					<div class="front-card">
-						<div class="image">
-							<Icon :name="item.icon" />
+			<div class="list-wrapper">
+				<div v-for="item in list" :key="item.title" class="item">
+					<div class="desktop">
+						<div class="front-card">
+							<div class="image">
+								<Icon :name="item.icon" />
+							</div>
+							<h3 class="title">{{ item.title }}</h3>
+							<p class="description">{{ item.description.slice(0, item.description.length / 2) }}</p>
 						</div>
-						<h3 class="title">{{ item.title }}</h3>
-						<p class="description">{{ item.description.slice(0, item.description.length / 2) }}</p>
-					</div>
-					<div class="back-card">
-						<AppImage :src="item.image" />
-						<p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p>
-						<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}`">Відкрити</NuxtLink>
-					</div>
-				</template>
-				<template v-if="isMobileScreen">
-						<div class="icon">
-							<Icon :name="item.icon" />
+						<div class="back-card">
+							<AppImage :src="item.image" />
+							<p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p>
+							<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}`">Відкрити</NuxtLink>
 						</div>
-						<h3 class="title">{{ item.title }}</h3>
-						<p class="description">{{ item.description }}</p>
-						<AppImage :src="item.image" />
-						<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}/`">Відкрити</NuxtLink>
-				</template>
+					</div>
+					<div  class="mobile">
+							<div class="icon">
+								<Icon :name="item.icon" />
+							</div>
+							<h3 class="title">{{ item.title }}</h3>
+							<p class="description">{{ item.description }}</p>
+							<AppImage :src="item.image" />
+							<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}/`">Відкрити</NuxtLink>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -68,26 +70,33 @@ defineProps<{
 	background-position: center;
 	background-size: cover;
 	.container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: stretch;
+		
+		.list-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: stretch;
+
+		}
 		.title {
 			width: 100%;
 			color: $white;
 			text-align: center;
 		}
 		.item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
 			color: $white;
 			width: 30%;
 			position: relative;
 			border-radius: 15px;
 			// overflow: hidden;
 			transition: all 0.7s ease;
+			display: flex;
 			margin: 1%;
+			.desktop {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
 			.front-card {
 				padding: 2rem;
 				border: 1px solid $white;
@@ -203,6 +212,9 @@ defineProps<{
 
 			}
 		}
+		.mobile {
+			display: none;
+		}
 
 		@media (max-width: 1000px) {
 			.item {
@@ -211,23 +223,30 @@ defineProps<{
 				padding: 2rem;
 				border-radius: 15px;
 				overflow: hidden;
-				.title {
-					position: relative;
-					z-index: 3;
+				.desktop {
+					display: none;
 				}
-				.image {
-					position: relative;
-					z-index: 4;
+				.mobile {
+					display: flex;
+					flex-direction: column;
+					height: 100%;
+					justify-content: space-between;
+					align-items: center;
 				}
-			}
-		}
-		@media (max-width: 700px) {
-			.item {
-				width: 80%;
-				margin: 2rem auto;
-				padding: 2rem;
-				border-radius: 15px;
-				overflow: hidden;
+				.description {
+					margin-bottom: auto;
+				}
+				a {
+					margin: 2rem auto;
+				}
+				.icon {
+					width: 80px;
+					position: relative;
+					z-index: 4;	
+					height: 80px;
+					color: $white;
+					margin: 0 auto;
+				}
 				.title {
 					position: relative;
 					z-index: 3;
@@ -241,6 +260,11 @@ defineProps<{
 					left: 0;
 					filter: brightness(0.3);
 				}
+			}
+		}
+		@media (max-width: 700px) {
+			.item {
+				width: 80%;
 			}
 		}
 	}

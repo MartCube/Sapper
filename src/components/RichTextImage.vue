@@ -36,6 +36,24 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	p {
 		margin-bottom: 15px;
 	}
+	ul {
+		font-size: 1.2rem;
+		padding-left: 3rem;
+		// margin-top: 2rem;
+		list-style-type: none;
+		li {
+			display: flex;
+			align-items: center;
+			&::before {
+				content: '';
+				display: block;
+				min-width: 7px;
+				height: 3px;
+				background-color: $dark;
+				margin-right: 1rem;
+			}
+		}
+	}
 
 	.container {
 		display: flex;

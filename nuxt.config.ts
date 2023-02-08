@@ -80,6 +80,7 @@ export default defineNuxtConfig({
 						new_message: 'Створити новий лист',
 					},
 					blog: 'Блог',
+					contact_info_title: 'Контакти',
 					rights: 'Всі права захищено',
 					footer_text: "Наша компанія – це команда фахівців, які мають необхідний досвід та спеціалізацію в галузі гуманітарного розмінування. Кожен із наших співробітників отримав необхідну освіту та досвід для здійснення протимінної діяльності. ",
 				},
@@ -89,6 +90,7 @@ export default defineNuxtConfig({
 					blog: 'Blog',
 					sitemap: 'Sitemap',
 					read_more: 'Read more',
+					contact_info_title: 'Contact info',
 					form: {
 						submit: 'Submit',
 						send_form: 'Send the form',

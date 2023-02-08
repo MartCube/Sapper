@@ -4,16 +4,7 @@
 			<h2>{{ title }}</h2>
 			<template v-if="data && !pending">
 				<div class="article-wrapper">
-					<div v-for="article in data" :key="article.uid" class="item">
-						<div class="image-wrapper">
-							<AppImage :src="article.image"/>
-						</div>
-						<div class="text">
-							<h3 class="title">{{ article.title.slice(0, 80) }}</h3>
-							<p class="description">{{ article.description.slice(0, 150) }}</p>
-							<NuxtLink :to="`/${locale === 'ua' ? 'novunu' : 'blog'}/${article.uid}/`" class="link">{{ t('read_more') }}</NuxtLink>
-						</div>
-					</div>
+					<NewsCard v-for="article in data" :key="article.uid" :data="article"/>
 				</div>
 			</template>
 		</div>
@@ -38,11 +29,11 @@ const { data, pending } = await useAsyncData(
 
 
 // handle error
-// if (!data.value) throw createError({
-// 	statusCode: 404,
-// 	statusMessage: `${params.article} Not Found`,
-// 	fatal: true
-// })
+if (!data.value) throw createError({
+	statusCode: 404,
+	statusMessage: `Articles Not Found`,
+	fatal: true
+})
 </script>
 
 <style lang="scss" scoped>

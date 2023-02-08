@@ -39,7 +39,7 @@
 				<Icon name="ri:close-fill" @click="menuToggle()" />
 			</div>
 			<div class="desktop">
-				<h3>Contact info</h3>
+				<h3>{{ t('contact_info_title') }}</h3>
 				<a :href="`tel:${info?.phone}`" class="info phone">
 					<Icon name="ri:phone-fill" />
 					<span>{{ info?.phone }}</span>
@@ -48,7 +48,7 @@
 					<Icon name="ri:mail-open-fill" />
 					<span>{{ info?.email }}</span>
 				</a>
-				<a href="javaskript:;" class="info adress">
+				<a target="_blank" class="info adress" href="https://www.google.mk/maps/place/1B,+Vozdvyzhens'ka+St,+1%D0%91,+Kyiv,+Ukraine,+02000/@50.4621143,30.5064641,17z/data=!3m1!4b1!4m5!3m4!1s0x40d4ce699f16510f:0xb06cbb87c055600a!8m2!3d50.4621143!4d30.5086528?hl=en&authuser=0">
 					<Icon name="ri:map-pin-2-fill" />
 					<span>{{ info?.adress }}</span>
 				</a>
@@ -130,15 +130,18 @@ header {
 	justify-content: space-between;
 	align-items: center;
 
-	@media (max-width: 600px) {
-		height: 60px;
-	}
-
+	
 	.logo {
 		width: 100px;
 		height: auto;
 		object-fit: contain;
 	}
+		@media (max-width: 600px) {
+			height: 60px;
+			.logo {
+				width: 55px;
+			}
+		}
 
 	.menu {
 		display: flex;
@@ -289,6 +292,9 @@ header {
 		justify-content: center;
 		align-items: center;
 
+		h3 {
+			text-align: center;
+		}
 		.info {
 			width: 100%;
 
@@ -371,6 +377,7 @@ header {
 		.social-media {
 			display: flex;
 			margin-top: 2rem;
+			justify-content: center;
 			a {
 				color: $dark3;
 				margin: 10px;
@@ -379,7 +386,8 @@ header {
 				justify-content: center;
 				align-items: center;
 				svg {
-					width: 30px;
+					width: 35px;
+					height: 35px;
 					// fill: $white;
 				}
 				&:hover {

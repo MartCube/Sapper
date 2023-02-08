@@ -132,13 +132,14 @@ defineProps<{
 		}
 
 		@media (max-width: 1000px) {
-			.item {
+			.item , .item.four{
 				width: 48%;
+				margin: 1rem 0;
 			}
 		}
-		@media (max-width: 500px) {
+		@media (max-width: 600px) {
 			justify-content: center;
-			.item {
+			.item , .item.four{
 				width: 90%;
 			}
 		}

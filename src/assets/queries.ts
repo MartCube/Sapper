@@ -132,7 +132,7 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 
 // Article
 // export const Articles_Q = groq`*[_type == "article" && $activeTag in [tag->title, "all"]][$from...$to]{
-export const Articles_Q = groq`*[_type == "article" && $lang == __i18n_lang ][$from...$to]{
+export const Articles_Q = groq`*[_type == "article" && $lang == __i18n_lang ][$from...$to] | order(publishedAt desc){
 	title,
 	"uid": uid.current,
   	"image": poster.asset._ref,
@@ -154,6 +154,7 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	content[] {
 		...,
 		_type == "block" => { ... },
+		_type == "richtextImage" => { ..., "image": image.asset._ref  },
 		_type == "image" => { _key, _type, "src": asset._ref, },
 		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
 		_type == "youtube" => { ... },
