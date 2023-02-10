@@ -1,5 +1,5 @@
 <template>
-	<form id="form" @submit="onSubmit" autocomplete="off">
+	<form id="form" @submit="onSubmit" autocomplete="off" ref="form">
 		<div class="container">
 			<div class="group">
 				<VeeInput :data="data.name" />
@@ -12,14 +12,21 @@
 	
 			<button type="submit" :disabled="isSubmitting">
 				<span class="submit">{{ t('form.submit') }}</span>
-				<span class="loading">loading</span>
+				<!-- <span class="loading">loading</span> -->
 			</button>
 	
 			<div class="msg" v-if="showMsg">
-				<h2>{{ t('form.message_title') }}</h2>
-				<p>{{ t('form.message_greet') }}</p>
-				<p>{{ t('form.message_reply') }}</p>
-				<span>Write<span @click="showMsg = false">{{ t('form.new_message') }}</span>.</span>
+				<template v-if="showMsgResultState">
+					<h2>{{ t('form.message_title') }}</h2>
+					<p>{{ t('form.message_greet') }}</p>
+					<p>{{ t('form.message_reply') }}</p>
+				</template>
+				<template v-if="!showMsgResultState">
+					<h2>{{ t('form.message_title_fail') }}</h2>
+					<p>{{ t('form.message_fail') }}</p>
+					<p>{{ t('form.message_reply_fail') }}</p>
+				</template>
+			  <span @click="showMsg = false">{{ t('form.new_message') }}.</span>
 			</div>
 		</div>
 	</form>
@@ -30,7 +37,7 @@ import { useForm } from 'vee-validate';
 import type { ContactForm } from "~~/src/assets/types";
 import { toFormValidator } from '@vee-validate/zod';
 import { z } from 'zod';
-// import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 // import { promiseTimeout } from '@vueuse/core'
 const { t } = useI18n()
 const props = defineProps<{data: ContactForm}>()
@@ -45,13 +52,26 @@ const validationSchema = toFormValidator(
 )
 
 const showMsg = ref(false)
+const showMsgResultState = ref(false)
+const form = ref()
 
 const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
 
-const onSubmit = handleSubmit(async (values, { resetForm}) => {
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
 	console.log(values)
-
-	showMsg.value = false
+	emailjs.sendForm('service_95o1gb1', 'template_xhp1lkj', form.value, 'u2zmujMl1wV-_J2qn')
+	.then(
+		(result) => { 
+			showMsg.value = true
+			showMsgResultState.value = true
+			console.log('SUCCESS!', result.text) 
+		}, 
+		(error) => { 
+			showMsgResultState.value = false 
+			console.log('FAILED...', error.text) 
+		},
+	)
+	
 	resetForm()
 })
 </script>
@@ -92,6 +112,7 @@ form {
 		background-color: $dark;
 		min-width: 10rem;
 		min-height: 4rem;
+		padding: 0 2rem;
 		span {
 			width: 100%;
 			height: 60px;

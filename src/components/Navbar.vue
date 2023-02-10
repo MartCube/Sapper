@@ -74,7 +74,7 @@
 							</div>
 							<ul v-if="link.dropdown" class="submenu">
 								<li v-for="sublink in link.dropdown.sublinks">
-									<NuxtLink :to="`localePath({name: 'page', params: { page: sublink.uid}})}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
+									<NuxtLink :to="`${localePath({name: 'page', params: { page: sublink.uid}})}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
 								</li>
 							</ul>
 						</li>

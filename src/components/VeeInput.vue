@@ -62,7 +62,7 @@ const { errorMessage, value } = useField(nameRef)
 		border-bottom: 3px solid $dark;
 		background: transparent;
 		padding: 1rem;
-		font-family: 'Poppins';
+		// font-family: 'Poppins';
 
 		color: $dark;
 		font-size: 1rem;

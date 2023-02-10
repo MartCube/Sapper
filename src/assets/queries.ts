@@ -102,17 +102,6 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 	title,
 	content[]{
 		...,
-		_type == "latestArticles" => {... , 
-			lastnews[] -> {
-				_id,
-				description,
-				title,
-				publishedAt,
-				"image": poster.asset._ref,
-				"lang": __i18n_lang,
-				"uid": uid.current,
-			},
-		},
 		_type == "services" => { ..., 
 			list[]{ 
 				title, 

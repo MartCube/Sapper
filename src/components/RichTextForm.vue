@@ -11,7 +11,7 @@
 		</div>
 		<div v-if="isOpen" class="modal">
 			<Icon class="close" @click="isOpen = false" name="ic:baseline-close" />
-			<!-- <ContactForm name="Name" email="Email" phone="Phone" :title="title" message="Message"/> -->
+			<JobOfferForm name="Name" email="Email" phone="Phone" :title="title" message="Message"/>
 		</div>
 	</section>
 </template>

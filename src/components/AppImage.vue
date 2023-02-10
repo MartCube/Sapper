@@ -6,7 +6,7 @@
 				<img v-lazy="src" />
 			</template>
 		</SanityImage>
-		<span v-if="alt">{{ alt }}</span>
+		<!-- <span v-if="alt">{{ alt }}</span> -->
 	</div>
 </template>
 

@@ -7,7 +7,7 @@
 					<div class="content">
 						<h4 class="subtitle">{{ slide.subtitle }}</h4>
 						<h1 class="title"> {{ slide.title }}</h1>
-						<p class="description">{{ slide.description }}</p>
+						<p v-if="slide.description" class="description">{{ slide.description }}</p>
 					</div>
 				</div>
 			</slide>
@@ -66,7 +66,7 @@ defineComponent({ Carousel,Slide,Pagination,Navigation})
 				}
 				&.carousel__pagination-button--active {
 					&::after {
-						background-color: $dark;
+						background-color: $dark3;
 						width: 5rem;
 					}
 				}

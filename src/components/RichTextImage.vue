@@ -2,7 +2,8 @@
 	<section class="richtext-image">
 		<div class="container">
 			<div class="image-wrapper">
-				<AppImage :src="image" ref="imageParalax"/>
+				<AppImage :src="image" :alt="alt" ref="imageParalax"/>
+				<span>{{ alt }}</span>
 			</div>
 			<div class="text">
 				<SanityContent :blocks="list" />
@@ -65,14 +66,25 @@ const { tilt, roll, source } = useParallax(imageParalax)
 			height: 700px;
 			overflow: hidden;
 			display: flex;
-			border-radius: 50%;
 			padding: 7rem ;
+			position: relative;
 			.image {
 				overflow: hidden;
 				border-radius: 50%;
 				border: 20px solid $dark;
 				width: 100%;
 				height: auto;
+			}
+			span {
+				position: absolute;
+				bottom: 2rem;
+				z-index: 4;
+				color: $dark;
+				font-weight: 600;
+				line-height: 1;
+				font-size: 1.4rem;
+				text-align: center;
+				width: calc(100% - 14rem);
 			}
 		}
 		.text {
@@ -87,6 +99,10 @@ const { tilt, roll, source } = useParallax(imageParalax)
 				width: 45vw;
 				height: 45vw;
 				padding: 4rem;
+				span {
+					bottom: 0;
+					width: calc(100% - 8rem);
+				}
 			}
 			.text {
 				width: calc(100% - 45vw);
@@ -96,11 +112,14 @@ const { tilt, roll, source } = useParallax(imageParalax)
 	@media (max-width: 1000px) {
 		.container {
 			.image-wrapper {
-				width: 70vw;
-				height: 70vw;
-				padding: 0;
+				width: 75vw;
+				height: 85vw;
+				padding: 0 0 5rem 0;
 				margin-left: auto;
 				margin-right: auto;
+				span {
+					width: 100%;
+				}
 			}
 			.image {
 				width: 70vw;

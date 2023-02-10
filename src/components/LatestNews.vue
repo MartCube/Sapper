@@ -4,7 +4,7 @@
 			<h2>{{ title }}</h2>
 			<template v-if="data && !pending">
 				<div class="article-wrapper">
-					<carousel :items-to-show="3" :breakpoints="{
+					<carousel :breakpoints="{
 							// 700px and up
 							320: {
 								itemsToShow: 1,
@@ -44,7 +44,7 @@ import type { ArticleCard } from "~/assets/types"
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
-defineProps<{ title: string, lastnews: any[]}>()
+defineProps<{ title: string }>()
 defineComponent({ Carousel,Slide,Pagination,Navigation})
 
 const { locale, setLocale, t } = useI18n()
@@ -93,35 +93,38 @@ if (!data.value) throw createError({
 		// flex-wrap: wrap;
 	}
 	.carousel__prev, .carousel__next {
-			background-color: $dark3;
-			color: $white;
-			padding: 10px;
-			border-radius: 5px;
-			font-size: 1.5rem;
-			&:hover {
-				opacity: 0.7;
+		background-color: $dark3;
+		color: $white;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 1.5rem;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	.carousel__pagination {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		.carousel__pagination-button {
+			&::after {
+				transition: all 0.5s linear;
+				background-color: rgb($dark3, 50%);
+				width: 3rem;
+				border-radius: 10px;
+				height: 7px;
 			}
-		}
-		.carousel__pagination {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			transform: translateX(-50%);
-			.carousel__pagination-button {
+			&.carousel__pagination-button--active {
 				&::after {
-					transition: all 0.5s linear;
-					background-color: rgb($dark3, 50%);
-					width: 3rem;
-					border-radius: 10px;
-					height: 7px;
+					background-color: $dark;
+					width: 5rem;
 				}
-				&.carousel__pagination-button--active {
-					&::after {
-						background-color: $dark;
-						width: 5rem;
-					}
-				}
-			} 
-		}
+			}
+		} 
+	}
+	.carousel {
+		padding-bottom: 2rem;
+	}
 }
 </style>

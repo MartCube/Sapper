@@ -13,15 +13,22 @@
 	
 			<button type="submit" :disabled="isSubmitting">
 				<span class="submit">{{ t('form.submit') }}</span>
-				<span class="loading">loading</span>
+				<!-- <span class="loading">loading</span> -->
 			</button>
 	
-			<!-- <div class="msg" v-if="showMsg">
-				<h2>{{ t('form.message_title') }}</h2>
-				<p>{{ t('form.message_greet') }}</p>
-				<p>{{ t('form.message_reply') }}</p>
-				<span>Write<span @click="showMsg = false">{{ t('form.new_message') }}</span>.</span>
-			</div> -->
+			<div class="msg" v-if="showMsg">
+				<template v-if="showMsgResultState">
+					<h2>{{ t('form.message_title') }}</h2>
+					<p>{{ t('form.message_greet') }}</p>
+					<p>{{ t('form.message_reply') }}</p>
+				</template>
+				<template v-if="!showMsgResultState">
+					<h2>{{ t('form.message_title_fail') }}</h2>
+					<p>{{ t('form.message_fail') }}</p>
+					<p>{{ t('form.message_reply_fail') }}</p>
+				</template>
+			  <span @click="showMsg = false">{{ t('form.new_message') }}.</span>
+			</div>
 		</div>
 	</form>
 </template>
@@ -39,7 +46,7 @@ let data: JobOfferForm = {
 	title: 'Some title',
 	email: {
 		name: 'email',
-		label: 'Email',
+		label: t('email'),
 		type: 'input',
 	},
 	phone: {
@@ -69,6 +76,7 @@ const validationSchema = toFormValidator(
 )
 
 const showMsg = ref(false)
+const showMsgResultState = ref(false)
 
 const { handleSubmit, isSubmitting } = useForm<JobOfferForm>({ validationSchema })
 
