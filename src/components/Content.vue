@@ -33,6 +33,7 @@ const serializers = {
 		youtubeGallery: resolveComponent('GalleryYoutube'),
 		youtubeSlider: resolveComponent('YoutubeSlider'),
 		testimonials: resolveComponent('Testimonials'),
+		cta: resolveComponent('CtaSection'),
 		// article content
 		// gallery: resolveComponent('Gallery'),
 		// youtube: resolveComponent('Youtube'),
