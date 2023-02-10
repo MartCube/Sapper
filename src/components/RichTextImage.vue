@@ -16,7 +16,8 @@ import { useParallax } from '@vueuse/core'
 
 defineProps<{
 	list: any[],
-	image: string
+	image: string,
+	alt: string,
 }>()
 
 const imageParalax = ref(null)

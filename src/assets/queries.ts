@@ -66,7 +66,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 			},
 		},
 		_type == "image" => { "src": asset._ref  },
-		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "richtextImage" => { ..., "image": image.asset._ref, "alt": image.alt },
 		_type == "gallery" => { ..., "images": images[].asset._ref  },
 		_type == "youtubeGallery" => { ..., "list": list[].id  },
 		_type == "slider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
