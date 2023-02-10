@@ -1,11 +1,35 @@
 <template>
-	<section class="gallery-youtube">
+	<section class="slider-youtube">
 		<div class="container">
 			<div class="grid">
-				<div v-for="(image, index) in list" :key="index" @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
-					<Icon name="ic:baseline-play-circle-filled-white" />
-					<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
-				</div>
+				<carousel :breakpoints="{
+						// 700px and up
+						320: {
+							itemsToShow: 1,
+							snapAlign: 'center',
+						},
+						700: {
+							itemsToShow: 2,
+							snapAlign: 'center',
+						},
+						// 1024 and up
+						1024: {
+							itemsToShow: 3,
+							snapAlign: 'start',
+						},
+					}">
+					<slide v-for="(image, index) in list" :key="index">
+						<div  @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
+							<Icon name="ic:baseline-play-circle-filled-white" />
+							<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
+						</div>
+					</slide>
+
+					<template #addons>
+						<navigation />
+						<pagination />
+					</template>
+				</carousel>
 			</div>
 			<div v-if="isOpen" class="lightbox">
 				<div class="wrapper" ref="img">
@@ -21,10 +45,17 @@
 
 <script setup lang="ts">
 import { useCycleList, onKeyStroke, onClickOutside, useSwipe } from '@vueuse/core'
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+
+
 const props = defineProps<{
 	// title: string,
 	list: string[];
 }>()
+defineComponent({ Carousel,Slide,Pagination,Navigation})
+
+
 const img = ref(null)	// image ref
 const isOpen = ref(false) // toggle lightbox
 const { state, next, prev, index } = useCycleList(props.list)
@@ -55,13 +86,14 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 
 </script>
 
-<style lang="scss" scoped>
-.gallery-youtube {
+<style lang="scss" >
+.slider-youtube {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	padding: 4rem 0;
+	position: relative;
 	.lightbox {
 		position: fixed;
 		z-index: 10;
@@ -118,14 +150,14 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		}
 	}
 	.grid {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
+		// width: 100%;
+		// display: flex;
+		// justify-content: space-between;
+		// flex-wrap: wrap;
 		.placeholder {
-			width: 30%;
+			width: 100%;
 			height: 20vw;
-			margin-bottom: 4rem;
+			margin: 1rem;
 			position: relative;
 			border-radius: 4px;
 			overflow: hidden;
@@ -179,6 +211,40 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			}
 			
 		}
+	}
+	.carousel__prev, .carousel__next {
+		background-color: $dark3;
+		color: $white;
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 1.5rem;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	.carousel__pagination {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		.carousel__pagination-button {
+			&::after {
+				transition: all 0.5s linear;
+				background-color: rgb($dark3, 50%);
+				width: 3rem;
+				border-radius: 10px;
+				height: 7px;
+			}
+			&.carousel__pagination-button--active {
+				&::after {
+					background-color: $dark;
+					width: 5rem;
+				}
+			}
+		} 
+	}
+	.carousel {
+		padding-bottom: 2rem;
 	}
 }
 </style>

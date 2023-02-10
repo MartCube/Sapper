@@ -31,6 +31,7 @@ const serializers = {
 		articleList: resolveComponent('ArticleList'),
 		gallery: resolveComponent('Gallery'),
 		youtubeGallery: resolveComponent('GalleryYoutube'),
+		youtubeSlider: resolveComponent('YoutubeSlider'),
 		testimonials: resolveComponent('Testimonials'),
 		// article content
 		// gallery: resolveComponent('Gallery'),

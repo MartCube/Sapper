@@ -73,19 +73,28 @@ const dataDescription = computed ( () => {
 		justify-self: flex-end;
 		width: fit-content;
 		align-self: center;
-		&:hover {
-			background-color: #1a1a1a;
-		}
 	}
 	.image-wrapper {
 		width: 100%;
 		height: 14rem;
+		overflow: hidden;
 		.image {
 			width: 100%;
 			height: 100%;
 			display: block;
 			object-fit: cover;
 			object-position: center;
+			transition: all 0.3s ease-in;
+		}
+	}
+	&:hover {
+		.image-wrapper {
+			.image {
+				transform: scale(1.1);
+			}
+		}
+		.link {
+			background-color: #1a1a1a;
 		}
 	}
 
