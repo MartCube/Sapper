@@ -2,7 +2,7 @@
 	<section class="richtext-form">
 		<div class="container">
 			<div class="card">
-				<h2 class="titlek">{{ title }}</h2>
+				<h2 class="title">{{ title }}</h2>
 				<div class="text">
 					<SanityContent :blocks="list" />
 				</div>
@@ -51,6 +51,7 @@ defineProps<{
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
+		padding:  0 1rem;
 	}
 	.card {
 		margin: 1rem;
@@ -149,7 +150,7 @@ defineProps<{
 		form {
 			background-color: $white;
 			.container {
-				padding: 4rem 0;
+				padding: 4rem 1rem;
 				.title {
 					text-align: center;
 					margin-bottom: 4rem;

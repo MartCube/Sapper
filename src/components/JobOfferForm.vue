@@ -1,5 +1,5 @@
 <template>
-	<form id="form" @submit="onSubmit" autocomplete="off">
+	<form id="form" @submit="onSubmit" autocomplete="off" ref="form">
 		<div class="container">
 			<h2 v-if="data.title" class="title">{{ data.title }}</h2>
 			<div class="group">
@@ -38,52 +38,69 @@ import { useForm } from 'vee-validate';
 import type { JobOfferForm } from "~~/src/assets/types";
 import { toFormValidator } from '@vee-validate/zod';
 import { z } from 'zod';
-// import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 // import { promiseTimeout } from '@vueuse/core'
 const { t } = useI18n()
+const props = defineProps<{title: string}>()
+
 
 let data: JobOfferForm = {
-	title: 'Some title',
+	title: props.title,
 	email: {
 		name: 'email',
-		label: t('email'),
+		label: t('form.labels.email'),
 		type: 'input',
 	},
 	phone: {
 		name: 'phone',
-		label: 'Phone',
+		label: t('form.labels.phone'),
 		type: 'input',
 	},
 	name: {
 		name: 'name',
-		label: 'Name',
+		label: t('form.labels.name'),
 		type: 'input',
 	},
 	message: {
 		name: 'message',
-		label: 'Message',
+		label: t('form.labels.message'),
 		type: 'textarea',
 	},
 }
 
 const validationSchema = toFormValidator(
 	z.object({
-		'full name': z.string().min(1, 'Required'),
+		name: z.string().min(1, 'Required'),
 		email: z.string().min(1, 'Required').email(),
 		phone: z.string().min(1, 'Required'),
-		// message: z.string().min(1, 'Required').max(120),
+		message: z.string().min(1, 'Required').max(120),
 	})
 )
 
 const showMsg = ref(false)
 const showMsgResultState = ref(false)
+const form = ref()
 
 const { handleSubmit, isSubmitting } = useForm<JobOfferForm>({ validationSchema })
 
 const onSubmit = handleSubmit(async (values, { resetForm}) => {
-	console.log(values)
-
-	showMsg.value = false
+	const emailData = {
+		...values,
+		title: props.title
+	}
+	emailjs.send('service_95o1gb1', 'template_suolvuk', emailData, 'u2zmujMl1wV-_J2qn')
+	.then(
+		(result) => { 
+			showMsg.value = true
+			showMsgResultState.value = true
+			console.log('SUCCESS!', result.text) 
+		}, 
+		(error) => { 
+			showMsgResultState.value = false 
+			console.log('FAILED...', error.text) 
+		},
+	)
+	
 	resetForm()
 })
 </script>
@@ -96,6 +113,7 @@ form {
 	margin: 2rem 0;
 	.container {
 		position: relative;
+		// padding: 0 1rem;
 	}
 	.group {
 		display: flex;
@@ -136,6 +154,7 @@ form {
 			font-weight: 300;
 			font-size: 1rem;
 			line-height: 60px;
+			padding: 0 3rem;
 
 			// &::before,
 			&::after {
@@ -242,7 +261,7 @@ form {
 		position: absolute;
     top: 0;
     background-color: $white;
-    width: calc(100% - 4rem);
+    width: 100%;
     height: 100%;
 		text-align: center;
     display: flex;

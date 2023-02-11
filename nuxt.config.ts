@@ -72,6 +72,12 @@ export default defineNuxtConfig({
 					about_us: 'Про нас',
 					read_more: 'Читати',
 					form: {
+						labels: {
+							name: "Ім'я",
+							email: "Емаіл",
+							phone: 'Телефон',
+							message: 'Повідомлення',
+						},
 						message_title: 'Повідомлення відправлено!',
 						submit: 'Відправити',
 						send_form: 'Відправити запит',
@@ -95,6 +101,12 @@ export default defineNuxtConfig({
 					read_more: 'Read more',
 					contact_info_title: 'Contact info',
 					form: {
+						labels: {
+							name: "Name",
+							email: "Email",
+							phone: 'Phone',
+							message: 'Meesage',
+						},
 						submit: 'Submit',
 						send_form: 'Send the form',
 						message_title: 'Message sent !',
