@@ -83,15 +83,16 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 	"metaTags": {
 		"uid": uid.current,
 		"title" : metaTags.title,
+		"type": _type,
 		"description": metaTags.description,
 		"image": metaTags.image.asset._ref,
-		"altLang": coalesce(
+		"alterLang": coalesce(
 			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
 			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
 		),
 	},
 	"lang": __i18n_lang,
-	"altLang": coalesce(
+	"alterLang": coalesce(
 		__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
 		__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
 		),
@@ -120,9 +121,10 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 	"metaTags": {
 		"uid": uid.current,
 		"title" : metaTags.title,
+		"type": _type,
 		"description": metaTags.description,
 		"image": metaTags.image.asset._ref,
-		"altLang": coalesce(
+		"alterLang": coalesce(
 			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
 			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
 		),
@@ -161,10 +163,11 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	},
 	"metaTags": {
 		"uid": uid.current,
+		"type": _type,
 		"title" : metaTags.title,
 		"description": metaTags.description,
 		"image": metaTags.image.asset._ref,
-		"altLang": coalesce(
+		"alterLang": coalesce(
 			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
 			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
 		),

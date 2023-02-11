@@ -33,16 +33,16 @@ watch(locale, async (oldLocale, newLocale) => {
 
 // defineI18nRoute({
 //   paths: {
-//     en: data.value.altLang.uid,
+//     en: data.value.alterLang.uid,
 //     ua: data.value.lang
 //   }
 // })
-// console.log(data.value.altLang);
+// console.log(data.value.alterLang);
 
 if(params && data.value) {
   meta.nuxtI18n = {
-		en: { page: `${locale.value === 'en' ? params.page : data.value.altLang.uid}/` },
-		ua: { page: `${locale.value === 'ua' ? params.page : data.value.altLang.uid}/` },
+		en: { page: `${locale.value === 'en' ? params.page : data.value.alterLang.uid}/` },
+		ua: { page: `${locale.value === 'ua' ? params.page : data.value.alterLang.uid}/` },
 	};
 }
 // write metatags

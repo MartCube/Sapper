@@ -110,7 +110,7 @@ export interface Page {
 	content: any[],
 	metaTags: metaTags,
 	lang: string,
-	altLang: Lang
+	alterLang: Lang
 }
 export interface Article {
 	uid: string,
@@ -118,7 +118,7 @@ export interface Article {
 	content: any[],
 	metaTags: metaTags,
 	lang: string,
-	altLang: Lang
+	alterLang: Lang
 }
 
 

@@ -16,28 +16,34 @@ export default (data: metaTags) => {
 	const url = domain + fullPath
 	const ogType = useRoute().params.article ? "article" : "website"
 	// const robots = useRoute().params.article ? "index, nofollow" : "index, follow"
-	const alter = computed( () => { 
-		return useRoute().params.article ? 
-		{ // alernative language type article
-			hid: 'alternate', 
-			rel: 'alternate', 
-			href: `${domain}/${data.alterLang?.id === 'ua' ? '/' : 'en/'}${data.alterLang?.id === 'ua' ? 'novunu/' : 'blog/'}${data.alterLang?.uid}/`, 
-			hreflang: data.alterLang?.id 
-		} :
-		{ // alernative language type page
-			hid: 'alternate', 
-			rel: 'alternate', 
-			href: `${domain}/${data.alterLang?.id === 'ua' ? '/' : 'en/'}${data.alterLang?.uid}/`, 
-			hreflang: data.alterLang?.id
-		}
+	const alternate = computed( () => {
+		if(data.type === 'page') {
+			console.log(data.type, data.alterLang?.uid);
+			
+			return `${domain}/en${locale.value === 'en' ? '/' + useRoute().params.page + '/' : '/' + data.alterLang?.uid + '/'}`
+		} else if (data.type === 'home') {
+			return `${domain}/en/`
+		} else if (data.type === 'article') {
+			return undefined
+		} 
 	})			
-
+	const canonical = computed( () => {
+		if(data.type === 'page') {
+			return `${domain}/${locale.value === 'ua' ? useRoute().params.page + '/' : data.alterLang?.uid + '/'}`
+		} else if (data.type === 'home') {
+			return `${domain}/`
+		} else if (data.type === 'article') {
+			return `${domain}/novunu/${useRoute().params.article}`
+		} 
+	})			
+	console.log( alternate.value);
+	
 	useHead({
 		title: data.title,
 		htmlAttrs: { lang: locale.value },
 		link: [
-			alter,
-			{ hid: 'alternate', rel: 'alternate', href: url, hreflang: 'x-default' },
+			{ hid: 'alternate', rel: 'alternate', href: alternate.value, hreflang: 'en' } ,
+			{ hid: 'canonical', rel: 'canonical', href: canonical.value, hreflang: 'x-default' },
 		],
 		meta: [
 			{ "charset": "utf-8" },
