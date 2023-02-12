@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url'
 export default (data: metaTags) => {
 
 	const { fullPath } = useRoute()
-	const { locale, setLocale, t } = useI18n()
+	const { locale, t } = useI18n()
 
 	const builder = imageUrlBuilder({
 		projectId: 'ede4uk6z',
@@ -18,7 +18,6 @@ export default (data: metaTags) => {
 	// const robots = useRoute().params.article ? "index, nofollow" : "index, follow"
 	const alternate = computed( () => {
 		if(data.type === 'page') {
-			console.log(data.type, data.alterLang?.uid);
 			
 			return `${domain}/en${locale.value === 'en' ? '/' + useRoute().params.page + '/' : '/' + data.alterLang?.uid + '/'}`
 		} else if (data.type === 'home') {
@@ -36,7 +35,6 @@ export default (data: metaTags) => {
 			return `${domain}/novunu/${useRoute().params.article}`
 		} 
 	})			
-	console.log( alternate.value);
 	
 	useHead({
 		title: data.title,

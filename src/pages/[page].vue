@@ -13,7 +13,7 @@ import type { Page } from "~/assets/types"
 // fetch data
 const { params, meta  } = useRoute()
 const { fetch } = useSanity()
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 const { data, pending, refresh } = await useAsyncData(
 	`${params.page} - page`,
 	(): Promise<Page> => fetch(Page_Q, { uid: params.page })
@@ -30,14 +30,6 @@ if (!data.value) throw createError({
 watch(locale, async (oldLocale, newLocale) => {
 	if (newLocale) refresh
 })
-
-// defineI18nRoute({
-//   paths: {
-//     en: data.value.alterLang.uid,
-//     ua: data.value.lang
-//   }
-// })
-// console.log(data.value.alterLang);
 
 if(params && data.value) {
   meta.nuxtI18n = {

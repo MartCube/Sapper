@@ -47,7 +47,7 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 defineProps<{ title: string }>()
 defineComponent({ Carousel,Slide,Pagination,Navigation})
 
-const { locale, setLocale, t } = useI18n()
+const { locale, t } = useI18n()
 
 // fetch data
 const { fetch } = useSanity()

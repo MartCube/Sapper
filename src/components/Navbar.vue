@@ -27,7 +27,7 @@
 			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
 				<span>{{ altLocale }}</span>
 			</NuxtLink>
-			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" />
+			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" class="burger"/>
 			<Icon v-else name="ri:close-fill" @click="menuToggle()" />
 			<a class="phone" href="tel:+380647339023">
 				<Icon name="mdi:phone-in-talk-outline"/>
@@ -91,7 +91,7 @@ import { storeToRefs } from 'pinia'
 import { Link } from '~/assets/types'
 
 const switchLocalePath = useSwitchLocalePath()
-const { locale, setLocale, t } = useI18n()
+const { locale, t } = useI18n()
 
 const localePath = useLocalePath()	 
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
@@ -162,6 +162,11 @@ header {
 			width: 2rem;
 			height: 2rem;
 			color: $dark3;
+			&.burger {
+				&:hover {
+					cursor: pointer;
+				}
+			}
 		}
 		.phone {
 			display: flex;

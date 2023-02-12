@@ -16,8 +16,7 @@ import { Articles_Q } from "~/assets/queries"
 import type { ArticleCard } from "~/assets/types"
 
 defineProps<{ title: string }>()
-const { locale, setLocale, t } = useI18n()
-// console.log(locale);
+const { locale, t } = useI18n()
 
 // fetch data
 const { fetch } = useSanity()
@@ -25,8 +24,6 @@ const { data, pending } = await useAsyncData(
 	'article',
 	(): Promise<ArticleCard[]> => fetch(Articles_Q, { lang: locale.value, from: 0, to: 10 })
 )
-// console.log(data);	
-
 
 // handle error
 if (!data.value) throw createError({

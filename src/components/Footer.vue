@@ -63,12 +63,9 @@
 
 import { storeToRefs } from 'pinia'
 
-const { locale, setLocale, t} = useI18n({})
+const { locale, t} = useI18n({})
 const { smedias, info, links } = storeToRefs(useAppStore())
 const localePath = useLocalePath()
-
-
-// console.log(locale.value);
 
 const footerLinks = computed( () => locale.value === 'ua' ? links.value?.ua : links.value?.en ) 
 const submenuLinks = computed( () => footerLinks.value?.at(0)?.dropdown)

@@ -58,7 +58,6 @@ const form = ref()
 const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
-	console.log(values)
 	emailjs.sendForm('service_95o1gb1', 'template_xhp1lkj', form.value, 'u2zmujMl1wV-_J2qn')
 	.then(
 		(result) => { 

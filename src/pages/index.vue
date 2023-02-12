@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { Home_Q } from "~~/src/assets/queries"
 import type { Page } from "~~/src/assets/types"
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 
 // fetch data
 const { fetch } = useSanity()
@@ -17,7 +17,6 @@ const { data, pending, refresh } = await useAsyncData(
 	`Home Page`,
 	(): Promise<Page> => fetch(Home_Q, { lang: locale.value })
 )
-// console.log(data.value);
 watch(locale, async (oldLocale, newLocale) => {
 	if (newLocale) refresh
 })
