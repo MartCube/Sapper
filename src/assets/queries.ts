@@ -1,37 +1,36 @@
 // Sitemap
 export const Sitemap_Q = groq`*[ _type in ["article", "page", "home"] ]{
-		_type == "page" && __i18n_lang == 'ua' => {
-			"url": "/"
-			"changefreq": "monthly",
-			"priority": sitemap.priority,
-			"lastmod" :_updatedAt,
-	},
-	_type == "page" && __i18n_lang == 'en' => {
-			"url": "/en/"
-			"/",
-			"changefreq": "monthly",
-			"priority": sitemap.priority,
-			"lastmod" :_updatedAt,
-	},
-	_type == "page" && __i18n_lang == 'ua' => {
-			"url": "/"+uid.current+"/",
-			"changefreq": "monthly",
-			"priority": sitemap.priority,
-			"lastmod" :_updatedAt,
-	},
-	_type == "page" && __i18n_lang == 'en' => {
-			"url": "/en/"+uid.current+
-			"/",
-			"changefreq": "monthly",
-			"priority": sitemap.priority,
-			"lastmod" :_updatedAt,
-	},
-	_type == "article" && __i18n_lang == 'ua' => {
-			"url": "/novunu/"+uid.current+"/",
-			"changefreq": "monthly",
-			"priority": sitemap.priority,
-			"lastmod" :_updatedAt,
-	},
+	_type == "home" && __i18n_lang == 'ua' => {
+		"url": "https://mine-action.netlify.app/",
+		"changefreq": "monthly",
+		"priority": sitemap.priority,
+		"lastmod" :_updatedAt,
+},
+_type == "home" && __i18n_lang == 'en' => {
+		"url": "https://mine-action.netlify.app/en/",
+		"changefreq": "monthly",
+		"priority": sitemap.priority,
+		"lastmod" :_updatedAt,
+},
+_type == "page" && __i18n_lang == 'ua' => {
+		"url": "https://mine-action.netlify.app/"+uid.current+"/",
+		"changefreq": "monthly",
+		"priority": sitemap.priority,
+		"lastmod" :_updatedAt,
+},
+_type == "page" && __i18n_lang == 'en' => {
+		"url": "https://mine-action.netlify.app/en/"+uid.current+
+		"/",
+		"changefreq": "monthly",
+		"priority": sitemap.priority,
+		"lastmod" :_updatedAt,
+},
+_type == "article" && __i18n_lang == 'ua' => {
+		"url": "https://mine-action.netlify.app/novunu/"+uid.current+"/",
+		"changefreq": "monthly",
+		"priority": sitemap.priority,
+		"lastmod" :_updatedAt,
+},
 }`
 
 export const Route_Q = groq`*[ _type in ["article", "page"] ]{
