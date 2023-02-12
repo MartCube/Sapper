@@ -1,5 +1,18 @@
 // Sitemap
-export const Sitemap_Q = groq`*[ _type in ["article", "page"] ]{
+export const Sitemap_Q = groq`*[ _type in ["article", "page", "home"] ]{
+		_type == "page" && __i18n_lang == 'ua' => {
+			"url": "/"
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "page" && __i18n_lang == 'en' => {
+			"url": "/en/"
+			"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
 	_type == "page" && __i18n_lang == 'ua' => {
 			"url": "/"+uid.current+"/",
 			"changefreq": "monthly",

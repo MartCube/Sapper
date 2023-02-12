@@ -18,7 +18,7 @@ import { useParallax } from '@vueuse/core'
 defineProps<{
 	list: any[],
 	image: string,
-	alt: string,
+	alt?: '',
 }>()
 
 const imageParalax = ref(null)
@@ -46,6 +46,7 @@ const { tilt, roll, source } = useParallax(imageParalax)
 		li {
 			display: flex;
 			align-items: center;
+			font-weight: 100;
 			&::before {
 				content: '';
 				display: block;

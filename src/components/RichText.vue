@@ -35,6 +35,7 @@ defineProps<{
 		li {
 			display: flex;
 			align-items: center;
+			font-weight: 100;
 			&::before {
 				content: '';
 				display: block;

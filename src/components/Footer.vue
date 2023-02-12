@@ -20,13 +20,13 @@
 					</a>
 				</div>
 				<div class="social-media">
-					<NuxtLink :to="smedias?.instagram" external>
+					<NuxtLink :to="smedias?.instagram" external target="_blank">
 						<Icon name="mdi:instagram" />
 					</NuxtLink>
-					<NuxtLink :to="smedias?.facebook" external>
+					<NuxtLink :to="smedias?.facebook" external target="_blank">
 						<Icon name="mdi:facebook" />
 					</NuxtLink>
-					<NuxtLink :to="smedias?.youtube" external>
+					<NuxtLink :to="smedias?.youtube" external target="_blank">
 						<Icon name="mdi:youtube" />
 					</NuxtLink>
 				</div>

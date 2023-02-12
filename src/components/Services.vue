@@ -15,7 +15,7 @@
 						<div class="back-card">
 							<AppImage :src="item.image" />
 							<p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p>
-							<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}`">Відкрити</NuxtLink>
+							<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}/`">Відкрити</NuxtLink>
 						</div>
 					</div>
 					<div  class="mobile">

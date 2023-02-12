@@ -13,7 +13,7 @@
 <script setup lang="ts">
 defineProps<{
 	src: string,
-	alt?: string,
+	alt?: '',
 	width?: number,
 	height?: number,
 }>()
