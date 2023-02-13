@@ -11,7 +11,7 @@ export default (data: metaTags) => {
 		dataset: "production",
 	})
 	// freewayua.com
-	const domain = "https://main-action.netlify.app"
+	const domain = "https://freewayua.com"
 	const ogImage = data.image ? builder.image(data.image).auto('format').width(1200).height(630).url() : ''
 	const url = domain + fullPath
 	const ogType = useRoute().params.article ? "article" : "website"
