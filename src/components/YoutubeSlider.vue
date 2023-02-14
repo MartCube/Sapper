@@ -2,7 +2,7 @@
 	<section class="slider-youtube">
 		<div class="container">
 			<div class="grid">
-				<carousel :breakpoints="{
+				<carousel :itemsToShow='3' :breakpoints="{
 						// 700px and up
 						320: {
 							itemsToShow: 1,
@@ -156,7 +156,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		// flex-wrap: wrap;
 		.placeholder {
 			width: 100%;
-			height: 20vw;
+			height: 17vw;
 			margin: 1rem;
 			position: relative;
 			border-radius: 4px;
@@ -175,7 +175,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 				width: 100%;
 				object-fit: cover;
 				height: 100%;
-				filter: brightness(0.4);
+				filter: brightness(0.7);
 				transition: transform 0.3s ease-in;
 			}
 			svg {

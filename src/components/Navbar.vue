@@ -12,8 +12,8 @@
 				</li>
 				<li v-for="link in currentLinks" :key="link.title" class="link">
 					
-					<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid}})}/`">{{ link.title }}</NuxtLink>
-					<a href="javacript:;" v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
+					<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid } })}/`">{{ link.title }}</NuxtLink>
+					<a v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
 					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
 					<ul v-if="link.dropdown" class="submenu">
 						<li v-for="sublink in link.dropdown.sublinks">
@@ -29,9 +29,9 @@
 			</NuxtLink>
 			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" class="burger"/>
 			<Icon v-else name="ri:close-fill" @click="menuToggle()" />
-			<a class="phone" href="tel:+380647339023">
+			<a class="phone" :href="`tel:${info?.phone}`">
 				<Icon name="mdi:phone-in-talk-outline"/>
-				+38 (064) 733-90-23
+				+38 (098) 685 89 24
 			</a>
 		</div>
 		<div class="sidebar" v-show="menuValue" ref="sidebar">
@@ -242,6 +242,7 @@ header {
 				}
 
 				&:hover {
+					cursor: pointer;
 					&::after {
 						width: 100%;
 					}

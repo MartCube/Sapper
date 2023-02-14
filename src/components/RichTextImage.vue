@@ -75,6 +75,10 @@ const { tilt, roll, source } = useParallax(imageParalax)
 				border: 20px solid $dark;
 				width: 100%;
 				height: auto;
+				img { 
+					border-radius: 50%;
+					overflow: hidden;
+				}
 			}
 			span {
 				position: absolute;

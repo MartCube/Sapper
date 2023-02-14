@@ -84,6 +84,10 @@ if (!data.value) throw createError({
 	}
 	.article-wrapper {
 		.wrapper {
+			width: 100%;
+			max-height: 35vw;
+			height: 100%;
+			padding: 1rem;
 			.item {
 				width: -webkit-fill-available;
 			}

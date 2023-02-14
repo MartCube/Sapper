@@ -23,10 +23,10 @@ const props = defineProps<{
 	},
 }>()
 
-const dataTitle = computed ( () => {
-	return `${props.data.title.slice(0, 77)}...`
+const dataTitle = computed( () => {
+	return `${props.data.title.slice(0, 50)}...`
 })
-const dataDescription = computed ( () => {
+const dataDescription = computed( () => {
 	return `${props.data.description.slice(0, 147)}...`
 })
 </script>
@@ -39,6 +39,8 @@ const dataDescription = computed ( () => {
 	justify-content: flex-start;
 	padding: 1.5rem;
 	text-align: center;
+	max-height: 45vw;
+	height: 100%;
 	background-color: $white;
 	border-radius: 5px;
 	margin: 1.6%;
@@ -52,7 +54,6 @@ const dataDescription = computed ( () => {
 	.text {
 		display: flex;
 		flex-direction: column;
-		height: -webkit-fill-available;
 	}
 	.description {
 		margin-bottom: 1rem;
