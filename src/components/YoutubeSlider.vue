@@ -2,34 +2,40 @@
 	<section class="slider-youtube">
 		<div class="container">
 			<div class="grid">
-				<carousel :itemsToShow='3' :breakpoints="{
-						// 700px and up
-						320: {
-							itemsToShow: 1,
-							snapAlign: 'center',
-						},
-						700: {
-							itemsToShow: 2,
-							snapAlign: 'center',
-						},
-						// 1024 and up
-						1024: {
-							itemsToShow: 3,
-							snapAlign: 'start',
-						},
-					}">
-					<slide v-for="(image, index) in list" :key="index">
-						<div  @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
-							<Icon name="ic:baseline-play-circle-filled-white" />
-							<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
-						</div>
-					</slide>
-
-					<template #addons>
-						<navigation />
-						<pagination />
-					</template>
-				</carousel>
+				<ClientOnly>
+					<carousel 
+					@init="handleInit"
+					ref="sliderYoutube" 
+					:items-to-show=3
+					:breakpoints="{
+							// 700px and up
+							320: {
+								itemsToShow: 1,
+								snapAlign: 'center',
+							},
+							700: {
+								itemsToShow: 2,
+								snapAlign: 'center',
+							},
+							// 1024 and up
+							1024: {
+								itemsToShow: 3,
+								snapAlign: 'start',
+							},
+						}">
+						<slide v-for="(image, index) in list" :key="index">
+							<div  @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
+								<Icon name="ic:baseline-play-circle-filled-white" />
+								<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
+							</div>
+						</slide>
+	
+						<template #addons>
+							<navigation />
+							<pagination />
+						</template>
+					</carousel>
+				</ClientOnly>
 			</div>
 			<div v-if="isOpen" class="lightbox">
 				<div class="wrapper" ref="img">
@@ -44,17 +50,19 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted  } from 'vue'
 import { useCycleList, onKeyStroke, onClickOutside, useSwipe } from '@vueuse/core'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
+const route = useRoute()
 
 const props = defineProps<{
 	// title: string,
 	list: string[];
 }>()
-defineComponent({ Carousel,Slide,Pagination,Navigation})
 
+defineComponent({ Carousel,Slide,Pagination,Navigation})
 
 const img = ref(null)	// image ref
 const isOpen = ref(false) // toggle lightbox
@@ -84,6 +92,13 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 	}
 })
 
+const sliderYoutube = ref(null)
+const handleInit = () => {
+	console.log('created youtube slider');
+}
+onMounted( () => {
+	// sliderYoutube..restartCarousel()
+})
 </script>
 
 <style lang="scss" >
@@ -155,7 +170,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		// justify-content: space-between;
 		// flex-wrap: wrap;
 		.placeholder {
-			width: 100%;
+			// width: 100%;
 			height: 17vw;
 			margin: 1rem;
 			position: relative;

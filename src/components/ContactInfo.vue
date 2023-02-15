@@ -22,11 +22,37 @@
 				<span class="title">{{ address.title }}</span>
 				<span>{{ address.value }}</span>
 			</div>
+			<div class="item">
+				<NuxtLink :to="smedias?.instagram" external target="_blank" class="icon-wrapper">
+					<Icon name="mdi:instagram" />
+				</NuxtLink>
+				<NuxtLink class="title" :to="smedias?.instagram" external target="_blank">
+					Instagram
+				</NuxtLink>
+			</div>
+			<div class="item">
+				<NuxtLink :to="smedias?.facebook" external target="_blank" class="icon-wrapper">
+					<Icon name="mdi:facebook" />
+				</NuxtLink>
+				<NuxtLink class="title" :to="smedias?.facebook" external target="_blank">
+					Facebook
+				</NuxtLink>
+			</div>
+			<div class="item">
+				<NuxtLink :to="smedias?.youtube" external target="_blank" class="icon-wrapper">
+					<Icon name="mdi:youtube" />
+				</NuxtLink>
+				<NuxtLink class="title" :to="smedias?.youtube" external target="_blank">
+					Youtube
+				</NuxtLink>
+			</div>
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
 defineProps<{ 
 	email: {
 		icon: string,
@@ -44,6 +70,9 @@ defineProps<{
 		title: string
 	}, 
 }>()
+
+const { smedias } = storeToRefs(useAppStore())
+
 </script>
 
 <style lang="scss" scoped>
