@@ -4,7 +4,7 @@
 			<div class="grid">
 				<div v-for="(image, index) in list" :key="index" @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
 					<Icon name="ic:baseline-play-circle-filled-white" />
-					<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
+					<img :src="`https://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
 				</div>
 			</div>
 			<div v-if="isOpen" class="lightbox">
