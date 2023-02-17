@@ -231,6 +231,9 @@ footer {
 		}
 
 		@media (max-width: 600px) {
+			.cta {
+				margin: 2rem auto;
+			}
 			.copyright {
 				justify-content: center;
 			}
@@ -241,6 +244,9 @@ footer {
 			}
 			.social-media {
 				justify-content: center;
+				a:last-child{
+					margin-right: 0;
+				}
 			}
 
 			.links li a {

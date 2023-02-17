@@ -112,3 +112,55 @@ h5, h6          { font-weight: bolder }
 		}
 	}
 }
+
+.splide__arrow--prev, .splide__arrow--next {
+	position: absolute;
+	z-index: 3;
+	// width: 100%;
+	top: 46%;
+	transform: translateY(-50%);
+	background-color: $dark3;
+	border: none;
+	padding: 15px;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	svg {
+		fill: $white;
+		width: 20px;
+		height: 20px;
+	}
+	&:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+}
+.splide__arrow--prev {
+	transform: translateY(-50%)  rotate(180deg);
+	left: 0;
+}
+.splide__arrow--next {
+	right: 0;
+}
+.splide__pagination {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	.splide__pagination__page  {
+		transition: all 0.5s linear;
+		background-color: rgb($dark3, 50%);
+		width: 3rem;
+		border-radius: 10px;
+		height: 7px;
+		border: none;
+		margin: 0 3px;
+		&.is-active {
+			background-color: $dark3;
+			width: 5rem;
+		}
+	} 
+}

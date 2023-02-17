@@ -67,8 +67,14 @@
 			<div class="mobile">
 				<nav>
 					<ul class="links">
+						<li class="link">
+							<NuxtLink :to="localePath('index')" class="logo">
+								{{ t('index') }}
+							</NuxtLink>
+						</li>
 						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
-							<NuxtLink :to="`${localePath({name: 'page', params: { page: link.uid}})}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
+							<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid}})}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
+							<a v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
 							<div class="arrow" v-if="link.dropdown" :key="link.uid">
 								<Icon name="ic:twotone-keyboard-arrow-down"/>
 							</div>
@@ -136,12 +142,12 @@ header {
 		height: auto;
 		object-fit: contain;
 	}
-		@media (max-width: 600px) {
-			height: 60px;
-			.logo {
-				width: 55px;
-			}
+	@media (max-width: 600px) {
+		height: 60px;
+		.logo {
+			width: 55px;
 		}
+	}
 
 	.menu {
 		display: flex;

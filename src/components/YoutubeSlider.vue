@@ -2,40 +2,15 @@
 	<section class="slider-youtube">
 		<div class="container">
 			<div class="grid">
-				<ClientOnly>
-					<carousel 
-					@init="handleInit"
-					ref="sliderYoutube" 
-					:items-to-show=3
-					:breakpoints="{
-							// 700px and up
-							320: {
-								itemsToShow: 1,
-								snapAlign: 'center',
-							},
-							700: {
-								itemsToShow: 2,
-								snapAlign: 'center',
-							},
-							// 1024 and up
-							1024: {
-								itemsToShow: 3,
-								snapAlign: 'start',
-							},
-						}">
-						<slide v-for="(image, index) in list" :key="index">
-							<div  @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
-								<Icon name="ic:baseline-play-circle-filled-white" />
-								<img :src="`http://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
-							</div>
-						</slide>
-	
-						<template #addons>
-							<navigation />
-							<pagination />
-						</template>
-					</carousel>
-				</ClientOnly>
+				<Splide :options="sliderOptions" 
+								aria-label="My Favorite Images">
+					<SplideSlide v-for="(image, index) in list" :key="index">
+						<div  @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
+							<Icon name="ic:baseline-play-circle-filled-white" />
+							<img :src="`https://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
+						</div>
+					</SplideSlide>
+				</Splide>
 			</div>
 			<div v-if="isOpen" class="lightbox">
 				<div class="wrapper" ref="img">
@@ -51,18 +26,32 @@
 
 <script setup lang="ts">
 import { ref, onMounted  } from 'vue'
-import { useCycleList, onKeyStroke, onClickOutside, useSwipe } from '@vueuse/core'
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+import { useCycleList, onKeyStroke, onClickOutside } from '@vueuse/core'
 
-const route = useRoute()
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css/core';
+
+const sliderOptions = {
+	perPage: 3,
+	perMove: 1,
+	arrows: true,
+	pagination: true,
+	breakpoints: {
+		700: {
+			perPage: 1,
+		},
+		// 1024 and down
+		1024: {
+			perPage: 2,
+		},
+	}
+}
 
 const props = defineProps<{
-	// title: string,
 	list: string[];
 }>()
 
-defineComponent({ Carousel,Slide,Pagination,Navigation})
+defineComponent({ Splide, SplideSlide })
 
 const img = ref(null)	// image ref
 const isOpen = ref(false) // toggle lightbox
@@ -91,17 +80,9 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			break
 	}
 })
-
-const sliderYoutube = ref(null)
-const handleInit = () => {
-	console.log('created youtube slider');
-}
-onMounted( () => {
-	// sliderYoutube..restartCarousel()
-})
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .slider-youtube {
 	display: flex;
 	flex-wrap: wrap;
@@ -212,53 +193,22 @@ onMounted( () => {
 		@media (max-width: 1000px) {
 			.placeholder,
 			.placeholder.two {
-				width: 49%;
-				height: 35vw;
+				// width: 49%;
+				height: 23vw;
 			}
 			
 		}
-		@media (max-width: 600px) {
+		@media (max-width: 700px) {
 			.placeholder,
 			.placeholder.two,
 			.placeholder.one {
-				width: 100%;
-				height: 55vw;
+				// width: 100%;
+				height: 48vw;
 			}
-			
 		}
 	}
-	.carousel__prev, .carousel__next {
-		background-color: $dark3;
-		color: $white;
-		padding: 10px;
-		border-radius: 5px;
-		font-size: 1.5rem;
-		&:hover {
-			opacity: 0.7;
-		}
-	}
-	.carousel__pagination {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		.carousel__pagination-button {
-			&::after {
-				transition: all 0.5s linear;
-				background-color: rgb($dark3, 50%);
-				width: 3rem;
-				border-radius: 10px;
-				height: 7px;
-			}
-			&.carousel__pagination-button--active {
-				&::after {
-					background-color: $dark;
-					width: 5rem;
-				}
-			}
-		} 
-	}
-	.carousel {
+
+	.splide {
 		padding-bottom: 2rem;
 	}
 }

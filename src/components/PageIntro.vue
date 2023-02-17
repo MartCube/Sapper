@@ -61,5 +61,17 @@ defineProps<{ title: string, }>()
 		}
 
 	}
+	@media (max-width: 700px) {
+		h1 {
+			font-size: 3rem;
+		}
+		.breadcrumbs {
+			a:last-child {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	}
 }
 </style>

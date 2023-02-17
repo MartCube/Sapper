@@ -16,6 +16,7 @@
     "@pinia/nuxt": "^0.4.3",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
+    "@splidejs/vue-splide": "^0.6.12",
     "@vee-validate/zod": "^4.6.1",
     "@vueuse/core": "9.6.0",
     "eslint": "^8.31.0",
@@ -30,7 +31,6 @@
     "vee-validate": "^4.6.1",
     "vue": "^3.2.45",
     "vue-tsc": "^1.0.24",
-    "vue3-carousel": "^0.2.9",
     "vue3-lazyload": "^0.3.6",
     "webpack": "^5.75.0",
     "zod": "^3.17.3"

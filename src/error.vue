@@ -2,10 +2,10 @@
 <template>
 	<div id="error">
 		<div class="card">
-			<nuxt-img src="/chopper.png" format="webp" loading="lazy" />
+			<nuxt-img src="/logo.jpg" format="webp" loading="lazy" />
 			<h2>{{ error.statusCode }}</h2>
 			<p>{{ error.statusMessage }}</p>
-			<button @click="handleError">to home page</button>
+			<NuxtLink :to="localePath({ name: 'index' })">to home page</NuxtLink>
 		</div>
 	</div>
 </template>
@@ -15,7 +15,8 @@ import type { Error } from "~/assets/types";
 defineProps<{
 	error: Error;
 }>()
-const handleError = () => clearError({ redirect: '/' })
+const localePath  =  useLocalePath()
+// const handleError = () => clearError({ redirect: '/' })
 </script>
 
 <style lang="scss">
@@ -36,7 +37,7 @@ const handleError = () => clearError({ redirect: '/' })
 		justify-content: space-between;
 		img {
 			width: 10rem;
-			height: 12.5rem;
+			height: auto;
 		}
 		h2 {
 			font-weight: 400;

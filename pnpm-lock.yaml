@@ -9,6 +9,7 @@ specifiers:
   '@pinia/nuxt': ^0.4.3
   '@sanity/client': ^3.4.1
   '@sanity/image-url': ^1.0.1
+  '@splidejs/vue-splide': ^0.6.12
   '@vee-validate/zod': ^4.6.1
   '@vueuse/core': 9.6.0
   eslint: ^8.31.0
@@ -23,7 +24,6 @@ specifiers:
   vee-validate: ^4.6.1
   vue: ^3.2.45
   vue-tsc: ^1.0.24
-  vue3-carousel: ^0.2.9
   vue3-lazyload: ^0.3.6
   webpack: ^5.75.0
   zod: ^3.17.3
@@ -37,6 +37,7 @@ devDependencies:
   '@pinia/nuxt': 0.4.6_prq2uz4lho2pwp6irk4cfkrxwu
   '@sanity/client': 3.4.1
   '@sanity/image-url': 1.0.2
+  '@splidejs/vue-splide': 0.6.12
   '@vee-validate/zod': 4.7.3_f2btg7zmr5jfq4gp3vvwlannri
   '@vueuse/core': 9.6.0_vue@3.2.45
   eslint: 8.32.0
@@ -51,7 +52,6 @@ devDependencies:
   vee-validate: 4.7.3_vue@3.2.45
   vue: 3.2.45
   vue-tsc: 1.0.24_typescript@4.9.4
-  vue3-carousel: 0.2.9_vue@3.2.45
   vue3-lazyload: 0.3.6_vue@3.2.45
   webpack: 5.75.0
   zod: 3.20.2
@@ -1280,6 +1280,16 @@ packages:
   /@sanity/timed-out/4.0.2:
     resolution: {integrity: sha512-NBDKGj14g9Z+bopIvZcQKWCzJq5JSrdmzRR1CS+iyA3Gm8SnIWBfZa7I3mTg2X6Nu8LQXG0EPKXdOGozLS4i3w==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /@splidejs/splide/4.1.4:
+    resolution: {integrity: sha512-5I30evTJcAJQXt6vJ26g2xEkG+l1nXcpEw4xpKh0/FWQ8ozmAeTbtniVtVmz2sH1Es3vgfC4SS8B2X4o5JMptA==}
+    dev: true
+
+  /@splidejs/vue-splide/0.6.12:
+    resolution: {integrity: sha512-eQb8pnGMN8Tr0FVaQo1PUMZlMHl8fSqHNXPTx79eeE2dkZqbsvq6jRzXoT9ZF7hFkxdOEmB6qYNp93SUwV684g==}
+    dependencies:
+      '@splidejs/splide': 4.1.4
     dev: true
 
   /@trysound/sax/0.2.0:
@@ -7726,14 +7736,6 @@ packages:
       '@vue/runtime-dom': 3.2.45
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
-    dev: true
-
-  /vue3-carousel/0.2.9_vue@3.2.45:
-    resolution: {integrity: sha512-JSU3rjWNfMq6uLjO7mD0/qQL7EsD0qyGUhSw/1F9ir7ObhdcJdRxbiAGIx+iyxR3v0Zoec5JrQdxSmn4ItKVrw==}
-    peerDependencies:
-      vue: ^3.2.0
-    dependencies:
-      vue: 3.2.45
     dev: true
 
   /vue3-lazyload/0.3.6_vue@3.2.45:

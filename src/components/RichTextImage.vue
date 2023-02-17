@@ -118,19 +118,33 @@ const { tilt, roll, source } = useParallax(imageParalax)
 		.container {
 			.image-wrapper {
 				width: 75vw;
-				height: 85vw;
-				padding: 0 0 5rem 0;
+				height: 75vw;
+				padding: 0;
 				margin-left: auto;
 				margin-right: auto;
 				span {
 					width: 100%;
 				}
+				.image {
+					width: 100%;
+					height: 100%;
+					padding: 0;
+					margin: 0 auto;
+				}
 			}
-			.image {
-				width: 70vw;
-				height: 70vw;
-				padding: 0;
-				margin: 0 auto;
+			.text {
+				margin-top: 3rem;
+				width: 100%;
+				padding-left: 0;
+			}
+		}
+	}
+	@media (max-width: 700px) {
+		.container {
+			.image-wrapper {
+				.image {
+					border-width: 15px;
+				}
 			}
 			.text {
 				margin-top: 3rem;

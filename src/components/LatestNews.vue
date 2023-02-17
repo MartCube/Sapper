@@ -4,33 +4,13 @@
 			<h2>{{ title }}</h2>
 			<template v-if="data && !pending">
 				<div class="article-wrapper">
-					<carousel :breakpoints="{
-							// 700px and up
-							320: {
-								itemsToShow: 1,
-								snapAlign: 'center',
-							},
-							700: {
-								itemsToShow: 2,
-								snapAlign: 'center',
-							},
-							// 1024 and up
-							1024: {
-								itemsToShow: 3,
-								snapAlign: 'start',
-							},
-						}">
-						<slide v-for="article in data" :key="article.uid">
+					<Splide :options="sliderOptions" aria-label="My Favorite Images">
+						<SplideSlide v-for="article in data" :key="article.uid">
 							<div class="wrapper">
 								<NewsCard :key="article.uid" :data="article"/>
 							</div>
-						</slide>
-
-						<template #addons>
-							<navigation />
-							<pagination />
-						</template>
-					</carousel>
+						</SplideSlide>
+					</Splide>
 				</div>
 			</template>
 		</div>
@@ -41,11 +21,26 @@
 import { Articles_Q } from "~/assets/queries"
 import type { ArticleCard } from "~/assets/types"
 
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css/core';
+defineComponent({ Splide, SplideSlide })
+const sliderOptions = {
+	perPage: 3,
+	perMove: 1,
+	arrows: true,
+	pagination: true,
+	breakpoints: {
+		700: {
+			perPage: 1,
+		},
+		// 1024 and down
+		1024: {
+			perPage: 2,
+		},
+	}
+}
 
 defineProps<{ title: string }>()
-defineComponent({ Carousel,Slide,Pagination,Navigation})
 
 const { locale, t } = useI18n()
 
@@ -85,50 +80,18 @@ if (!data.value) throw createError({
 	.article-wrapper {
 		.wrapper {
 			width: 100%;
-			max-height: 35vw;
-			height: 100%;
 			padding: 1rem;
 			.item {
 				width: -webkit-fill-available;
 			}
 		}
-		// display: flex;
-		// justify-content: flex-start;
-		// flex-wrap: wrap;
 	}
-	.carousel__prev, .carousel__next {
-		background-color: $dark3;
-		color: $white;
-		padding: 10px;
-		border-radius: 5px;
-		font-size: 1.5rem;
-		&:hover {
-			opacity: 0.7;
-		}
-	}
-	.carousel__pagination {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		.carousel__pagination-button {
-			&::after {
-				transition: all 0.5s linear;
-				background-color: rgb($dark3, 50%);
-				width: 3rem;
-				border-radius: 10px;
-				height: 7px;
-			}
-			&.carousel__pagination-button--active {
-				&::after {
-					background-color: $dark;
-					width: 5rem;
-				}
-			}
-		} 
-	}
-	.carousel {
+
+	.splide {
 		padding-bottom: 2rem;
+		@media (max-width: 700px) {
+			padding-bottom: 0;
+		}
 	}
 }
 </style>

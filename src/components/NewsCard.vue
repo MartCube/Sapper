@@ -39,7 +39,7 @@ const dataDescription = computed( () => {
 	justify-content: flex-start;
 	padding: 1.5rem;
 	text-align: center;
-	max-height: 45vw;
+	// max-height: 45vw;
 	height: 100%;
 	background-color: $white;
 	border-radius: 5px;
@@ -54,6 +54,7 @@ const dataDescription = computed( () => {
 	.text {
 		display: flex;
 		flex-direction: column;
+		height: 20rem;
 	}
 	.description {
 		margin-bottom: 1rem;
@@ -101,8 +102,15 @@ const dataDescription = computed( () => {
 
 	@media (max-width: 1000px) {
 		width: 100%;
+		.text {
+			height: 17rem;	
+		}
+	}
+	@media (max-width: 700px) {
 		margin-bottom: 4rem;
-		height: fit-content;
+		.text {
+			height: 17rem;	
+		}
 	}
 }
 </style>
