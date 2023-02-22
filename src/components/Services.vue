@@ -10,11 +10,12 @@
 								<Icon :name="item.icon" />
 							</div>
 							<h3 class="title">{{ item.title }}</h3>
-							<p class="description">{{ item.description.slice(0, item.description.length / 2) }}</p>
+							<p class="description">{{ description(item.description, true) }}</p>
 						</div>
 						<div class="back-card">
 							<AppImage :src="item.image" />
-							<p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p>
+							<p class="description">{{ description(item.description, false) }}</p>
+							<!-- <p class="description">{{ item.description.slice(item.description.length / 2, item.description.length) }}</p> -->
 							<NuxtLink :to="`${localePath({ name: 'page', params: { page: item.link.uid } })}/`">Відкрити</NuxtLink>
 						</div>
 					</div>
@@ -34,11 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMediaQuery } from '@vueuse/core'
-
-const localePath = useLocalePath()	 
-const isMobileScreen = useMediaQuery('(max-width: 1000px)')
-
 defineProps<{ 
 	title: string, 
 	list: {
@@ -54,6 +50,15 @@ defineProps<{
 		}
 	}[], 	
 }>()
+
+const localePath = useLocalePath()	
+
+const description = (str: string, isFirsHalf: boolean) => {
+	let strSplited = str.split(" ")
+	let strDivided = isFirsHalf ? strSplited.slice(0 , strSplited.length / 2) : strSplited.slice(strSplited.length / 2 , strSplited.length)
+	let strPrepared = strDivided.join(" ")
+	return strPrepared
+}
 </script>
 
 <style lang="scss" scoped>
@@ -264,7 +269,11 @@ defineProps<{
 		}
 		@media (max-width: 700px) {
 			.item {
-				width: 80%;
+				width: 95%;
+				padding: 1rem;
+				.mobile {
+					width: 100%;
+				}
 			}
 		}
 	}
