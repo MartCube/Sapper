@@ -1,4 +1,5 @@
-@import '~/assets/css/fonts.scss';
+// @import '~/assets/css/fonts.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
 
 * {
 	margin: 0;
@@ -20,9 +21,10 @@
 
 html,
 body {
-	font-family: 'Roboto';
+	font-family: 'Poppins', sans-serif;
 	background-color: $white;
 	color: $dark;
+	font-size: 15px;
 }
 
 img {
@@ -52,4 +54,113 @@ img {
 .page-enter-from,
 .page-leave-to {
 	opacity: 0
+}
+
+p, a {
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+}
+
+h1              { font-size: 4em; margin: .67em 0 }
+h2              { font-size: 3em; margin: .75em 0 }
+h3              { font-size: 2.34em; margin: .83em 0 }
+h5              { font-size: 1.66em; margin: 1.5em 0 }
+h6              { font-size: 1.5em; margin: 1.67em 0 }
+h1, h2, h3, h4,
+h5, h6          { font-weight: bolder }
+@media (min-width: 1000px) {
+	.container {
+		max-width:  1450px;
+		width: 100%;
+		padding: 0 2rem;
+	}
+}
+@media (max-width: 1000px) {
+	.container {
+		width: 100%;
+		max-width:  90%;
+	}
+	h1              { font-size: 3em; margin: .67em 0;line-height: 1; }
+	h2              { font-size: 2em; margin: .75em 0;line-height: 1; }
+	h3              { font-size: 1.34em; margin: .83em 0 }
+	h5              { font-size: 1.06em; margin: 1.5em 0 }
+	h6              { font-size: .9em; margin: 1.67em 0 }
+	h1, h2, h3, h4,
+	h5, h6          { font-weight: bolder }
+}
+
+#article {
+	.image {
+		width: 100%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@media (min-width: 1000px) {
+		div.image {
+			max-width:  1450px;
+			width: 100%;
+			// padding: 0 2rem;
+		}
+	}
+	@media (max-width: 1000px) {
+		div.image {
+			width: 100%;
+			max-width:  90%;
+		}
+	}
+}
+
+.splide__arrow--prev, .splide__arrow--next {
+	position: absolute;
+	z-index: 3;
+	// width: 100%;
+	top: 46%;
+	transform: translateY(-50%);
+	background-color: $dark3;
+	border: none;
+	padding: 15px;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	svg {
+		fill: $white;
+		width: 20px;
+		height: 20px;
+	}
+	&:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+}
+.splide__arrow--prev {
+	transform: translateY(-50%)  rotate(180deg);
+	left: 0;
+}
+.splide__arrow--next {
+	right: 0;
+}
+.splide__pagination {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	.splide__pagination__page  {
+		transition: all 0.5s linear;
+		background-color: rgb($dark3, 50%);
+		width: 3rem;
+		border-radius: 10px;
+		height: 7px;
+		border: none;
+		margin: 0 3px;
+		&.is-active {
+			background-color: $dark3;
+			width: 5rem;
+		}
+	} 
 }

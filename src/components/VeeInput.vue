@@ -1,20 +1,21 @@
 <template>
 	<div class="field">
-		<div class="error">
-			<span v-show="errorMessage"> {{ errorMessage }} </span>
-		</div>
-		<input v-model="value" type="text" :id="name" :name="name" :placeholder="name" />
-		<div class="line" />
+			<div class="error">
+				<span v-show="errorMessage"> {{ errorMessage }} </span>
+			</div>
+			<input v-model="value" type="text" :id="data.name" :name="data.name" :placeholder="data.label" />
+			<div class="line" />
 	</div>
 </template>
   
 <script setup lang="ts">
-import { useField } from 'vee-validate'
+import { useField, Field } from 'vee-validate'
+import type { InputField } from "~~/src/assets/types";
 import { toRef } from 'vue'
 
-const props = defineProps<{ name: string }>()
+const props = defineProps<{ data: InputField }>()
 
-const nameRef = toRef(props, 'name')
+const nameRef = toRef(props.data, 'name')
 const { errorMessage, value } = useField(nameRef)
 </script>
 
@@ -52,26 +53,32 @@ const { errorMessage, value } = useField(nameRef)
 		}
 	}
 
-	input {
+	textarea {
+		min-height: 150px;
+	}
+
+	input, textarea {
 		border: none;
-		border-bottom: 1px solid $bg-secondary;
+		border-bottom: 3px solid $dark;
 		background: transparent;
-		padding: 0.5rem 0;
+		padding: 1rem;
+		// font-family: 'Poppins';
 
-		color: $white;
+		color: $dark;
 		font-size: 1rem;
-		font-weight: 100;
-		line-height: 1rem;
+		line-height: 4rem;
 		letter-spacing: 1px;
-
+		height: 4.5rem;
+		box-shadow: 0 1rem 2rem rgb(0 0 0 / 10%);
+		border-radius: 5px;
 		&::placeholder {
-			color: $light-grey;
+			color: $dark4;
 			text-transform: capitalize;
 		}
 
 		&:focus {
 			&::placeholder {
-				color: $white;
+				color: $dark;
 				opacity: 1;
 			}
 
@@ -102,7 +109,7 @@ const { errorMessage, value } = useField(nameRef)
 		left: 0;
 		width: 0%;
 		height: 1px;
-		background: $primary;
+		background: $dark;
 		transition: all 0.25s ease;
 	}
 }

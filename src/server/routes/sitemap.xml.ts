@@ -11,11 +11,13 @@ export default defineEventHandler(async event => {
 		apiVersion: '2022-11-21',
 		useCdn: true,
 	})
-	// fetch data
-	const fetchData: Sitemap[] = await client.fetch(Sitemap_Q)
+	// fetch sitemap data 
+	const routes: Sitemap[] = await client.fetch(Sitemap_Q)
 
-	const sitemap = new SitemapStream({ hostname: 'https://martcube.netlify.app/' })
-	fetchData.forEach(route => {
+	const sitemap = new SitemapStream({
+		hostname: 'https://mine-action.netlify.app/'
+	})
+	routes.forEach(route => {
 		sitemap.write({
 			url: route.url,
 			changefreq: route.changefreq,

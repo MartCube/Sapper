@@ -11,9 +11,10 @@ import { Page_Q } from "~/assets/queries"
 import type { Page } from "~/assets/types"
 
 // fetch data
-const { params } = useRoute()
+const { params, meta  } = useRoute()
 const { fetch } = useSanity()
-const { data, pending } = await useAsyncData(
+const { locale } = useI18n()
+const { data, pending, refresh } = await useAsyncData(
 	`${params.page} - page`,
 	(): Promise<Page> => fetch(Page_Q, { uid: params.page })
 )
@@ -26,15 +27,16 @@ if (!data.value) throw createError({
 	fatal: true
 })
 
+watch(locale, async (oldLocale, newLocale) => {
+	if (newLocale) refresh
+})
 
-// i18n
-// defineI18nRoute({
-// 	paths: {
-// 		ua: data.value.uid,
-// 		en: data.value.altLang.uid,
-// 	}
-// })
-
+if(params && data.value) {
+  meta.nuxtI18n = {
+		en: { page: `${locale.value === 'en' ? params.page : data.value.alterLang.uid}/` },
+		ua: { page: `${locale.value === 'ua' ? params.page : data.value.alterLang.uid}/` },
+	};
+}
 // write metatags
 useMetaTags(data.value.metaTags)
 </script>

@@ -7,21 +7,24 @@
 </template>
 
 <script setup lang="ts">
-import { Page_Q } from "~~/src/assets/queries"
+import { Home_Q } from "~~/src/assets/queries"
 import type { Page } from "~~/src/assets/types"
-
+const { locale } = useI18n()
 
 // fetch data
 const { fetch } = useSanity()
-const { data, pending } = await useAsyncData(
+const { data, pending, refresh } = await useAsyncData(
 	`Home Page`,
-	(): Promise<Page> => fetch(Page_Q, { uid: "golovna" })
+	(): Promise<Page> => fetch(Home_Q, { lang: locale.value })
 )
+watch(locale, async (oldLocale, newLocale) => {
+	if (newLocale) refresh
+})
 
 // // handle error
 if (!data.value) throw createError({
 	statusCode: 404,
-	statusMessage: 'Page Not Found',
+	statusMessage: `f${data.value} Not Found`,
 	fatal: true
 })
 

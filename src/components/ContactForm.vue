@@ -1,24 +1,35 @@
 <template>
-	<div>
-		<h2>contact form</h2>
-	</div>
-	<!-- <form ref="form" id="form" :class="formStateAnim" @submit="onSubmit" autocomplete="off">
-		<VeeInput :name="props.email" />
-		<VeeInput :name="props.subject" />
-		<VeeInput :name="props.message" />
-
-		<button type="submit" :disabled="isSubmitting">
-			<span class="submit">submit</span>
-			<span class="loading">loading</span>
-		</button>
-
-		<div class="msg">
-			<h2>message sent</h2>
-			<p>Thanks for being awesome!</p>
-			<p>I will replay by email as soon as possible.</p>
-			<p>Write<span @click="formStateAnim = 'showForm'"> new message</span>.</p>
+	<form id="form" @submit="onSubmit" autocomplete="off" ref="form">
+		<div class="container">
+			<div class="group">
+				<VeeInput :data="data.name" />
+				<VeeInput :data="data.email" />
+				<VeeInput :data="data.phone" />
+			</div>
+			<VeeInput :data="data.message" />
+			<!-- <VeeInput :name="message" type="textarea" /> -->
+			<!-- <VeeTextarea :name="props.message"/> -->
+	
+			<button type="submit" :disabled="isSubmitting">
+				<span class="submit">{{ t('form.submit') }}</span>
+				<!-- <span class="loading">loading</span> -->
+			</button>
+	
+			<div class="msg" v-if="showMsg">
+				<template v-if="showMsgResultState">
+					<h2>{{ t('form.message_title') }}</h2>
+					<p>{{ t('form.message_greet') }}</p>
+					<p>{{ t('form.message_reply') }}</p>
+				</template>
+				<template v-if="!showMsgResultState">
+					<h2>{{ t('form.message_title_fail') }}</h2>
+					<p>{{ t('form.message_fail') }}</p>
+					<p>{{ t('form.message_reply_fail') }}</p>
+				</template>
+			  <span @click="showMsg = false">{{ t('form.new_message') }}.</span>
+			</div>
 		</div>
-	</form> -->
+	</form>
 </template>
 
 <script setup lang="ts">
@@ -27,17 +38,10 @@ import type { ContactForm } from "~~/src/assets/types";
 import { toFormValidator } from '@vee-validate/zod';
 import { z } from 'zod';
 import emailjs from '@emailjs/browser';
-import { promiseTimeout } from '@vueuse/core'
+// import { promiseTimeout } from '@vueuse/core'
+const { t } = useI18n()
+const props = defineProps<{data: ContactForm}>()
 
-const props = defineProps<{
-	name: string;
-	email: string;
-	phone: string;
-	message: string;
-}>()
-
-const formStateAnim = ref<string>('showForm')
-const form = ref<string | HTMLFormElement>('')
 const validationSchema = toFormValidator(
 	z.object({
 		name: z.string().min(1, 'Required'),
@@ -47,17 +51,27 @@ const validationSchema = toFormValidator(
 	})
 )
 
-const { handleSubmit, isSubmitting, } = useForm<ContactForm>({ validationSchema })
+const showMsg = ref(false)
+const showMsgResultState = ref(false)
+const form = ref()
 
-const onSubmit = handleSubmit(async (values, actions) => {
-	formStateAnim.value = 'loading'
-	//send data
-	emailjs.sendForm('service_l807s5g', 'template_l807s5g', form.value, 'O9kaL-kw7T0WfpVbt').then((result) => { console.log('SUCCESS!', result.text) }, (error) => { console.log('FAILED...', error.text) },)
-	// loading animation
-	await promiseTimeout(750)
-	// reset form
-	formStateAnim.value = 'showMsg'
-	actions.resetForm()
+const { handleSubmit, isSubmitting } = useForm<ContactForm>({ validationSchema })
+
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+	emailjs.sendForm('service_95o1gb1', 'template_xhp1lkj', form.value, 'u2zmujMl1wV-_J2qn')
+	.then(
+		(result) => { 
+			showMsg.value = true
+			showMsgResultState.value = true
+			console.log('SUCCESS!', result.text) 
+		}, 
+		(error) => { 
+			showMsgResultState.value = false 
+			console.log('FAILED...', error.text) 
+		},
+	)
+	
+	resetForm()
 })
 </script>
 
@@ -65,51 +79,74 @@ const onSubmit = handleSubmit(async (values, actions) => {
 form {
 	width: 100%;
 	display: flex;
-	flex-direction: column;
-	position: relative;
+	justify-content: center;
+	margin: 2rem 0;
+	.container {
+		position: relative;
+	}
+	.group {
+		display: flex;
+		.field{
+			&:not(:first-child):not(:last-child) {
+				margin: 0 1rem;
+			}
+			height: fit-content;
+		}
+	}
 
-	button[type="submit"] {
+	button {
 		height: 2rem;
 		overflow: hidden;
 		margin-top: 4rem;
 		border: none;
-		background: transparent;
+		border-radius: 4rem;
 		cursor: pointer;
-
+		
 		display: flex;
 		flex-direction: column;
 		position: relative;
-
+		align-self: center;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: $dark;
+		min-width: 10rem;
+		min-height: 4rem;
+		padding: 0 2rem;
 		span {
 			width: 100%;
-			height: 2rem;
+			height: 60px;
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 
 			color: $white;
 			letter-spacing: 0.25rem;
 			text-transform: uppercase;
 			font-weight: 300;
 			font-size: 1rem;
-			line-height: 2rem;
+			line-height: 60px;
 
-			&::before,
+			// &::before,
 			&::after {
 				content: '';
 				display: inline-block;
-				width: 1px;
-				height: 100%;
-				background: $white;
-				transition: width 0.35s ease;
+				width: 100%;
+				height: 60px;
+				opacity: 1;
+				background: $dark;
+				position: absolute;
+				border-radius: 5rem;
+				transform: scale(1);
+				z-index: -1;
+				transition: all 0.35s ease;
 			}
 
 
 			&.submit {
-				position: absolute;
-				top: 0;
-				left: 0;
+				// position: absolute;
+				// top: 0;
+				// left: 0;
 
-				transform: translateY(2rem);
+				// transform: translateY(2rem);
 				animation: sShow 350ms forwards normal;
 
 				@keyframes sShow {
@@ -128,6 +165,7 @@ form {
 				top: 0;
 				left: 0;
 				transform: translateY(2rem);
+				opacity: 0;
 
 				&::before,
 				&::after {
@@ -137,8 +175,15 @@ form {
 		}
 
 		&:hover {
+			overflow: visible;
+			span {
+				&::after {
+					transform: scale(1.4);
+					opacity: 0;
+				}
+			}
 			.submit {
-				color: $dark;
+				color: $white-hover;
 			}
 		}
 	}
@@ -181,7 +226,29 @@ form {
 		}
 	}
 
+	.msg {
+		position: absolute;
+    top: 0;
+    background-color: $white;
+    width: calc(100% - 4rem);
+    height: 100%;
+		text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px -1px #cecece;
+    border-radius: 1rem;
+		span {
+			text-decoration: underline;
+			font-weight: 600;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 	&.showMsg {
+		
 		.field {
 			display: none;
 		}
@@ -205,5 +272,18 @@ form {
 		}
 	}
 
+	@media (max-width: 1000px) {
+		.group {
+			flex-wrap: wrap;
+			.field{
+				&:not(:first-child):not(:last-child) {
+					margin: 0 0 2rem 0;
+				}
+			}
+		}
+		.msg {
+			width: 90%;
+		}
+	}
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
-	<div class="content">
+	<div ref="root" class="content">
 		<SanityContent :blocks="blocks" :serializers="serializers" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { resolveComponent } from 'vue'
+import { resolveComponent, ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 
 defineProps<{
 	blocks: any[],
@@ -14,14 +15,25 @@ defineProps<{
 const serializers = {
 	types: {
 		// page content ### Lazy load ?
-		slider: resolveComponent('Slider'),
-		articleSlider: resolveComponent('ArticleSlider'),
+		homeSlider: resolveComponent('HomeSlider'),
+		latestArticles: resolveComponent('LatestNews'),
 		achivments: resolveComponent('Achivments'),
 		pageIntro: resolveComponent('PageIntro'),
-		homeInfo: resolveComponent('HomeInfo'),
+		image: resolveComponent('AppImageSection'),
 		contactForm: resolveComponent('ContactForm'),
 		gmap: resolveComponent('Gmap'),
-
+		contactInfo: resolveComponent('ContactInfo'),
+		richtext: resolveComponent('RichText'),
+		richtextImage: resolveComponent('RichTextImage'),
+		richtextForm: resolveComponent('RichTextForm'),
+		services: resolveComponent('Services'),
+		counter: resolveComponent('Counter'),
+		articleList: resolveComponent('ArticleList'),
+		gallery: resolveComponent('Gallery'),
+		youtubeGallery: resolveComponent('GalleryYoutube'),
+		youtubeSlider: resolveComponent('YoutubeSlider'),
+		testimonials: resolveComponent('Testimonials'),
+		cta: resolveComponent('CtaSection'),
 		// article content
 		// gallery: resolveComponent('Gallery'),
 		// youtube: resolveComponent('Youtube'),
@@ -29,7 +41,22 @@ const serializers = {
 	// marks: {
 	// 	link: Link,
 	// },
+
+	
 }
+
+
+// const root = ref(null)
+// const target = document.getElementById("counter")
+// const isVisible = ref(false)
+// useIntersectionObserver(
+//   target,
+//   ([{ isIntersecting }]) => {
+//     isVisible.value = isIntersecting
+//   },
+//   { root },
+// )
+
 </script>
 
 <style lang="scss">
