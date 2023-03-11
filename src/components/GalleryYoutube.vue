@@ -124,7 +124,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 		flex-wrap: wrap;
 		.placeholder {
 			width: 30%;
-			height: 20vw;
+			height: 17vw;
 			margin-bottom: 4rem;
 			position: relative;
 			border-radius: 4px;
@@ -162,11 +162,18 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 				}
 			}
 		}
+		@media (min-width: 1550px) {
+			.placeholder,
+			.placeholder.two {
+				height: 14vw;
+			}
+			
+		}
 		@media (max-width: 1000px) {
 			.placeholder,
 			.placeholder.two {
 				width: 49%;
-				height: 35vw;
+				height: 26vw;
 			}
 			
 		}
