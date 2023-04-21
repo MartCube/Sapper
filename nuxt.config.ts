@@ -67,7 +67,7 @@ export default defineNuxtConfig({
 			fallbackLocale: 'ua',
 			messages: {
 				ua: {
-					index: 'Домашня',
+					index: 'Головна',
 					sitemap: 'Карта сайту',
 					about_us: 'Про нас',
 					read_more: 'Читати',

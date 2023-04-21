@@ -24,7 +24,7 @@ watch(locale, async (oldLocale, newLocale) => {
 // // handle error
 if (!data.value) throw createError({
 	statusCode: 404,
-	statusMessage: `f${data.value} Not Found`,
+	statusMessage: `${data.value} Not Found`,
 	fatal: true
 })
 
