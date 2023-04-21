@@ -1,2 +1,6 @@
 User-Agent: *
 Allow: /
+Disallow: /en/protuminna-diyalnist/
+Disallow: /anti-mine-activity/
+Disallow: /en/navchannja/
+Disallow: /education/

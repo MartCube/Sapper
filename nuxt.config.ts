@@ -147,6 +147,10 @@ export default defineNuxtConfig({
 				en: false,
 				ua: '/novunu/[article]',
 			},
+			'info/[slug]': {
+				en: false,
+				ua: '/korusna-informacija/[slug]',
+			},
 			// 'index': {
 			// 	en: '/en',
 			// 	ua: '/'

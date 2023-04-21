@@ -25,6 +25,7 @@ export default defineEventHandler(async event => {
 			lastmod: route.lastmod,
 		})
 	})
+
 	sitemap.end()
 
 	setHeader(event, 'content-type', 'application/xml')

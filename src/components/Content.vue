@@ -29,6 +29,7 @@ const serializers = {
 		services: resolveComponent('Services'),
 		counter: resolveComponent('Counter'),
 		articleList: resolveComponent('ArticleList'),
+		infoList: resolveComponent('InfoList'),
 		gallery: resolveComponent('Gallery'),
 		youtubeGallery: resolveComponent('GalleryYoutube'),
 		youtubeSlider: resolveComponent('YoutubeSlider'),
@@ -42,7 +43,7 @@ const serializers = {
 	// 	link: Link,
 	// },
 
-	
+
 }
 
 

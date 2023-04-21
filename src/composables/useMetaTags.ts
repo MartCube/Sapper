@@ -16,31 +16,35 @@ export default (data: metaTags) => {
 	const url = domain + fullPath
 	const ogType = useRoute().params.article ? "article" : "website"
 	// const robots = useRoute().params.article ? "index, nofollow" : "index, follow"
-	const alternate = computed( () => {
-		if(data.type === 'page') {
-			
+	const alternate = computed(() => {
+		if (data.type === 'page') {
+
 			return `${domain}/en${locale.value === 'en' ? '/' + useRoute().params.page + '/' : '/' + data.alterLang?.uid + '/'}`
 		} else if (data.type === 'home') {
 			return `${domain}/en/`
 		} else if (data.type === 'article') {
 			return undefined
-		} 
-	})			
-	const canonical = computed( () => {
-		if(data.type === 'page') {
+		} else if (data.type === 'info') {
+			return undefined
+		}
+	})
+	const canonical = computed(() => {
+		if (data.type === 'page') {
 			return `${domain}/${locale.value === 'ua' ? useRoute().params.page + '/' : data.alterLang?.uid + '/'}`
 		} else if (data.type === 'home') {
 			return `${domain}/`
 		} else if (data.type === 'article') {
 			return `${domain}/novunu/${useRoute().params.article}`
-		} 
-	})			
-	
+		} else if (data.type === 'info') {
+			return `${domain}/korusna-informacija/${useRoute().params.slug}`
+		}
+	})
+
 	useHead({
 		title: data.title,
 		htmlAttrs: { lang: locale.value },
 		link: [
-			{ hid: 'alternate', rel: 'alternate', href: alternate.value, hreflang: 'en' } ,
+			{ hid: 'alternate', rel: 'alternate', href: alternate.value, hreflang: 'en' },
 			{ hid: 'canonical', rel: 'canonical', href: canonical.value, hreflang: 'x-default' },
 		],
 		meta: [

@@ -1,39 +1,45 @@
 // Sitemap
-export const Sitemap_Q = groq`*[ _type in ["article", "page", "home"] ]{
+export const Sitemap_Q = groq`*[ _type in ["article", "info", "page", "home"] ]{
 	_type == "home" && __i18n_lang == 'ua' => {
 		"url": "https://freewayua.com/",
 		"changefreq": "monthly",
 		"priority": sitemap.priority,
 		"lastmod" :_updatedAt,
-},
-_type == "home" && __i18n_lang == 'en' => {
-		"url": "https://freewayua.com/en/",
+	},
+	_type == "home" && __i18n_lang == 'en' => {
+			"url": "https://freewayua.com/en/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "page" && __i18n_lang == 'ua' => {
+			"url": "https://freewayua.com/"+uid.current+"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "page" && __i18n_lang == 'en' => {
+			"url": "https://freewayua.com/en/"+uid.current+
+			"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "article" && __i18n_lang == 'ua' => {
+			"url": "https://freewayua.com/novunu/"+uid.current+"/",
+			"changefreq": "monthly",
+			"priority": sitemap.priority,
+			"lastmod" :_updatedAt,
+	},
+	_type == "info" && __i18n_lang == 'ua' => {
+		"url": "https://freewayua.com/korusna-informacija/"+uid.current+"/",
 		"changefreq": "monthly",
 		"priority": sitemap.priority,
 		"lastmod" :_updatedAt,
-},
-_type == "page" && __i18n_lang == 'ua' => {
-		"url": "https://freewayua.com/"+uid.current+"/",
-		"changefreq": "monthly",
-		"priority": sitemap.priority,
-		"lastmod" :_updatedAt,
-},
-_type == "page" && __i18n_lang == 'en' => {
-		"url": "https://freewayua.com/en/"+uid.current+
-		"/",
-		"changefreq": "monthly",
-		"priority": sitemap.priority,
-		"lastmod" :_updatedAt,
-},
-_type == "article" && __i18n_lang == 'ua' => {
-		"url": "https://freewayua.com/novunu/"+uid.current+"/",
-		"changefreq": "monthly",
-		"priority": sitemap.priority,
-		"lastmod" :_updatedAt,
-},
+	},
 }`
 
-export const Route_Q = groq`*[ _type in ["article", "page"] ]{
+export const Route_Q = groq`*[ _type in ["article", "info", "page"] ]{
 	_type == "page" && __i18n_lang == 'ua' => {
 			"url": "/"+uid.current+"/",
 	},
@@ -42,6 +48,9 @@ export const Route_Q = groq`*[ _type in ["article", "page"] ]{
 	},
 	_type == "article" && __i18n_lang == 'ua' => {
 			"url": "/novunu/"+uid.current+"/",
+	},
+	_type == "info" && __i18n_lang == 'ua' => {
+		"url": "/korusna-informacija/"+uid.current+"/",
 	},
 }`
 
@@ -90,7 +99,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 				message { label, name, type },
 				name { label, name, type },
 			},
-    }, 
+		}, 
 	},
 	"metaTags": {
 		"uid": uid.current,
@@ -142,6 +151,46 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 		),
 	},
 	"lang": __i18n_lang,
+}`
+
+// Info page 
+export const InfoList_Q = groq`*[_type == "info" && $lang == __i18n_lang ] | order(publishedAt desc){
+	title,
+	"uid": uid.current,
+  	"image": poster.asset._ref,
+	description,
+	publishedAt,
+}`
+
+export const Info_Q = groq`*[_type == "info" && uid.current == $uid][0]{
+	title, 
+	"poster": poster.asset._ref, 
+	"uid": uid.current,
+	"tag": tag->title,
+	__i18n_refs[] -> {
+		"lang": __i18n_lang,
+		"uid": uid.current
+	},
+	publishedAt,
+	content[] {
+		...,
+		_type == "block" => { ... },
+		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "image" => { _key, _type, "src": asset._ref, },
+		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
+		_type == "youtube" => { ... },
+	},
+	"metaTags": {
+		"uid": uid.current,
+		"type": _type,
+		"title" : metaTags.title,
+		"description": metaTags.description,
+		"image": metaTags.image.asset._ref,
+		"alterLang": coalesce(
+			__i18n_refs[0] -> { "id": __i18n_lang, "uid": uid.current},
+			__i18n_base -> { "id": __i18n_lang, "uid": uid.current},
+		),
+	},
 }`
 
 // Article
