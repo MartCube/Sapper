@@ -1,6 +1,23 @@
 User-Agent: *
-Allow: /
-Disallow: /en/protuminna-diyalnist/
-Disallow: /anti-mine-activity/
+Disallow: /en/pro-nas/
 Disallow: /en/navchannja/
-Disallow: /education/
+Disallow: /en/vacansii/
+Disallow: /en/komanda/
+Disallow: /en/protuminna-diyalnist/
+Disallow: /en/novunu/
+Disallow: /en/korusna-informacija/
+Disallow: /en/video/
+Disallow: /en/kontakti/
+Disallow: /en/galeria/
+Disallow: /about-us
+Disallow: /education
+Disallow: /job-offers
+Disallow: /team
+Disallow: /anti-mine-activity
+Disallow: /blog
+Disallow: /additional-info
+Disallow: /video-page
+Disallow: /contact
+Disallow: /gallery
+
+Sitemap: https://freewayua.com/sitemap.xml
