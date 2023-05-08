@@ -15,7 +15,7 @@ export default defineEventHandler(async event => {
 	const routes: Sitemap[] = await client.fetch(Sitemap_Q)
 
 	const sitemap = new SitemapStream({
-		hostname: 'https://mine-action.netlify.app/'
+		hostname: 'https://freewayua.com/'
 	})
 	routes.forEach(route => {
 		sitemap.write({

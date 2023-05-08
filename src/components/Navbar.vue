@@ -1,7 +1,7 @@
 <template>
 	<header>
-		<NuxtLink :to="localePath('index')" class="logo">
-			<AppImage :src="logo!"/>
+		<NuxtLink :to="localePath('index')" class="logo" :title="t('index')">
+			<AppImage :src="logo!" title="FREEWAYUA" alt="FREEWAYUA" />
 		</NuxtLink>
 		<nav>
 			<ul class="links">
@@ -11,13 +11,13 @@
 					</NuxtLink>
 				</li>
 				<li v-for="link in currentLinks" :key="link.title" class="link">
-					
-					<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid } })}/`">{{ link.title }}</NuxtLink>
+
+					<NuxtLink v-if="!link.dropdown" :to="`${localePath({ name: 'page', params: { page: link.uid } })}/`">{{ link.title }}</NuxtLink>
 					<a v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
-					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down"/>
+					<Icon v-if="link.dropdown" name="ic:twotone-keyboard-arrow-down" />
 					<ul v-if="link.dropdown" class="submenu">
 						<li v-for="sublink in link.dropdown.sublinks">
-							<NuxtLink :to="`${localePath({name: 'page', params: { page: sublink.uid}})}/`">{{ sublink.title }}</NuxtLink>
+							<NuxtLink :to="`${localePath({ name: 'page', params: { page: sublink.uid } })}/`">{{ sublink.title }}</NuxtLink>
 						</li>
 					</ul>
 				</li>
@@ -27,10 +27,10 @@
 			<NuxtLink class="lang_switcher" :to="switchLocalePath(altLocale)">
 				<span>{{ altLocale }}</span>
 			</NuxtLink>
-			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" class="burger"/>
+			<Icon v-if="!menuValue" name="ri:menu-2-fill" @click="menuToggle()" class="burger" />
 			<Icon v-else name="ri:close-fill" @click="menuToggle()" />
 			<a class="phone" :href="`tel:${info?.phone}`">
-				<Icon name="mdi:phone-in-talk-outline"/>
+				<Icon name="mdi:phone-in-talk-outline" />
 				+38 (098) 685 89 24
 			</a>
 		</div>
@@ -73,14 +73,14 @@
 							</NuxtLink>
 						</li>
 						<li v-for="link in currentLinks" :key="link.uid" class="link" :class="link.classes" @click="submenu(link)">
-							<NuxtLink v-if="!link.dropdown" :to="`${localePath({name: 'page', params: { page: link.uid}})}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
+							<NuxtLink v-if="!link.dropdown" :to="`${localePath({ name: 'page', params: { page: link.uid } })}/`" @click="menuToggle()">{{ link.title }}</NuxtLink>
 							<a v-if="link.dropdown">{{ t(link.dropdown.title) }}</a>
 							<div class="arrow" v-if="link.dropdown" :key="link.uid">
-								<Icon name="ic:twotone-keyboard-arrow-down"/>
+								<Icon name="ic:twotone-keyboard-arrow-down" />
 							</div>
 							<ul v-if="link.dropdown" class="submenu">
 								<li v-for="sublink in link.dropdown.sublinks">
-									<NuxtLink :to="`${localePath({name: 'page', params: { page: sublink.uid}})}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
+									<NuxtLink :to="`${localePath({ name: 'page', params: { page: sublink.uid } })}/`" @click="menuToggle()">{{ sublink.title }}</NuxtLink>
 								</li>
 							</ul>
 						</li>
@@ -99,7 +99,7 @@ import { Link } from '~/assets/types'
 const switchLocalePath = useSwitchLocalePath()
 const { locale, t } = useI18n()
 
-const localePath = useLocalePath()	 
+const localePath = useLocalePath()
 const altLocale = computed(() => locale.value == 'ua' ? 'en' : 'ua')
 
 const { AppFetch } = useAppStore()
@@ -113,7 +113,7 @@ watch(locale, async (oldLocale, newLocale) => {
 const [menuValue, menuToggle] = useToggle()
 
 const submenu = (link: Link) => {
-	if(link.classes !== '') {
+	if (link.classes !== '') {
 		link.classes = ''
 	} else {
 		link.classes = 'open'
@@ -136,14 +136,16 @@ header {
 	justify-content: space-between;
 	align-items: center;
 
-	
+
 	.logo {
 		width: 100px;
 		height: auto;
 		object-fit: contain;
 	}
+
 	@media (max-width: 600px) {
 		height: 60px;
+
 		.logo {
 			width: 55px;
 		}
@@ -152,6 +154,7 @@ header {
 	.menu {
 		display: flex;
 		align-items: center;
+
 		.lang_switcher {
 			width: 2rem;
 			height: 2rem;
@@ -168,12 +171,14 @@ header {
 			width: 2rem;
 			height: 2rem;
 			color: $dark3;
+
 			&.burger {
 				&:hover {
 					cursor: pointer;
 				}
 			}
 		}
+
 		.phone {
 			display: flex;
 			white-space: nowrap;
@@ -185,10 +190,12 @@ header {
 			align-items: center;
 			font-weight: 600;
 			transition: all 0.2s ease-in;
+
 			svg {
 				color: inherit;
 				margin-right: 1rem;
 			}
+
 			&:hover {
 				background-color: $dark2;
 			}
@@ -208,13 +215,14 @@ header {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+
 		.link {
 			overflow: hidden;
 			position: relative;
 			display: flex;
 			align-items: center;
 			margin: 0 1.5rem;
+
 			&:last-child {
 				margin-right: 0;
 			}
@@ -229,6 +237,7 @@ header {
 				color: $dark;
 				font-weight: 500;
 				position: relative;
+
 				// margin-right: 1rem;
 				&::after {
 					content: '';
@@ -240,7 +249,7 @@ header {
 					left: 0;
 					transition: width 0.3s linear;
 				}
-				
+
 				&.router-link-exact-active {
 					&::after {
 						width: 100%;
@@ -249,6 +258,7 @@ header {
 
 				&:hover {
 					cursor: pointer;
+
 					&::after {
 						width: 100%;
 					}
@@ -260,6 +270,7 @@ header {
 			.icon {
 				margin-left: 0.5rem;
 			}
+
 			ul.submenu {
 				position: absolute;
 				background-color: $white;
@@ -272,6 +283,7 @@ header {
 				border-radius: 5px;
 				box-shadow: 0 0 10px -3px lightgrey;
 				transition: opacity 0.3s linear;
+
 				li {
 					a {
 						margin: 0;
@@ -281,6 +293,7 @@ header {
 
 			&:hover {
 				overflow: visible;
+
 				ul.submenu {
 					opacity: 1;
 				}
@@ -307,6 +320,7 @@ header {
 		h3 {
 			text-align: center;
 		}
+
 		.info {
 			width: 100%;
 
@@ -330,6 +344,7 @@ header {
 
 		.links {
 			flex-direction: column;
+
 			.link {
 				width: 100%;
 				padding-right: 2rem;
@@ -340,20 +355,24 @@ header {
 				margin: 0;
 				padding: 0 0 0 2rem;
 				transition: all 0.3s ease-in;
+
 				a {
 					padding: 1rem 0;
 				}
-				
+
 				.arrow {
 					padding: 1rem;
 				}
-				&.open{
+
+				&.open {
 					overflow: visible;
 					height: 100%;
+
 					.submenu {
 						opacity: 1;
 					}
 				}
+
 				.submenu {
 					position: initial;
 					transition: all 0.3s ease-in;
@@ -363,6 +382,7 @@ header {
 					padding-top: 0;
 					padding-bottom: 0;
 					opacity: 0;
+
 					li {
 						a {
 							&::before {
@@ -374,22 +394,27 @@ header {
 				}
 			}
 		}
+
 		.close {
 			position: absolute;
 			top: 1rem;
 			right: 1rem;
+
 			svg {
 				width: 30px;
 				height: 30px;
 			}
 		}
+
 		.mobile {
 			display: none;
 		}
+
 		.social-media {
 			display: flex;
 			margin-top: 2rem;
 			justify-content: center;
+
 			a {
 				color: $dark3;
 				margin: 10px;
@@ -397,13 +422,16 @@ header {
 				display: flex;
 				justify-content: center;
 				align-items: center;
+
 				svg {
 					width: 35px;
 					height: 35px;
 					// fill: $white;
 				}
+
 				&:hover {
 					color: rgb($dark3, 50%);
+
 					svg {
 						fill: rgb($dark3, 50%);
 					}
@@ -413,13 +441,15 @@ header {
 	}
 
 	@media (max-width: 1400px) {
-		> nav {
+		>nav {
 			display: none;
 		}
+
 		.sidebar {
 			.desktop {
 				display: none;
 			}
+
 			.mobile {
 				display: block;
 			}
@@ -429,16 +459,21 @@ header {
 	@media (max-width: 600px) {
 		.sidebar {
 			width: 100vw;
+
 			.links .link {
 				padding: 0 2rem;
-				a, .arrow svg {
+
+				a,
+				.arrow svg {
 					font-size: 1.5rem;
 				}
+
 				a.router-link-exact-active::after {
 					bottom: 10px;
 				}
 			}
 		}
+
 		.menu .phone {
 			display: none;
 		}

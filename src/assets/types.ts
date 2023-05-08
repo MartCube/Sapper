@@ -55,6 +55,15 @@ export interface JobOfferForm {
 	message: InputField;
 }
 
+export interface SanityImage {
+	ref: string,
+	hotspot: {
+		width: string,
+		height: string,
+		x: string,
+		y: string,
+	}
+}
 
 
 // sanity schema docs

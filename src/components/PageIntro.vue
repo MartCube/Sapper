@@ -3,7 +3,7 @@
 		<div class="container">
 			<h1>{{ title }}</h1>
 			<div class="breadcrumbs">
-				<NuxtLink to="/">{{ t('index')}}</NuxtLink>
+				<NuxtLink to="/" title="FREEWAYUA">{{ t('index') }}</NuxtLink>
 				<NuxtLink to="/">{{ title }}</NuxtLink>
 			</div>
 		</div>
@@ -36,23 +36,29 @@ defineProps<{ title: string, }>()
 		font-weight: 600;
 		text-align: center;
 		line-height: 1;
+
 		&::first-letter {
 			text-transform: uppercase;
 		}
 	}
+
 	.breadcrumbs {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
 		a {
 			// display: flex;
 			color: $white;
 			font-size: 1.4rem;
+
 			&::first-letter {
 				text-transform: uppercase;
 			}
+
 			&:first-child {
 				margin-right: 1rem;
+
 				&::after {
 					content: '>';
 					margin-left: 1rem;
@@ -61,10 +67,12 @@ defineProps<{ title: string, }>()
 		}
 
 	}
+
 	@media (max-width: 700px) {
 		h1 {
 			font-size: 3rem;
 		}
+
 		.breadcrumbs {
 			a:last-child {
 				white-space: nowrap;

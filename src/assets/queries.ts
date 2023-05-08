@@ -87,7 +87,7 @@ export const Page_Q = groq`*[ _type == "page" && uid.current == $uid][0]{
 			},
 		},
 		_type == "image" => { "src": asset._ref  },
-		_type == "richtextImage" => { ..., "image": image.asset._ref, "alt": image.alt },
+		_type == "richtextImage" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot } },
 		_type == "gallery" => { ..., "images": images[].asset._ref  },
 		_type == "youtubeGallery" => { ..., "list": list[].id  },
 		_type == "slider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
@@ -135,7 +135,7 @@ export const Home_Q = groq`*[ _type == "home" && __i18n_lang == $lang][0]{
 			} 
 		},
 		_type == "youtubeSlider" => { ..., "list": list[].id  },
-		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "richtextImage" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot }  },
 		_type == "homeSlider" => { ..., list[]{title, "image":image.asset._ref, subtitle, description} },
 		_type == "achivments" => { ..., list[]{ title, icon, description, _key}  },
 	},
@@ -175,7 +175,7 @@ export const Info_Q = groq`*[_type == "info" && uid.current == $uid][0]{
 	content[] {
 		...,
 		_type == "block" => { ... },
-		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "richtextImage" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot }  },
 		_type == "image" => { _key, _type, "src": asset._ref, },
 		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
 		_type == "youtube" => { ... },
@@ -217,7 +217,7 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	content[] {
 		...,
 		_type == "block" => { ... },
-		_type == "richtextImage" => { ..., "image": image.asset._ref  },
+		_type == "richtextImage" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot } },
 		_type == "image" => { _key, _type, "src": asset._ref, },
 		_type == "gallery" => { _key, _type, "images": images[].asset._ref },
 		_type == "youtube" => { ... },
