@@ -20,11 +20,23 @@ defineProps<{
 	display: flex;
 	justify-content: center;
 
-	p, a {
+	p,
+	a {
 		font-size: 1.4rem;
 	}
+
 	p {
 		margin-bottom: 15px;
+	}
+
+	a {
+		color: hsl(240, 100%, 50%);
+		text-decoration: underline;
+
+		&:visited,
+		&:active {
+			color: hsl(270, 100%, 50%);
+		}
 	}
 
 	ul {
@@ -32,10 +44,12 @@ defineProps<{
 		padding-left: 3rem;
 		margin-top: 2rem;
 		list-style-type: none;
+
 		li {
 			display: flex;
 			align-items: center;
 			font-weight: 100;
+
 			&::before {
 				content: '';
 				display: block;
@@ -46,6 +60,7 @@ defineProps<{
 			}
 		}
 	}
+
 	// .v-enter-active,
 	// .v-leave-active {
 	// 	transition: all .35s ease;

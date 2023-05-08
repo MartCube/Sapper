@@ -11,7 +11,7 @@
 		</div>
 		<div v-if="isOpen" class="modal">
 			<Icon class="close" @click="isOpen = false" name="ic:baseline-close" />
-			<JobOfferForm name="Name" email="Email" phone="Phone" :title="title" message="Message"/>
+			<JobOfferForm name="Name" email="Email" phone="Phone" :title="title" message="Message" />
 		</div>
 	</section>
 </template>
@@ -33,32 +33,49 @@ defineProps<{
 	padding: 3rem 0;
 	display: flex;
 	justify-content: center;
-	
-	p, a {
+
+	p,
+	a {
 		font-size: 1.1rem;
 	}
+
 	p {
 		margin-bottom: 15px;
 	}
+
+	a {
+		color: hsl(240, 100%, 50%);
+		text-decoration: underline;
+
+		&:visited,
+		&:active {
+			color: hsl(270, 100%, 50%);
+		}
+	}
+
 	h4 {
 		font-size: 1.4rem;
 		margin: 2rem 0 1.5rem;
 	}
+
 	h2 {
 		margin: 0;
 	}
+
 	.container {
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		padding:  0 1rem;
+		padding: 0 1rem;
 	}
+
 	.card {
 		margin: 1rem;
 		border-radius: 15px;
 		box-shadow: 0 0 40px 1px lightgray;
 		padding: 3rem;
 	}
+
 	.call-modal {
 		text-decoration: none;
 		padding: 1.5rem 4rem;
@@ -73,6 +90,7 @@ defineProps<{
 		cursor: pointer;
 		color: $white;
 		background-color: $dark4;
+
 		&::after {
 			content: "";
 			display: inline-block;
@@ -86,30 +104,36 @@ defineProps<{
 			border-radius: 100px;
 			background-color: $dark4;
 		}
+
 		&:hover {
 			transform: translateY(-0.3rem);
 			box-shadow: 0 1rem 2rem rgb(0 0 0 / 20%);
 			border-radius: 100px;
 			color: rgb($white, 80%);
+
 			&::after {
 				transform: scaleX(1.4) scaleY(1.6);
 				opacity: 0;
 			}
 		}
 	}
+
 	.text {
 		width: 100%;
 		// padding-left: 3rem;
 	}
+
 	ul {
 		font-size: 1.2rem;
 		padding-left: 3rem;
 		// margin-top: 2rem;
 		list-style-type: none;
+
 		li {
 			display: flex;
 			align-items: center;
 			font-weight: 100;
+
 			&::before {
 				content: '';
 				display: block;
@@ -121,7 +145,7 @@ defineProps<{
 		}
 	}
 
-	
+
 	.modal {
 		position: fixed;
 		z-index: 10;
@@ -141,17 +165,20 @@ defineProps<{
 			// stroke: $white;
 			color: $white;
 			transition: all 0.2s ease;
-			
+
 			&:hover {
 				cursor: pointer;
 				color: rgb($white, 70%);
 				animation-play-state: running;
 			}
 		}
+
 		form {
 			background-color: $white;
+
 			.container {
 				padding: 4rem 1rem;
+
 				.title {
 					text-align: center;
 					margin-bottom: 4rem;
@@ -159,12 +186,14 @@ defineProps<{
 
 			}
 		}
+
 		.close {
 			top: 1rem;
 			right: 1rem;
 			background-color: $dark4;
 			padding: 5px;
 			border-radius: 5px;
+
 			&:hover {
 				background-color: $dark3;
 				padding: 3px;
@@ -177,12 +206,15 @@ defineProps<{
 		ul {
 			padding-left: 1rem;
 		}
+
 		form {
 			button {
 				margin-top: 1rem;
 			}
+
 			.container {
 				padding: 0;
+
 				.title {
 					font-size: 2rem;
 					line-height: 1;
@@ -190,13 +222,17 @@ defineProps<{
 				}
 			}
 		}
+
 		.modal {
 			align-items: flex-start;
+
 			form {
 				margin: 0;
+
 				.container {
 					padding: 0;
 				}
+
 				.feild {}
 			}
 		}
@@ -211,5 +247,4 @@ defineProps<{
 	// .v-leave-to {
 	// 	opacity: 0
 	// }
-}
-</style>
+}</style>
