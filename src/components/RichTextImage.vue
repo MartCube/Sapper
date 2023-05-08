@@ -40,6 +40,16 @@ const { tilt, roll, source } = useParallax(imageParalax)
 		margin-bottom: 15px;
 	}
 
+	a {
+		color: hsl(240, 100%, 50%);
+		text-decoration: underline;
+
+		&:visited,
+		&:active {
+			color: hsl(270, 100%, 50%);
+		}
+	}
+
 	ul {
 		font-size: 1.2rem;
 		padding-left: 3rem;
