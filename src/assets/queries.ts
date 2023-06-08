@@ -7,32 +7,31 @@ export const Sitemap_Q = groq`*[ _type in ["article", "info", "page", "home"] ]{
 		"lastmod" :_updatedAt,
 	},
 	_type == "home" && __i18n_lang == 'en' => {
-			"url": "https://freewayua.com/en/",
+			"url": "https://freewayua.com/en",
 			"changefreq": "monthly",
 			"priority": sitemap.priority,
 			"lastmod" :_updatedAt,
 	},
 	_type == "page" && __i18n_lang == 'ua' => {
-			"url": "https://freewayua.com/"+uid.current+"/",
+			"url": "https://freewayua.com/"+uid.current,
 			"changefreq": "monthly",
 			"priority": sitemap.priority,
 			"lastmod" :_updatedAt,
 	},
 	_type == "page" && __i18n_lang == 'en' => {
-			"url": "https://freewayua.com/en/"+uid.current+
-			"/",
+			"url": "https://freewayua.com/en/"+uid.current,
 			"changefreq": "monthly",
 			"priority": sitemap.priority,
 			"lastmod" :_updatedAt,
 	},
 	_type == "article" && __i18n_lang == 'ua' => {
-			"url": "https://freewayua.com/novunu/"+uid.current+"/",
+			"url": "https://freewayua.com/novunu/"+uid.current,
 			"changefreq": "monthly",
 			"priority": sitemap.priority,
 			"lastmod" :_updatedAt,
 	},
 	_type == "info" && __i18n_lang == 'ua' => {
-		"url": "https://freewayua.com/korusna-informacija/"+uid.current+"/",
+		"url": "https://freewayua.com/korusna-informacija/"+uid.current,
 		"changefreq": "monthly",
 		"priority": sitemap.priority,
 		"lastmod" :_updatedAt,

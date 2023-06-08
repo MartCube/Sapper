@@ -26,15 +26,13 @@ export const getRoutes = async () => {
 	return data.map((item: any) => { return item["url"] })
 }
 
-
 export default defineNuxtConfig({
-	router: {
-		options: {
-			strict: false,
-		}
-	},
 	srcDir: 'src',
-	typescript: { strict: true, typeCheck: true, shim: false },
+	typescript: {
+		strict: true,
+		typeCheck: true,
+		shim: false
+	},
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -53,13 +51,11 @@ export default defineNuxtConfig({
 		'@nuxtjs/i18n',
 		'nuxt-icon',
 	],
-
 	icon: {
 		// https://icones.js.org/collection/ri
 		size: '24px',
 		class: 'icon',
 	},
-
 	i18n: {
 		vueI18n: {
 			// legacy: false,
@@ -67,7 +63,7 @@ export default defineNuxtConfig({
 			fallbackLocale: 'ua',
 			messages: {
 				ua: {
-					index: 'Головна',
+					index: 'FREEWAYUA',
 					sitemap: 'Карта сайту',
 					about_us: 'Про нас',
 					read_more: 'Читати',
@@ -94,7 +90,7 @@ export default defineNuxtConfig({
 					footer_text: "Наша компанія – це команда фахівців, які мають необхідний досвід та спеціалізацію в галузі гуманітарного розмінування. Кожен із наших співробітників отримав необхідну освіту та досвід для здійснення протимінної діяльності. ",
 				},
 				en: {
-					index: 'Home',
+					index: 'FREEWAYUA',
 					about_us: 'About us',
 					blog: 'Blog',
 					sitemap: 'Sitemap',
@@ -158,15 +154,12 @@ export default defineNuxtConfig({
 		}
 
 	},
-
-
 	sanity: {
 		projectId: 'ede4uk6z',
 		dataset: 'production',
 		minimal: true,
 		apiVersion: '2022-11-21'
 	},
-
 	image: {
 		sanity: {
 			projectId: 'ede4uk6z',
@@ -179,7 +172,6 @@ export default defineNuxtConfig({
 			routes: ['/sitemap.xml']
 		}
 	},
-
 	hooks: {
 		async 'nitro:config'(nitroConfig: any) {
 			if (nitroConfig.dev) { return }
@@ -187,7 +179,6 @@ export default defineNuxtConfig({
 			nitroConfig.prerender.routes.push(...routes)
 		}
 	},
-
 	vite: {
 		css: {
 			preprocessorOptions: {
@@ -197,11 +188,4 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-
-	// webpack: {
-	// 	analyze: {
-	// 		analyzerMode: 'static'
-	// 	}
-	// },
-
 })

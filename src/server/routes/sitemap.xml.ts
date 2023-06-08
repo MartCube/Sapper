@@ -18,12 +18,13 @@ export default defineEventHandler(async event => {
 		hostname: 'https://freewayua.com/'
 	})
 	routes.forEach(route => {
-		sitemap.write({
-			url: route.url,
-			changefreq: route.changefreq,
-			priority: route.priority,
-			lastmod: route.lastmod,
-		})
+		if (route.url)// we have empty objects from en/info routes
+			sitemap.write({
+				url: route.url,
+				changefreq: route.changefreq,
+				priority: route.priority,
+				lastmod: route.lastmod,
+			})
 	})
 
 	sitemap.end()
