@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="grid">
 				<div v-for="(image, index) in list" :key="index" @click="Open(index)" class="placeholder" :class="{one: list.length === 1, two: list.length === 2 }">
-					<Icon name="ic:baseline-play-circle-filled-white" />
+					<!-- <Icon name="ic:baseline-play-circle-filled-white" /> -->
 					<img :src="`https://i3.ytimg.com/vi/${image}/hqdefault.jpg`" :width="300" :height="450" />
 				</div>
 			</div>
@@ -129,7 +129,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 			position: relative;
 			border-radius: 4px;
 			overflow: hidden;
-			box-shadow: 0 0 26px -5px hsl(0deg 0% 45%);
+			// box-shadow: 0 0 26px -5px hsl(0deg 0% 45%);
 			&.one {
 				width: 80%;
 				margin: auto;
@@ -143,7 +143,7 @@ onKeyStroke(['Escape', 'ArrowLeft', 'ArrowRight'], (e: KeyboardEvent) => {
 				width: 100%;
 				object-fit: cover;
 				height: 100%;
-				filter: brightness(0.4);
+				// filter: brightness(0.4);
 				transition: transform 0.3s ease-in;
 			}
 			svg {
