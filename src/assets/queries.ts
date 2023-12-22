@@ -215,6 +215,7 @@ export const Article_Q = groq`*[_type == "article" && uid.current == $uid][0]{
 	publishedAt,
 	content[] {
 		...,
+		_type == "pageIntro" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot } },
 		_type == "block" => { ... },
 		_type == "richtextImage" => { ..., "image": { "ref": image.asset._ref, "hotspot": image.hotspot } },
 		_type == "image" => { _key, _type, "src": asset._ref, },

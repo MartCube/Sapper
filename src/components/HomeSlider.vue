@@ -3,7 +3,7 @@
 		<Splide :options="sliderOptions">
 			<SplideSlide v-for="slide in list" :key="slide.image">
 				<div class="wrapper">
-					<AppImage :src="slide.image"/>
+					<AppImage :src="slide.image" />
 					<div class="content">
 						<h4 v-if="slide.subtitle" class="subtitle">{{ slide.subtitle }}</h4>
 						<h1 v-if="slide.title" class="title"> {{ slide.title }}</h1>
@@ -67,7 +67,7 @@ const sliderOptions = {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			filter: brightness(0.4);
+			filter: brightness(0.8);
 		}
 		.content {
 			position: absolute;
@@ -85,7 +85,7 @@ const sliderOptions = {
 			.subtitle {
 				font-size: 2.3rem;
 				line-height: 1.1;
-				margin: 0;
+				margin: 0 0 1rem 0;
 			}
 			.description {
 				font-size: 1.3rem;

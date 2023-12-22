@@ -1,5 +1,6 @@
 <template>
 	<section class="intro">
+				<AppImage  v-if="image" :src="image.ref" />
 		<div class="container">
 			<h1>{{ title }}</h1>
 			<div class="breadcrumbs">
@@ -11,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
+import type { SanityImage } from '~/assets/types'
 const { t } = useI18n({})
 
-defineProps<{ title: string, }>()
+defineProps<{ title: string, image: SanityImage,}>()
 </script>
 
 <style lang="scss" scoped>
@@ -30,7 +32,17 @@ defineProps<{ title: string, }>()
 	background-image: url('/page-header.jpg');
 	background-size: cover;
 	background-position: center;
-
+	position: relative;
+	overflow: hidden;
+	.image	 {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.5;
+		max-width: initial !important;
+	}
 	h1 {
 		font-size: 4.5rem;
 		font-weight: 600;
@@ -79,6 +91,9 @@ defineProps<{ title: string, }>()
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+		}
+		.image {
+			height: 100% !important;
 		}
 	}
 }

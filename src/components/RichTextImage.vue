@@ -57,8 +57,7 @@ const { tilt, roll, source } = useParallax(imageParalax)
 		list-style-type: none;
 
 		li {
-			display: flex;
-			align-items: center;
+			position: relative;
 			font-weight: 100;
 
 			&::before {
@@ -68,6 +67,9 @@ const { tilt, roll, source } = useParallax(imageParalax)
 				height: 3px;
 				background-color: $dark;
 				margin-right: 1rem;
+				position: absolute;
+				top: 1rem;
+				left: -2rem;
 			}
 		}
 	}
@@ -78,22 +80,22 @@ const { tilt, roll, source } = useParallax(imageParalax)
 		align-items: center;
 
 		.image-wrapper {
-			width: 700px;
-			height: 700px;
+			width: 50%;
+			// height: 700px;
 			overflow: hidden;
 			display: flex;
-			padding: 7rem;
+			padding: 2rem;
 			position: relative;
 
 			.image {
 				overflow: hidden;
-				border-radius: 50%;
+				border-radius: 1rem;
 				border: 20px solid $dark;
 				width: 100%;
 				height: auto;
 
 				img {
-					border-radius: 50%;
+					// border-radius: 50%;
 					overflow: hidden;
 				}
 			}

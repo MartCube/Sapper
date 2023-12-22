@@ -46,10 +46,10 @@ defineProps<{
 		list-style-type: none;
 
 		li {
-			display: flex;
-			align-items: center;
+			// display: flex;
+			// align-items: center;
 			font-weight: 100;
-
+			position: relative;
 			&::before {
 				content: '';
 				display: block;
@@ -57,6 +57,10 @@ defineProps<{
 				height: 3px;
 				background-color: $dark;
 				margin-right: 1rem;
+				width: 1rem;
+				position: absolute;
+				top: 1rem;
+				left: -2rem;
 			}
 		}
 	}
